@@ -1,0 +1,36 @@
+You are not permitted to use AI Writer.,Du har ikke tilladelse til at bruge AI Writer.
+AI Writer is disabled.,AI Writer er deaktiveret.
+No Anthropic API key configured. Please set one in AI Writer Settings.,Der er ikke konfigureret nogen Anthropic API-nøgle. Angiv en under AI Writer-indstillinger.
+Nothing to correct.,Der er intet at rette.
+The text is too long ({0} characters). The maximum is {1} characters.,Teksten er for lang ({0} tegn). Maksimum er {1} tegn.
+Invalid correction mode: {0},Ugyldig rettelsestilstand: {0}
+The Anthropic API key is invalid or lacks permission.,Anthropic API-nøglen er ugyldig eller mangler tilladelser.
+The configured AI model is not available: {0},Den konfigurerede AI-model er ikke tilgængelig: {0}
+The AI service is busy. Please try again in a moment.,AI-tjenesten er optaget. Prøv igen om et øjeblik.
+The AI service returned an error. Please try again later.,AI-tjenesten returnerede en fejl. Prøv igen senere.
+The AI service could not be reached. Please try again later.,AI-tjenesten kunne ikke nås. Prøv igen senere.
+The AI service declined to process this text.,AI-tjenesten afviste at behandle denne tekst.
+The corrected text would be too long. Please correct a shorter passage.,Den rettede tekst ville blive for lang. Ret et kortere afsnit.
+The AI service returned an empty response.,AI-tjenesten returnerede et tomt svar.
+Invalid model name: {0},Ugyldigt modelnavn: {0}
+AI correction,AI-korrektur
+AI correction options,Indstillinger for AI-korrektur
+Correct,Ret
+More formal,Mere formel
+More casual,Mere uformel
+Text corrected,Tekst rettet
+Enter an Anthropic API key to use AI correction.,Angiv en Anthropic API-nøgle for at bruge AI-korrektur.
+AI Writer Settings,AI Writer-indstillinger
+Enabled,Aktiveret
+Connection,Forbindelse
+Anthropic API Key,Anthropic API-nøgle
+Model,Model
+"Anthropic model ID, e.g. claude-haiku-5-5","Anthropic-model-id, f.eks. claude-haiku-5-5"
+Effort,Indsats
+How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,"Hvor meget modellen overvejer, før den svarer. »low« er hurtigst og billigst. Lad feltet være tomt for modeller uden understøttelse af indsats."
+Prompt,Prompt
+System Prompt,Systemprompt
+Instructions sent to the model with every request. Leave empty to restore the default.,"Instruktioner, der sendes til modellen ved hver forespørgsel. Lad feltet være tomt for at gendanne standarden."
+AI Writer,AI Writer
+Settings,Indstillinger
+Frappe AI Writer,Frappe AI Writer

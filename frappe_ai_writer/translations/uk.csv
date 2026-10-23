@@ -1,0 +1,36 @@
+You are not permitted to use AI Writer.,Ви не маєте дозволу на використання AI Writer.
+AI Writer is disabled.,AI Writer вимкнено.
+No Anthropic API key configured. Please set one in AI Writer Settings.,Ключ API Anthropic не налаштовано. Укажіть його в налаштуваннях AI Writer.
+Nothing to correct.,Немає чого виправляти.
+The text is too long ({0} characters). The maximum is {1} characters.,Текст задовгий ({0} символів). Максимум — {1} символів.
+Invalid correction mode: {0},Недійсний режим виправлення: {0}
+The Anthropic API key is invalid or lacks permission.,Ключ API Anthropic недійсний або не має потрібних дозволів.
+The configured AI model is not available: {0},Налаштована модель ШІ недоступна: {0}
+The AI service is busy. Please try again in a moment.,Сервіс ШІ перевантажений. Спробуйте ще раз за мить.
+The AI service returned an error. Please try again later.,Сервіс ШІ повернув помилку. Спробуйте пізніше.
+The AI service could not be reached. Please try again later.,Не вдалося з'єднатися із сервісом ШІ. Спробуйте пізніше.
+The AI service declined to process this text.,Сервіс ШІ відмовився обробляти цей текст.
+The corrected text would be too long. Please correct a shorter passage.,Виправлений текст був би задовгим. Виправте коротший фрагмент.
+The AI service returned an empty response.,Сервіс ШІ повернув порожню відповідь.
+Invalid model name: {0},Недійсна назва моделі: {0}
+AI correction,Виправлення за допомогою ШІ
+AI correction options,Параметри виправлення ШІ
+Correct,Виправити
+More formal,Офіційніше
+More casual,Невимушеніше
+Text corrected,Текст виправлено
+Enter an Anthropic API key to use AI correction.,"Введіть ключ API Anthropic, щоб користуватися виправленням ШІ."
+AI Writer Settings,Налаштування AI Writer
+Enabled,Увімкнено
+Connection,Підключення
+Anthropic API Key,Ключ API Anthropic
+Model,Модель
+"Anthropic model ID, e.g. claude-haiku-5-5","Ідентифікатор моделі Anthropic, напр. claude-haiku-5-5"
+Effort,Рівень зусиль
+How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,Наскільки ретельно модель міркує перед відповіддю. «low» — найшвидше й найдешевше. Залиште порожнім для моделей без підтримки цього параметра.
+Prompt,Промпт
+System Prompt,Системний промпт
+Instructions sent to the model with every request. Leave empty to restore the default.,"Інструкції, що надсилаються моделі з кожним запитом. Залиште порожнім, щоб відновити типові."
+AI Writer,AI Writer
+Settings,Налаштування
+Frappe AI Writer,Frappe AI Writer

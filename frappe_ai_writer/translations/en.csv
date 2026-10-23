@@ -1,0 +1,36 @@
+You are not permitted to use AI Writer.,You are not permitted to use AI Writer.
+AI Writer is disabled.,AI Writer is disabled.
+No Anthropic API key configured. Please set one in AI Writer Settings.,No Anthropic API key configured. Please set one in AI Writer Settings.
+Nothing to correct.,Nothing to correct.
+The text is too long ({0} characters). The maximum is {1} characters.,The text is too long ({0} characters). The maximum is {1} characters.
+Invalid correction mode: {0},Invalid correction mode: {0}
+The Anthropic API key is invalid or lacks permission.,The Anthropic API key is invalid or lacks permission.
+The configured AI model is not available: {0},The configured AI model is not available: {0}
+The AI service is busy. Please try again in a moment.,The AI service is busy. Please try again in a moment.
+The AI service returned an error. Please try again later.,The AI service returned an error. Please try again later.
+The AI service could not be reached. Please try again later.,The AI service could not be reached. Please try again later.
+The AI service declined to process this text.,The AI service declined to process this text.
+The corrected text would be too long. Please correct a shorter passage.,The corrected text would be too long. Please correct a shorter passage.
+The AI service returned an empty response.,The AI service returned an empty response.
+Invalid model name: {0},Invalid model name: {0}
+AI correction,AI correction
+AI correction options,AI correction options
+Correct,Correct
+More formal,More formal
+More casual,More casual
+Text corrected,Text corrected
+Enter an Anthropic API key to use AI correction.,Enter an Anthropic API key to use AI correction.
+AI Writer Settings,AI Writer Settings
+Enabled,Enabled
+Connection,Connection
+Anthropic API Key,Anthropic API Key
+Model,Model
+"Anthropic model ID, e.g. claude-haiku-5-5","Anthropic model ID, e.g. claude-haiku-5-5"
+Effort,Effort
+How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.
+Prompt,Prompt
+System Prompt,System Prompt
+Instructions sent to the model with every request. Leave empty to restore the default.,Instructions sent to the model with every request. Leave empty to restore the default.
+AI Writer,AI Writer
+Settings,Settings
+Frappe AI Writer,Frappe AI Writer

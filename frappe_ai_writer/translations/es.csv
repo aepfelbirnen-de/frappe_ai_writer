@@ -1,0 +1,36 @@
+You are not permitted to use AI Writer.,No tiene permiso para usar AI Writer.
+AI Writer is disabled.,AI Writer está desactivado.
+No Anthropic API key configured. Please set one in AI Writer Settings.,No hay ninguna clave de API de Anthropic configurada. Configúrela en los ajustes de AI Writer.
+Nothing to correct.,No hay nada que corregir.
+The text is too long ({0} characters). The maximum is {1} characters.,El texto es demasiado largo ({0} caracteres). El máximo es de {1} caracteres.
+Invalid correction mode: {0},Modo de corrección no válido: {0}
+The Anthropic API key is invalid or lacks permission.,La clave de API de Anthropic no es válida o no tiene permisos.
+The configured AI model is not available: {0},El modelo de IA configurado no está disponible: {0}
+The AI service is busy. Please try again in a moment.,El servicio de IA está ocupado. Inténtelo de nuevo en un momento.
+The AI service returned an error. Please try again later.,El servicio de IA ha devuelto un error. Inténtelo de nuevo más tarde.
+The AI service could not be reached. Please try again later.,No se ha podido conectar con el servicio de IA. Inténtelo de nuevo más tarde.
+The AI service declined to process this text.,El servicio de IA se ha negado a procesar este texto.
+The corrected text would be too long. Please correct a shorter passage.,El texto corregido sería demasiado largo. Corrija un fragmento más corto.
+The AI service returned an empty response.,El servicio de IA ha devuelto una respuesta vacía.
+Invalid model name: {0},Nombre de modelo no válido: {0}
+AI correction,Corrección con IA
+AI correction options,Opciones de corrección con IA
+Correct,Corregir
+More formal,Más formal
+More casual,Más informal
+Text corrected,Texto corregido
+Enter an Anthropic API key to use AI correction.,Introduzca una clave de API de Anthropic para usar la corrección con IA.
+AI Writer Settings,Ajustes de AI Writer
+Enabled,Activado
+Connection,Conexión
+Anthropic API Key,Clave de API de Anthropic
+Model,Modelo
+"Anthropic model ID, e.g. claude-haiku-5-5","ID del modelo de Anthropic, p. ej. claude-haiku-5-5"
+Effort,Esfuerzo
+How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,Cuánto razona el modelo antes de responder. «low» es lo más rápido y económico. Déjelo vacío para modelos sin soporte de esfuerzo.
+Prompt,Prompt
+System Prompt,Prompt del sistema
+Instructions sent to the model with every request. Leave empty to restore the default.,Instrucciones que se envían al modelo en cada solicitud. Déjelo vacío para restaurar el valor predeterminado.
+AI Writer,AI Writer
+Settings,Ajustes
+Frappe AI Writer,Frappe AI Writer

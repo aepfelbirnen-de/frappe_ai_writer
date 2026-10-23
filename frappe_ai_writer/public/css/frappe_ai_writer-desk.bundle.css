@@ -1,0 +1,192 @@
+.ai-writer-group {
+	position: relative;
+}
+
+/* Icons follow currentColor. v16 colors toolbar buttons via `color` with more specific rules, which
+   win; v15 leaves .ql-fill at Quill's #444 (invisible in dark mode), so the color is set here. */
+.ai-writer-group > button {
+	color: var(--icon-stroke);
+}
+
+/* Fills the button's content box: 18px in v15 (Quill 1 sizing), 16px in v16. */
+.ai-writer-group > button svg {
+	width: 100%;
+	height: 100%;
+}
+
+.ai-writer-group svg .ql-fill {
+	fill: currentColor;
+}
+
+.ai-writer-group svg .ql-stroke {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* Must outrank Quill's `.ql-snow.ql-toolbar button` and Frappe v16's `.ql-toolbar.ql-snow button`. */
+.ql-toolbar .ai-writer-group > .ai-writer-menu-btn {
+	width: 18px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.ai-writer-group button:disabled {
+	cursor: wait;
+}
+
+/* Busy: the stars twinkle out of phase while a third one flashes up. */
+.ai-writer-group .ai-writer-spark {
+	opacity: 0;
+}
+
+.ai-writer-group.ai-writer-busy .ai-writer-btn path {
+	transform-box: fill-box;
+	transform-origin: center;
+	animation: ai-writer-twinkle 1.2s ease-in-out infinite;
+}
+
+.ai-writer-group.ai-writer-busy .ai-writer-btn path:nth-child(2) {
+	animation-delay: -0.4s;
+}
+
+.ai-writer-group.ai-writer-busy .ai-writer-btn path:nth-child(3) {
+	animation-name: ai-writer-spark;
+	animation-delay: -0.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	/* :nth-child(n) matches the specificity of the :nth-child(3) rule above, so this wins. */
+	.ai-writer-group.ai-writer-busy .ai-writer-btn path:nth-child(n) {
+		animation: none;
+	}
+
+	.ai-writer-group.ai-writer-busy .ai-writer-btn {
+		animation: ai-writer-pulse 1.6s ease-in-out infinite;
+	}
+}
+
+/* Inline placement (comment box, textareas), outside any Quill toolbar. */
+.ai-writer-group.ai-writer-inline {
+	position: absolute;
+	right: 6px;
+	bottom: 5px;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+}
+
+.ai-writer-group.ai-writer-inline > button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: 3px;
+	background: none;
+	border: none;
+	border-radius: var(--border-radius-sm);
+	cursor: pointer;
+}
+
+.ai-writer-group.ai-writer-inline > .ai-writer-menu-btn {
+	width: 18px;
+	padding: 0;
+}
+
+.ai-writer-group.ai-writer-inline > button:hover {
+	background: var(--fg-hover-color);
+}
+
+/* Matches the specificity of Frappe's comment-box padding rule; app CSS loads later, so it wins. */
+.ql-container.ql-bubble.ai-writer-has-inline .ql-editor {
+	padding-right: 56px;
+}
+
+/* Textareas: clear of the resize handle and the scrollbar; text wraps before the buttons. */
+.ai-writer-has-textarea {
+	position: relative;
+}
+
+.ai-writer-group.ai-writer-inline.ai-writer-textarea {
+	right: 18px;
+	bottom: 6px;
+}
+
+.ai-writer-has-textarea > textarea.form-control {
+	padding-right: 64px;
+}
+
+.ai-writer-group .ai-writer-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 10;
+	min-width: 160px;
+	padding: 4px;
+	background: var(--fg-color);
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow-md);
+}
+
+.ai-writer-group.ai-writer-inline .ai-writer-menu {
+	left: auto;
+	right: 0;
+}
+
+.ai-writer-group .ai-writer-menu[hidden] {
+	display: none;
+}
+
+.ai-writer-group .ai-writer-menu .ai-writer-menu-item {
+	display: block;
+	float: none;
+	width: 100%;
+	height: auto;
+	padding: 4px 8px;
+	text-align: left;
+	white-space: nowrap;
+	font-size: var(--text-sm);
+	color: var(--text-color);
+	background: none;
+	border: none;
+	border-radius: var(--border-radius-sm);
+	cursor: pointer;
+}
+
+.ai-writer-group .ai-writer-menu .ai-writer-menu-item:hover {
+	background: var(--fg-hover-color);
+}
+
+@keyframes ai-writer-twinkle {
+	0%,
+	100% {
+		transform: scale(1) rotate(0deg);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(0.6) rotate(45deg);
+		opacity: 0.45;
+	}
+}
+
+@keyframes ai-writer-spark {
+	0%,
+	100% {
+		transform: scale(0.3);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(1) rotate(45deg);
+		opacity: 1;
+	}
+}
+
+@keyframes ai-writer-pulse {
+	50% {
+		opacity: 0.3;
+	}
+}

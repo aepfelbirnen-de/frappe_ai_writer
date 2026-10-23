@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-10-23 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "connection_section",
+  "api_key",
+  "model",
+  "effort",
+  "prompt_section",
+  "system_prompt"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "connection_section",
+   "fieldtype": "Section Break",
+   "label": "Connection"
+  },
+  {
+   "fieldname": "api_key",
+   "fieldtype": "Password",
+   "label": "Anthropic API Key",
+   "length": 255
+  },
+  {
+   "default": "claude-haiku-5-5",
+   "description": "Anthropic model ID, e.g. claude-haiku-5-5",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "default": "low",
+   "description": "How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.",
+   "fieldname": "effort",
+   "fieldtype": "Select",
+   "label": "Effort",
+   "options": "\nlow\nmedium\nhigh"
+  },
+  {
+   "fieldname": "prompt_section",
+   "fieldtype": "Section Break",
+   "label": "Prompt"
+  },
+  {
+   "description": "Instructions sent to the model with every request. Leave empty to restore the default.",
+   "fieldname": "system_prompt",
+   "fieldtype": "Small Text",
+   "label": "System Prompt"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-23 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Frappe AI Writer",
+ "name": "AI Writer Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "AI Writer Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

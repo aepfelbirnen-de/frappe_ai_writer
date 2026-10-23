@@ -1,0 +1,32 @@
+[project]
+name = "frappe_ai_writer"
+authors = [{ name = "aepfel+birnen IT GmbH", email = "it@aepfelbirnen.com" }]
+description = "AI proofreading for Frappe and ERPNext text fields, powered by Claude"
+readme = "README.md"
+license = { file = "license.txt" }
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    # 1.x is the first line with Python 3.10+ and httpx2; 2.x is untested.
+    "anthropic~=1.17",
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=15.0.0,<17.0.0"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+# Frappe's generated controller types use DF.Literal, which re-exports typing.Literal.
+typing-modules = ["frappe.types.DF"]
+
+[tool.ruff.format]
+quote-style = "double"
