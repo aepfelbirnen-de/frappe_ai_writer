@@ -34,7 +34,11 @@
 		},
 	];
 
+	const LOGO_URL = "/assets/frappe_ai_writer/images/frappe_ai_writer-logo.svg";
+
 	const is_enabled = () => Boolean(frappe.boot.ai_writer?.enabled);
+
+	localize_change_log();
 
 	patch(frappe.ui.form.ControlTextEditor, "make_quill_editor", function () {
 		if (this.quill) attach_to_quill(this.quill, field_context(this));
@@ -55,6 +59,20 @@
 		const label = control.df?.label || control.df?.fieldtype;
 		const doctype = control.frm?.doctype || control.doctype;
 		return [label, doctype].filter(Boolean).join(" · ");
+	}
+
+	// Frappe shows the update dialog from frappe.boot.change_log shortly after load and never translates
+	// it; this swaps in the user's language for this app's entries before the dialog opens.
+	function localize_change_log() {
+		const translated = frappe.boot.ai_writer_change_log;
+		if (!translated || !Array.isArray(frappe.boot.change_log)) return;
+		for (const entry of frappe.boot.change_log) {
+			if (entry.title !== translated.title || !Array.isArray(entry.change_log)) continue;
+			entry.change_log = entry.change_log.map(([version, markdown]) => [
+				version,
+				translated.versions[version] || markdown,
+			]);
+		}
 	}
 
 	function patch(Control, method, after) {
@@ -224,6 +242,10 @@
 	function show_help() {
 		if (!help_dialog) {
 			help_dialog = new frappe.ui.Dialog({ title: __("How AI Writer works"), size: "small" });
+			const logo = make_element("img", "ai-writer-help-logo");
+			logo.src = LOGO_URL;
+			logo.alt = "";
+			help_dialog.$wrapper.find(".modal-title").prepend(logo);
 			help_dialog.$body.append(make_help_content());
 		}
 		help_dialog.show();

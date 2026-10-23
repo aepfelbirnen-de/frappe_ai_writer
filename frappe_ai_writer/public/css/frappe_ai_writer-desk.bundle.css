@@ -180,6 +180,13 @@
 	height: 14px;
 }
 
+.ai-writer-help-logo {
+	width: 24px;
+	height: 24px;
+	margin-right: 8px;
+	vertical-align: middle;
+}
+
 .ai-writer-help dt {
 	font-weight: 600;
 	color: var(--text-color);

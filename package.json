@@ -1,6 +1,6 @@
 {
   "name": "frappe_ai_writer",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "description": "AI proofreading for Frappe and ERPNext text fields, powered by Claude",
   "license": "MIT"
