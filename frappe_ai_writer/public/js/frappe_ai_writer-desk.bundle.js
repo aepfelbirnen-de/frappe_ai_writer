@@ -10,6 +10,7 @@
 	const METHOD = "frappe_ai_writer.api.correction.correct_text";
 	const MODES = [
 		{ mode: "correct", label: () => __("Correct") },
+		{ mode: "expand", label: () => __("Write out") },
 		{ mode: "formal", label: () => __("More formal") },
 		{ mode: "casual", label: () => __("More casual") },
 	];
@@ -17,7 +18,7 @@
 	const is_enabled = () => Boolean(frappe.boot.ai_writer?.enabled);
 
 	patch(frappe.ui.form.ControlTextEditor, "make_quill_editor", function () {
-		if (this.quill) attach_to_quill(this.quill);
+		if (this.quill) attach_to_quill(this.quill, field_context(this));
 	});
 
 	// ControlCode (Ace) and ControlTextEditor also extend ControlText but override make_input
@@ -25,8 +26,17 @@
 	patch(frappe.ui.form.ControlText, "make_input", function () {
 		if (this.only_input || this.in_grid?.()) return;
 		const textarea = this.$input?.[0];
-		if (textarea?.tagName === "TEXTAREA") attach_to_textarea(textarea, $(this.input_area)[0]);
+		if (textarea?.tagName === "TEXTAREA") {
+			attach_to_textarea(textarea, $(this.input_area)[0], field_context(this));
+		}
 	});
+
+	// Tells the model what the text is for (e.g. "Description · Task"), so written-out notes fit the field.
+	function field_context(control) {
+		const label = control.df?.label || control.df?.fieldtype;
+		const doctype = control.frm?.doctype || control.doctype;
+		return [label, doctype].filter(Boolean).join(" · ");
+	}
 
 	function patch(Control, method, after) {
 		// Own-property check: ControlTextEditor inherits from ControlText, so an inherited flag
@@ -41,7 +51,7 @@
 		};
 	}
 
-	function attach_to_quill(quill) {
+	function attach_to_quill(quill, context) {
 		// Bubble-theme editors (the comment box) only show a toolbar while text is selected,
 		// so the button sits permanently at the end of the field instead.
 		const inline = quill.container.classList.contains("ql-bubble");
@@ -49,20 +59,23 @@
 		if (!host || host.querySelector(".ai-writer-group")) return;
 
 		const class_name = inline ? "ai-writer-group ai-writer-inline" : "ql-formats ai-writer-group";
-		host.append(make_group(class_name, quill_adapter(quill)));
+		host.append(make_group(class_name, quill_adapter(quill, context)));
 		if (inline) quill.container.classList.add("ai-writer-has-inline");
 	}
 
-	function attach_to_textarea(textarea, host) {
+	function attach_to_textarea(textarea, host, context) {
 		if (!host || host.querySelector(".ai-writer-group")) return;
-		host.append(make_group("ai-writer-group ai-writer-inline ai-writer-textarea", textarea_adapter(textarea)));
+		host.append(
+			make_group("ai-writer-group ai-writer-inline ai-writer-textarea", textarea_adapter(textarea, context))
+		);
 		host.classList.add("ai-writer-has-textarea");
 	}
 
 	// An adapter reads the text to correct and writes the result back for one kind of editor:
 	// read() returns { text, as_html, apply(result) } or null when there is nothing to correct.
-	function quill_adapter(quill) {
+	function quill_adapter(quill, context) {
 		return {
+			context,
 			is_disabled: () => quill.container.classList.contains("ql-disabled"),
 			// Edits during the request would shift the range the result is written back to.
 			lock: (locked) => quill.enable(!locked),
@@ -85,8 +98,9 @@
 		};
 	}
 
-	function textarea_adapter(textarea) {
+	function textarea_adapter(textarea, context) {
 		return {
+			context,
 			is_disabled: () => textarea.disabled || textarea.readOnly,
 			lock: (locked) => (textarea.readOnly = locked),
 			read() {
@@ -205,7 +219,12 @@
 		let result;
 		set_busy(adapter, group, true);
 		try {
-			result = await frappe.xcall(METHOD, { text: request.text, mode, as_html: request.as_html });
+			result = await frappe.xcall(METHOD, {
+				text: request.text,
+				mode,
+				as_html: request.as_html,
+				field_context: adapter.context,
+			});
 		} catch (error) {
 			// frappe.xcall already shows the server message to the user.
 			console.error(error);
@@ -216,7 +235,7 @@
 		}
 
 		request.apply(result);
-		frappe.show_alert({ message: __("Text corrected"), indicator: "green" });
+		frappe.show_alert({ message: __("Text updated"), indicator: "green" });
 	}
 
 	function with_original_whitespace(original, result) {

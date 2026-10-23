@@ -18,7 +18,6 @@ AI correction options,Параметри виправлення ШІ
 Correct,Виправити
 More formal,Офіційніше
 More casual,Невимушеніше
-Text corrected,Текст виправлено
 Enter an Anthropic API key to use AI correction.,"Введіть ключ API Anthropic, щоб користуватися виправленням ШІ."
 AI Writer Settings,Налаштування AI Writer
 Enabled,Увімкнено
@@ -34,3 +33,5 @@ Instructions sent to the model with every request. Leave empty to restore the de
 AI Writer,AI Writer
 Settings,Налаштування
 Frappe AI Writer,Frappe AI Writer
+Write out,Сформулювати повністю
+Text updated,Текст оновлено

@@ -18,7 +18,6 @@ AI correction options,Indstillinger for AI-korrektur
 Correct,Ret
 More formal,Mere formel
 More casual,Mere uformel
-Text corrected,Tekst rettet
 Enter an Anthropic API key to use AI correction.,Angiv en Anthropic API-nøgle for at bruge AI-korrektur.
 AI Writer Settings,AI Writer-indstillinger
 Enabled,Aktiveret
@@ -34,3 +33,5 @@ Instructions sent to the model with every request. Leave empty to restore the de
 AI Writer,AI Writer
 Settings,Indstillinger
 Frappe AI Writer,Frappe AI Writer
+Write out,Formulér
+Text updated,Tekst opdateret

@@ -18,7 +18,6 @@ AI correction options,AI correction options
 Correct,Correct
 More formal,More formal
 More casual,More casual
-Text corrected,Text corrected
 Enter an Anthropic API key to use AI correction.,Enter an Anthropic API key to use AI correction.
 AI Writer Settings,AI Writer Settings
 Enabled,Enabled
@@ -34,3 +33,5 @@ Instructions sent to the model with every request. Leave empty to restore the de
 AI Writer,AI Writer
 Settings,Settings
 Frappe AI Writer,Frappe AI Writer
+Write out,Write out
+Text updated,Text updated

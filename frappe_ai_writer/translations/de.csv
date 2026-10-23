@@ -18,7 +18,6 @@ AI correction options,KI-Korrektur – Optionen
 Correct,Korrigieren
 More formal,Formeller
 More casual,Lockerer
-Text corrected,Text korrigiert
 Enter an Anthropic API key to use AI correction.,"Geben Sie einen Anthropic-API-Schlüssel ein, um die KI-Korrektur zu nutzen."
 AI Writer Settings,AI-Writer-Einstellungen
 Enabled,Aktiviert
@@ -34,3 +33,5 @@ Instructions sent to the model with every request. Leave empty to restore the de
 AI Writer,AI Writer
 Settings,Einstellungen
 Frappe AI Writer,Frappe AI Writer
+Write out,Ausformulieren
+Text updated,Text aktualisiert
