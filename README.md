@@ -12,7 +12,8 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 
 - Works in **Text Editor** fields, the **email composer**, the **comment box** and plain **Small Text / Text / Long Text** fields
 - Four modes: **Correct**, **Write out**, **More formal**, **More casual**
-- Turns notes and bullet points into complete text, automatically or via **Write out**, without inventing facts
+- Turns bullet-point notes into detailed, complete text that explains terms and background, automatically or via **Write out**, without inventing specific facts
+- A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
 - One undo step (Cmd+Z / Ctrl+Z) reverts a correction
 - Detects the language of the text and answers in the same language
@@ -93,7 +94,8 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 
 - Funktioniert in **Text-Editor**-Feldern, im **E-Mail-Dialog**, im **Kommentarfeld** und in einfachen **Small-Text-, Text- und Long-Text**-Feldern
 - Vier Modi: **Korrigieren**, **Ausformulieren**, **Formeller**, **Lockerer**
-- Formuliert Stichpunkte zu vollständigem Text aus, automatisch oder über **Ausformulieren**, ohne Fakten zu erfinden
+- Formuliert Stichpunkte zu ausführlichem, vollständigem Text aus und erklärt dabei Begriffe und Hintergründe, automatisch oder über **Ausformulieren**, ohne konkrete Fakten zu erfinden
+- Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
 - Ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine Korrektur zurück
 - Erkennt die Sprache des Textes und antwortet in derselben Sprache

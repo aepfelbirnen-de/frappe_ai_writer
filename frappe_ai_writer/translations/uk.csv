@@ -35,3 +35,13 @@ Settings,Налаштування
 Frappe AI Writer,Frappe AI Writer
 Write out,Сформулювати повністю
 Text updated,Текст оновлено
+Help,Довідка
+How AI Writer works,Як працює AI Writer
+"Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Натисніть ✦, щоб одразу виправити текст, або відкрийте меню стрілкою, щоб вибрати режим. Без виділення обробляється все поле, з виділенням — лише виділена частина."
+Corrects the text and makes the tone more formal and business-like.,Виправляє текст і робить тон офіційнішим і діловим.
+Corrects the text and makes the tone friendlier and less formal.,Виправляє текст і робить тон дружнішим і менш офіційним.
+Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Ctrl+Z скасовує зміну.
+The answer is written in the language of the text.,Відповідь пишеться мовою тексту.
+The text is processed by Anthropic's Claude; AI Writer does not store it.,Текст обробляє Claude (Anthropic); AI Writer його не зберігає.
+"Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Виправляє орфографію, граматику та пунктуацію. Нотатки у вигляді списку перетворюються на повний текст."
+"Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Перетворює нотатки й пункти на повний, докладний текст і пояснює терміни та контекст, не вигадуючи конкретних фактів."

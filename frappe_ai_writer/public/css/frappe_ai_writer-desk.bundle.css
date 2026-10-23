@@ -161,6 +161,42 @@
 	background: var(--fg-hover-color);
 }
 
+.ai-writer-group .ai-writer-menu .ai-writer-menu-divider {
+	height: 1px;
+	margin: 4px 0;
+	background: var(--border-color);
+}
+
+.ai-writer-group .ai-writer-menu .ai-writer-menu-item.ai-writer-menu-help {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: var(--text-muted);
+}
+
+.ai-writer-group .ai-writer-menu .ai-writer-menu-help svg {
+	flex: none;
+	width: 14px;
+	height: 14px;
+}
+
+.ai-writer-help dt {
+	font-weight: 600;
+	color: var(--text-color);
+}
+
+.ai-writer-help dd {
+	margin: 0 0 var(--margin-sm, 8px);
+	color: var(--text-muted);
+}
+
+.ai-writer-help .ai-writer-help-notes {
+	margin: var(--margin-md, 12px) 0 0;
+	padding-left: 18px;
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+}
+
 @keyframes ai-writer-twinkle {
 	0%,
 	100% {

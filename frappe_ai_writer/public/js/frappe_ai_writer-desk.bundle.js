@@ -9,10 +9,29 @@
 	const PATCHED = Symbol.for("frappe_ai_writer.patched");
 	const METHOD = "frappe_ai_writer.api.correction.correct_text";
 	const MODES = [
-		{ mode: "correct", label: () => __("Correct") },
-		{ mode: "expand", label: () => __("Write out") },
-		{ mode: "formal", label: () => __("More formal") },
-		{ mode: "casual", label: () => __("More casual") },
+		{
+			mode: "correct",
+			label: () => __("Correct"),
+			help: () =>
+				__(
+					"Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text."
+				),
+		},
+		{
+			mode: "expand",
+			label: () => __("Write out"),
+			help: () => __("Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts."),
+		},
+		{
+			mode: "formal",
+			label: () => __("More formal"),
+			help: () => __("Corrects the text and makes the tone more formal and business-like."),
+		},
+		{
+			mode: "casual",
+			label: () => __("More casual"),
+			help: () => __("Corrects the text and makes the tone friendlier and less formal."),
+		},
 	];
 
 	const is_enabled = () => Boolean(frappe.boot.ai_writer?.enabled);
@@ -151,6 +170,19 @@
 			menu.append(item);
 		}
 
+		const divider = document.createElement("div");
+		divider.className = "ai-writer-menu-divider";
+		divider.setAttribute("role", "separator");
+		const help_label = document.createDocumentFragment();
+		help_label.append(help_icon(), document.createTextNode(__("Help")));
+		const help_item = make_button("ai-writer-menu-item ai-writer-menu-help", help_label);
+		help_item.setAttribute("role", "menuitem");
+		help_item.addEventListener("click", () => {
+			close_menu();
+			show_help();
+		});
+		menu.append(divider, help_item);
+
 		main_button.addEventListener("click", () => correct(adapter, group, "correct"));
 		menu_button.addEventListener("click", () => {
 			if (!menu.hidden) return close_menu();
@@ -177,6 +209,61 @@
 
 	function caret_icon() {
 		return make_svg([["path", "ql-stroke", "M6 7.5L9 10.5L12 7.5"]]);
+	}
+
+	function help_icon() {
+		return make_svg([
+			["path", "ql-stroke", "M9 2A7 7 0 1 1 9 16A7 7 0 1 1 9 2Z"],
+			["path", "ql-stroke", "M7 7.2A2 2 0 1 1 9.9 8.9C9.3 9.3 9 9.7 9 10.4V10.8"],
+			["path", "ql-fill", "M9 12.4A0.8 0.8 0 1 1 9 14A0.8 0.8 0 1 1 9 12.4Z"],
+		]);
+	}
+
+	// One dialog per page, built lazily on first use.
+	let help_dialog;
+	function show_help() {
+		if (!help_dialog) {
+			help_dialog = new frappe.ui.Dialog({ title: __("How AI Writer works"), size: "small" });
+			help_dialog.$body.append(make_help_content());
+		}
+		help_dialog.show();
+	}
+
+	function make_help_content() {
+		const root = make_element("div", "ai-writer-help");
+		root.append(
+			make_element(
+				"p",
+				null,
+				__(
+					"Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part."
+				)
+			)
+		);
+
+		const modes = make_element("dl");
+		for (const { label, help } of MODES) {
+			modes.append(make_element("dt", null, label()), make_element("dd", null, help()));
+		}
+
+		const notes = make_element("ul", "ai-writer-help-notes");
+		for (const note of [
+			__("Cmd+Z / Ctrl+Z undoes a change."),
+			__("The answer is written in the language of the text."),
+			__("The text is processed by Anthropic's Claude; AI Writer does not store it."),
+		]) {
+			notes.append(make_element("li", null, note));
+		}
+
+		root.append(modes, notes);
+		return root;
+	}
+
+	function make_element(tag, class_name, text) {
+		const element = document.createElement(tag);
+		if (class_name) element.className = class_name;
+		if (text) element.textContent = text;
+		return element;
 	}
 
 	function make_svg(shapes) {

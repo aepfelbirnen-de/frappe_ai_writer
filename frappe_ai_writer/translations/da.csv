@@ -35,3 +35,13 @@ Settings,Indstillinger
 Frappe AI Writer,Frappe AI Writer
 Write out,Formulér
 Text updated,Tekst opdateret
+Help,Hjælp
+How AI Writer works,Sådan virker AI Writer
+"Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Klik på ✦ for at rette teksten med det samme, eller åbn menuen med pilen for at vælge en tilstand. Uden markering bruges hele feltet; med markering kun den markerede del."
+Corrects the text and makes the tone more formal and business-like.,Retter teksten og gør tonen mere formel og forretningsmæssig.
+Corrects the text and makes the tone friendlier and less formal.,Retter teksten og gør tonen venligere og mindre formel.
+Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Ctrl+Z fortryder en ændring.
+The answer is written in the language of the text.,Svaret skrives på tekstens sprog.
+The text is processed by Anthropic's Claude; AI Writer does not store it.,Teksten behandles af Claude (Anthropic); AI Writer gemmer den ikke.
+"Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Retter stavning, grammatik og tegnsætning. Noter i punktform skrives ud som fuld tekst."
+"Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Gør noter og punkter til fyldig, sammenhængende tekst og forklarer begreber og baggrund uden at finde på konkrete fakta."

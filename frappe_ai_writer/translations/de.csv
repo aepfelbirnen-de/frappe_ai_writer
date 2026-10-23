@@ -35,3 +35,13 @@ Settings,Einstellungen
 Frappe AI Writer,Frappe AI Writer
 Write out,Ausformulieren
 Text updated,Text aktualisiert
+Help,Hilfe
+How AI Writer works,So funktioniert AI Writer
+"Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Klicken Sie auf ✦, um den Text sofort zu korrigieren, oder öffnen Sie über den Pfeil das Menü, um einen Modus zu wählen. Ohne Markierung wird das ganze Feld verwendet, mit Markierung nur der markierte Teil."
+Corrects the text and makes the tone more formal and business-like.,Korrigiert den Text und macht den Ton formeller und geschäftsmäßiger.
+Corrects the text and makes the tone friendlier and less formal.,Korrigiert den Text und macht den Ton freundlicher und weniger förmlich.
+Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Strg+Z macht eine Änderung rückgängig.
+The answer is written in the language of the text.,Die Antwort ist in der Sprache des Textes.
+The text is processed by Anthropic's Claude; AI Writer does not store it.,Der Text wird von Claude (Anthropic) verarbeitet; AI Writer speichert ihn nicht.
+"Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Korrigiert Rechtschreibung, Grammatik und Zeichensetzung. Stichpunktlisten werden zu vollständigem Text ausformuliert."
+"Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Macht aus Stichpunkten und Notizen ausführlichen, vollständigen Text und erklärt Begriffe und Hintergründe, ohne konkrete Fakten zu erfinden."
