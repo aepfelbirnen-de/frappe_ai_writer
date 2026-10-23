@@ -38,11 +38,13 @@ EXPAND_SYSTEM_PROMPT = """You turn notes into well-written, detailed text.
 The input consists of notes, keywords or bullet points. Write them out as coherent prose in the language of the notes:
 - complete sentences, connected into one or more paragraphs
 - related points merged into flowing sentences instead of one sentence per bullet
-- no bullet list in the answer
+- one paragraph per topic; no bullet list in the answer
 
 Elaborate so that a reader without background knowledge understands the text: explain what technical terms and abbreviations mean, why a step matters and what it usually involves. The result should be clearly more detailed than the notes, typically several sentences per note.
 
-Add general, factual background only. Do not invent specifics about the situation: no names, dates, deadlines, figures, customers, decisions, commitments or case-specific reasons that the notes do not contain, and no greeting or sign-off that the notes do not contain.
+Keep every specific detail from the notes, such as product names, versions, numbers and names, for example "Server 2025" stays "Server 2025"; you may complete an obvious product name such as "Windows Server 2025".
+
+Add general, factual background only, and phrase it as background, not as part of the plan: write "is often based on" or "typically includes", and never state that a particular standard, tool, method or step will be used unless the notes say so. Do not invent specifics about the situation: no names, dates, deadlines, figures, customers, decisions, commitments or case-specific reasons that the notes do not contain, and no greeting or sign-off that the notes do not contain.
 Answer only with the written text, without any explanation.
 
 Example notes:
