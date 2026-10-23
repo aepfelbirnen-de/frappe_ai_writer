@@ -14,20 +14,19 @@ LANGUAGE_CODE = re.compile(r"^[a-z]{2,3}(-[a-z0-9]{2,8})?$", re.IGNORECASE)
 
 def boot_session(bootinfo: frappe._dict) -> None:
     """Tell the desk client whether to show the AI button and hand over translated change logs."""
-    if has_ai_writer_access():
+    has_access = has_ai_writer_access()
+    if has_access:
         bootinfo.ai_writer = {
             "enabled": bool(cint(frappe.db.get_single_value("AI Writer Settings", "enabled", cache=True))),
         }
 
-    # Frappe shows the update dialog only to System Managers and never translates change logs,
-    # so the client swaps in these versions before the dialog opens.
-    if "System Manager" in frappe.get_roles():
-        versions = get_translated_change_logs(frappe.local.lang)
-        if versions:
-            bootinfo.ai_writer_change_log = {
-                "title": frappe.get_hooks("app_title", app_name=APP_NAME)[0],
-                "versions": versions,
-            }
+    # Frappe never translates change logs, so the client swaps in these versions before the update
+    # dialog opens; AI Writer users without Frappe's dialog get the app's own (see desk bundle).
+    if has_access or "System Manager" in frappe.get_roles():
+        bootinfo.ai_writer_change_log = {
+            "title": frappe.get_hooks("app_title", app_name=APP_NAME)[0],
+            "versions": get_translated_change_logs(frappe.local.lang),
+        }
 
 
 def get_translated_change_logs(lang: str | None) -> dict[str, str]:

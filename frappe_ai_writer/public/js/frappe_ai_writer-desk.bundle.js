@@ -39,6 +39,7 @@
 	const is_enabled = () => Boolean(frappe.boot.ai_writer?.enabled);
 
 	localize_change_log();
+	$(document).one("app_ready", () => setTimeout(show_change_log_to_writers, 1000));
 
 	patch(frappe.ui.form.ControlTextEditor, "make_quill_editor", function () {
 		if (this.quill) attach_to_quill(this.quill, field_context(this));
@@ -73,6 +74,34 @@
 				translated.versions[version] || markdown,
 			]);
 		}
+	}
+
+	// Frappe opens the update dialog only for System Managers (v16: also Workspace Managers). Other
+	// AI Writer users get this app's part of it, with the same opt-outs and once per update: closing
+	// it records the seen versions just like Frappe's dialog does.
+	function show_change_log_to_writers() {
+		const title = frappe.boot.ai_writer_change_log?.title;
+		if (!frappe.boot.ai_writer || !title || frappe_shows_change_log()) return;
+		if (window.Cypress || navigator.webdriver || frappe.defaults.is_enabled("disable_change_log_notification")) {
+			return;
+		}
+
+		const change_log = (frappe.boot.change_log || []).filter((entry) => entry.title === title);
+		if (!change_log.length) return;
+
+		const dialog = frappe.msgprint({
+			message: frappe.render_template("change_log", { change_log }),
+			title: __("Updated To A New Version 🎉"),
+			wide: true,
+		});
+		dialog.keep_open = true;
+		dialog.custom_onhide = () => frappe.call({ method: "frappe.utils.change_log.update_last_known_versions" });
+	}
+
+	function frappe_shows_change_log() {
+		const roles = frappe.user_roles || [];
+		const frappe_major = parseInt(frappe.boot.versions?.frappe, 10) || 15;
+		return roles.includes("System Manager") || (frappe_major >= 16 && roles.includes("Workspace Manager"));
 	}
 
 	function patch(Control, method, after) {
