@@ -38,7 +38,15 @@ class TestCorrectText(FrappeTestCase):
 
     def setUp(self) -> None:
         frappe.set_user("Administrator")
-        self._update_settings(enabled=1, api_key="sk-ant-test", model="claude-haiku-5-5", effort="low")
+        self._update_settings(
+            enabled=1,
+            api_key="sk-ant-test",
+            model="claude-haiku-5-5",
+            effort="low",
+            expand_prompt="",
+            expansion_factor_min=4,
+            expansion_factor_max=10,
+        )
         frappe.get_doc("User", TEST_USER).remove_roles(*frappe.get_roles(TEST_USER))
 
     def tearDown(self) -> None:
@@ -84,6 +92,16 @@ class TestCorrectText(FrappeTestCase):
         _, request = self._correct(mode="expand", text="Server 2025 mit AD aufsetzen, FSLogix + Hardening.")
         self.assertIn("turn notes into", request["system"])
         self.assertIn("Do not invent specifics", request["system"])
+
+    def test_expand_mode_uses_settings_prompt_and_word_range(self) -> None:
+        self._update_settings(expand_prompt="Custom write-out prompt.", expansion_factor_min=2, expansion_factor_max=3)
+        _, request = self._correct(mode="expand", text="FSLogix einrichten")
+        self.assertTrue(request["system"].startswith("Custom write-out prompt."))
+        self.assertIn("roughly 4 to 6 words", request["system"])
+
+    def test_length_guidance_only_for_write_out(self) -> None:
+        _, request = self._correct(text="Ein Fehlr im Satz.")
+        self.assertNotIn("words in total", request["system"])
 
     def test_expand_mode_with_html_asks_for_paragraphs(self) -> None:
         _, request = self._correct(mode="expand", text="<ul><li>Angebot anbei</li></ul>", as_html=1)

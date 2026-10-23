@@ -7,6 +7,7 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
+    DEFAULT_EXPAND_PROMPT,
     DEFAULT_MODEL,
     DEFAULT_SYSTEM_PROMPT,
     get_translation_languages,
@@ -38,6 +39,20 @@ class TestAIWriterSettings(FrappeTestCase):
         settings.save()
         self.assertEqual(settings.model, DEFAULT_MODEL)
         self.assertEqual(settings.system_prompt, DEFAULT_SYSTEM_PROMPT)
+
+    def test_write_out_defaults_are_filled(self) -> None:
+        settings = frappe.get_single("AI Writer Settings")
+        settings.update({"expand_prompt": "", "expansion_factor_min": 0, "expansion_factor_max": 0})
+        settings.save()
+        self.assertEqual(settings.expand_prompt, DEFAULT_EXPAND_PROMPT)
+        self.assertEqual((settings.expansion_factor_min, settings.expansion_factor_max), (4, 10))
+
+    def test_invalid_expansion_factors_are_rejected(self) -> None:
+        for low, high in ((5, 3), (1, 51)):
+            with self.subTest(low=low, high=high):
+                settings = frappe.get_single("AI Writer Settings")
+                settings.update({"expansion_factor_min": low, "expansion_factor_max": high})
+                self.assertRaises(frappe.ValidationError, settings.save)
 
     def test_invalid_model_name_is_rejected(self) -> None:
         settings = frappe.get_single("AI Writer Settings")

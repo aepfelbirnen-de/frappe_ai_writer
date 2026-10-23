@@ -48,6 +48,8 @@ bench --site your-site migrate
    - **Model**: defaults to `claude-haiku-5-5`, fast and inexpensive for proofreading
    - **Effort**: how much the model reasons before answering; `low` is fastest
    - **System Prompt**: the instructions sent with every request; leave empty to restore the default
+   - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
+   - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
 4. Give users the **AI Writer User** role. Users without it do not see the button.
 
@@ -133,6 +135,8 @@ bench --site ihre-site migrate
    - **Modell**: Standard ist `claude-haiku-5-5`, schnell und günstig für Korrekturen
    - **Denkaufwand**: wie gründlich das Modell vor der Antwort nachdenkt; `low` ist am schnellsten
    - **System-Prompt**: die Anweisungen, die bei jeder Anfrage mitgehen; leer lassen stellt den Standard wieder her
+   - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
+   - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
 4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.
 

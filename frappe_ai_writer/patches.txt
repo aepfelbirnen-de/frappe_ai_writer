@@ -3,3 +3,4 @@
 [post_model_sync]
 # The patch needs the translation_languages table, so it runs after the DocTypes sync.
 frappe_ai_writer.patches.v0_6.set_default_translation_languages
+frappe_ai_writer.patches.v0_7.set_write_out_defaults

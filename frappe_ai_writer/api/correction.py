@@ -14,8 +14,10 @@ from frappe.utils import escape_html, sbool
 from frappe.utils.html_utils import sanitize_html
 
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
+    DEFAULT_EXPAND_PROMPT,
     DEFAULT_MODEL,
     DEFAULT_SYSTEM_PROMPT,
+    get_expansion_factors,
     get_translation_languages,
 )
 from frappe_ai_writer.permissions import has_ai_writer_access
@@ -33,27 +35,11 @@ TONE_INSTRUCTIONS = {
     "casual": "Also make the tone friendlier and less formal.",
 }
 
-# Writing out notes conflicts with the correction prompt ("keep the formatting"), so it uses its own prompt.
-EXPAND_SYSTEM_PROMPT = """You turn notes into well-written, detailed text.
 
-The input consists of notes, keywords or bullet points. Write them out as coherent prose in the language of the notes:
-- complete sentences, connected into one or more paragraphs
-- related points merged into flowing sentences instead of one sentence per bullet
-- one paragraph per topic; no bullet list in the answer
-
-Elaborate so that a reader without background knowledge understands the text: explain what technical terms and abbreviations mean, why a step matters and what it usually involves. The result should be clearly more detailed than the notes, typically several sentences per note.
-
-Keep every specific detail from the notes, such as product names, versions, numbers and names, for example "Server 2025" stays "Server 2025"; you may complete an obvious product name such as "Windows Server 2025".
-
-Add general, factual background only, and phrase it as background, not as part of the plan: write "is often based on" or "typically includes", and never state that a particular standard, tool, method or step will be used unless the notes say so. Do not invent specifics about the situation: no names, dates, deadlines, figures, customers, decisions, commitments or case-specific reasons that the notes do not contain, and no greeting or sign-off that the notes do not contain.
-Answer only with the written text, without any explanation.
-
-Example notes:
-- migrate mailboxes to M365
-- MFA for all users
-
-Example answer:
-The existing mailboxes will be migrated to Microsoft 365, so that email, calendars and contacts are available in the cloud and no longer depend on the local mail server. In addition, multi-factor authentication (MFA) will be enabled for all users: besides their password, they confirm each sign-in with a second factor such as an authenticator app, which considerably reduces the risk of compromised accounts."""
+LENGTH_INSTRUCTION = (
+    "Length: the notes contain about {words} words. Write roughly {low} to {high} words in total. "
+    "Treat this as a guideline rather than an exact limit, and do not pad the text to reach it."
+)
 
 TRANSLATE_SYSTEM_PROMPT = """You are a professional translator. Translate the text into {language}.
 
@@ -94,6 +80,7 @@ BULLET_PATTERN = re.compile(r"^\s*(?:[-*\u2022\u2013]|\d+[.)])\s+")
 LIST_ITEM_PATTERN = re.compile(r"<li\b[^>]*>(.*?)</li>", re.IGNORECASE | re.DOTALL)
 PARAGRAPH_PATTERN = re.compile(r"<p\b[^>]*>(.*?)</p>", re.IGNORECASE | re.DOTALL)
 TAG_PATTERN = re.compile(r"<[^>]+>")
+WORD_PATTERN = re.compile(r"\w+")
 
 
 @frappe.whitelist(methods=["POST"])
@@ -157,7 +144,15 @@ def correct_text(
         model=settings.model or DEFAULT_MODEL,
         effort=_effort_for(mode, settings.effort),
         system_prompt=_build_system_prompt(
-            settings.system_prompt, mode, as_html, bool(field_context), language, bool(protected)
+            settings,
+            mode,
+            as_html,
+            has_context=bool(field_context),
+            language=language,
+            has_placeholders=bool(protected),
+            length_instruction=_length_instruction(masked, as_html, *get_expansion_factors(settings))
+            if mode == "expand"
+            else None,
         ),
         user_message=_build_user_message(masked, field_context),
     )
@@ -232,7 +227,14 @@ def _effort_for(mode: str, effort: str | None) -> str | None:
 
 
 def _html_to_text(html: str) -> str:
-    return unescape(TAG_PATTERN.sub("", html)).strip()
+    # Tags become spaces so that words in neighboring elements stay separate.
+    return unescape(TAG_PATTERN.sub(" ", html)).strip()
+
+
+def _length_instruction(masked: str, as_html: bool, low: int, high: int) -> str:
+    visible = _html_to_text(masked) if as_html else masked
+    words = max(1, len(WORD_PATTERN.findall(visible)))
+    return LENGTH_INSTRUCTION.format(words=words, low=words * low, high=words * high)
 
 
 def _clean_context(field_context: str | None) -> str:
@@ -242,12 +244,14 @@ def _clean_context(field_context: str | None) -> str:
 
 
 def _build_system_prompt(
-    base_prompt: str | None,
+    settings: frappe._dict,
     mode: str,
     as_html: bool,
-    has_context: bool,
+    *,
+    has_context: bool = False,
     language: dict[str, str] | None = None,
     has_placeholders: bool = False,
+    length_instruction: str | None = None,
 ) -> str:
     if mode == "translate":
         parts = [
@@ -255,9 +259,11 @@ def _build_system_prompt(
             TEXT_TAG_INSTRUCTION,
         ]
     elif mode == "expand":
-        parts = [EXPAND_SYSTEM_PROMPT, TEXT_TAG_INSTRUCTION]
+        parts = [(settings.expand_prompt or "").strip() or DEFAULT_EXPAND_PROMPT, TEXT_TAG_INSTRUCTION]
+        if length_instruction:
+            parts.append(length_instruction)
     else:
-        parts = [(base_prompt or "").strip() or DEFAULT_SYSTEM_PROMPT, TEXT_TAG_INSTRUCTION]
+        parts = [(settings.system_prompt or "").strip() or DEFAULT_SYSTEM_PROMPT, TEXT_TAG_INSTRUCTION]
     if has_context:
         parts.append(CONTEXT_INSTRUCTION)
     if has_placeholders:

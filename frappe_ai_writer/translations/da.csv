@@ -55,3 +55,11 @@ AI Writer Translation Language,AI Writer-oversættelsessprog
 "Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","Tekst mellem /"" og ""/ bliver aldrig rettet eller oversat, for eksempel /""Müller & Söhne GmbH""/."
 "The text marked with /""…""/ could not be kept unchanged. Please try again.","Teksten markeret med /""…""/ kunne ikke bevares uændret. Prøv igen."
 The language button (文A) translates the text into one of the languages a manager has enabled in AI Writer Settings.,"Sprogknappen (文A) oversætter teksten til et af de sprog, som en administrator har aktiveret under AI Writer-indstillinger."
+Write-out Prompt,Prompt til udskrivning
+Instructions for writing out notes. Leave empty to restore the default.,Instruktioner til at skrive noter ud. Lad feltet være tomt for at gendanne standarden.
+Minimum Expansion Factor,Mindste udvidelsesfaktor
+Maximum Expansion Factor,Største udvidelsesfaktor
+The written-out text should have at least about this many times the words of the notes.,Den udskrevne tekst skal have mindst omtrent så mange gange ordene i noterne.
+The written-out text should have at most about this many times the words of the notes.,Den udskrevne tekst skal have højst omtrent så mange gange ordene i noterne.
+Expansion factors must be between 1 and {0}.,Udvidelsesfaktorerne skal ligge mellem 1 og {0}.
+The maximum expansion factor must be at least the minimum.,Den største udvidelsesfaktor skal mindst være lig med den mindste.

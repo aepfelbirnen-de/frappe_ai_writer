@@ -55,3 +55,11 @@ AI Writer Translation Language,Idioma de traducción de AI Writer
 "Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","El texto entre /"" y ""/ nunca se corrige ni se traduce, por ejemplo /""Müller & Söhne GmbH""/."
 "The text marked with /""…""/ could not be kept unchanged. Please try again.","El texto marcado con /""…""/ no se pudo conservar sin cambios. Inténtelo de nuevo."
 The language button (文A) translates the text into one of the languages a manager has enabled in AI Writer Settings.,El botón de idiomas (文A) traduce el texto a uno de los idiomas que un responsable ha habilitado en los ajustes de AI Writer.
+Write-out Prompt,Prompt de redacción
+Instructions for writing out notes. Leave empty to restore the default.,Instrucciones para redactar notas. Déjelo vacío para restaurar el valor predeterminado.
+Minimum Expansion Factor,Factor de ampliación mínimo
+Maximum Expansion Factor,Factor de ampliación máximo
+The written-out text should have at least about this many times the words of the notes.,El texto redactado debe tener aproximadamente al menos este múltiplo de palabras de las notas.
+The written-out text should have at most about this many times the words of the notes.,El texto redactado debe tener aproximadamente como máximo este múltiplo de palabras de las notas.
+Expansion factors must be between 1 and {0}.,Los factores de ampliación deben estar entre 1 y {0}.
+The maximum expansion factor must be at least the minimum.,El factor de ampliación máximo debe ser al menos igual al mínimo.

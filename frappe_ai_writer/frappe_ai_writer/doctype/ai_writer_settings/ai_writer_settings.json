@@ -13,6 +13,11 @@
   "effort",
   "prompt_section",
   "system_prompt",
+  "write_out_section",
+  "expand_prompt",
+  "column_break_factors",
+  "expansion_factor_min",
+  "expansion_factor_max",
   "translation_section",
   "translation_languages"
  ],
@@ -61,6 +66,37 @@
    "label": "System Prompt"
   },
   {
+   "fieldname": "write_out_section",
+   "fieldtype": "Section Break",
+   "label": "Write out"
+  },
+  {
+   "description": "Instructions for writing out notes. Leave empty to restore the default.",
+   "fieldname": "expand_prompt",
+   "fieldtype": "Small Text",
+   "label": "Write-out Prompt"
+  },
+  {
+   "fieldname": "column_break_factors",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "4",
+   "description": "The written-out text should have at least about this many times the words of the notes.",
+   "fieldname": "expansion_factor_min",
+   "fieldtype": "Int",
+   "label": "Minimum Expansion Factor",
+   "non_negative": 1
+  },
+  {
+   "default": "10",
+   "description": "The written-out text should have at most about this many times the words of the notes.",
+   "fieldname": "expansion_factor_max",
+   "fieldtype": "Int",
+   "label": "Maximum Expansion Factor",
+   "non_negative": 1
+  },
+  {
    "fieldname": "translation_section",
    "fieldtype": "Section Break",
    "label": "Translation"
@@ -76,7 +112,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-23 17:00:00.000000",
+ "modified": "2026-10-23 18:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",
