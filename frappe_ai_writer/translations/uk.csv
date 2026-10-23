@@ -50,8 +50,8 @@ Translation,Переклад
 Translation Languages,Мови перекладу
 Target languages offered by the translate button. Leave empty to hide the button.,"Цільові мови для кнопки перекладу. Залиште порожнім, щоб приховати кнопку."
 Translation into {0} is not enabled. A manager can add it in AI Writer Settings.,Переклад мовою {0} не ввімкнено. Менеджер може додати його в налаштуваннях AI Writer.
-The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings.,"Кнопка з глобусом перекладає текст однією з мов, які менеджер увімкнув у налаштуваннях AI Writer."
 Language,Мова
 AI Writer Translation Language,Мова перекладу AI Writer
 "Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","Текст між /"" і ""/ ніколи не виправляється й не перекладається, наприклад /""Müller & Söhne GmbH""/."
 "The text marked with /""…""/ could not be kept unchanged. Please try again.","Текст, позначений /""…""/, не вдалося зберегти без змін. Спробуйте ще раз."
+The language button (文A) translates the text into one of the languages a manager has enabled in AI Writer Settings.,"Кнопка мов (文A) перекладає текст однією з мов, які менеджер увімкнув у налаштуваннях AI Writer."

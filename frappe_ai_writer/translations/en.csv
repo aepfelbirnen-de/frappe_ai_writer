@@ -50,8 +50,8 @@ Translation,Translation
 Translation Languages,Translation Languages
 Target languages offered by the translate button. Leave empty to hide the button.,Target languages offered by the translate button. Leave empty to hide the button.
 Translation into {0} is not enabled. A manager can add it in AI Writer Settings.,Translation into {0} is not enabled. A manager can add it in AI Writer Settings.
-The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings.,The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings.
 Language,Language
 AI Writer Translation Language,AI Writer Translation Language
 "Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/."
 "The text marked with /""…""/ could not be kept unchanged. Please try again.","The text marked with /""…""/ could not be kept unchanged. Please try again."
+The language button (文A) translates the text into one of the languages a manager has enabled in AI Writer Settings.,The language button (文A) translates the text into one of the languages a manager has enabled in AI Writer Settings.

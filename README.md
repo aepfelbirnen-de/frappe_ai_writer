@@ -13,7 +13,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Works in **Text Editor** fields, the **email composer**, the **comment box** and plain **Small Text / Text / Long Text** fields
 - Four modes: **Correct**, **Write out**, **More formal**, **More casual**
 - Turns bullet-point notes into detailed, complete text that explains terms and background, automatically or via **Write out**, without inventing specific facts
-- **Translate** button (globe) with target languages chosen by a manager in AI Writer Settings
+- **Translate** button (文A) with target languages chosen by a manager in AI Writer Settings
 - Text between `/"` and `"/` is never corrected or translated, e.g. `/"Müller & Söhne GmbH"/`; it does not reach the AI service
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
@@ -98,7 +98,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - Funktioniert in **Text-Editor**-Feldern, im **E-Mail-Dialog**, im **Kommentarfeld** und in einfachen **Small-Text-, Text- und Long-Text**-Feldern
 - Vier Modi: **Korrigieren**, **Ausformulieren**, **Formeller**, **Lockerer**
 - Formuliert Stichpunkte zu ausführlichem, vollständigem Text aus und erklärt dabei Begriffe und Hintergründe, automatisch oder über **Ausformulieren**, ohne konkrete Fakten zu erfinden
-- **Übersetzen**-Button (Globus) mit Zielsprachen, die ein Manager in den AI-Writer-Einstellungen festlegt
+- **Übersetzen**-Button (文A) mit Zielsprachen, die ein Manager in den AI-Writer-Einstellungen festlegt
 - Text zwischen `/"` und `"/` wird nie korrigiert oder übersetzt, z. B. `/"Müller & Söhne GmbH"/`; er gelangt nicht zum KI-Dienst
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten

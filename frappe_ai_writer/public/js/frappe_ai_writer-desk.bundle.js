@@ -277,11 +277,15 @@
 		return make_svg([["path", "ql-stroke", "M6 7.5L9 10.5L12 7.5"]]);
 	}
 
+	// The "文A" language symbol, as used for language selection on Wikipedia.
 	function translate_icon() {
 		return make_svg([
-			["path", "ql-stroke", "M9 2A7 7 0 1 1 9 16A7 7 0 1 1 9 2Z"],
-			["path", "ql-stroke", "M2 9H16"],
-			["path", "ql-stroke", "M9 2C11.2 4 12 6.4 12 9C12 11.6 11.2 14 9 16C6.8 14 6 11.6 6 9C6 6.4 6.8 4 9 2Z"],
+			["path", "ql-stroke", "M1.5 3.5H8.5"],
+			["path", "ql-stroke", "M5 1.5V3.5"],
+			["path", "ql-stroke", "M7.5 3.5C6.9 6.6 4.9 8.9 1.8 10.2"],
+			["path", "ql-stroke", "M3.3 5.6C4.2 7.6 5.8 9.1 8 10"],
+			["path", "ql-stroke", "M9.5 16.5L12.75 8L16 16.5"],
+			["path", "ql-stroke", "M10.7 13.5H14.8"],
 		]);
 	}
 
@@ -329,7 +333,7 @@
 				"dd",
 				null,
 				__(
-					"The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings."
+					"The language button (文A) translates the text into one of the languages a manager has enabled in AI Writer Settings."
 				)
 			)
 		);
