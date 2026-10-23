@@ -1,8 +1,12 @@
 # Frappe AI Writer
 
+**English** · [Deutsch](#deutsch)
+
 AI proofreading for Frappe and ERPNext text fields, powered by Anthropic's Claude.
 
 A sparkle button appears in every desk text field. One click corrects spelling, grammar and punctuation, either of the selected text or of the whole field, without leaving the form.
+
+![AI correction menu in the email composer](docs/screenshots/en-email-menu.png)
 
 ## Features
 
@@ -13,6 +17,10 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Detects the language of the text and answers in the same language
 - Configurable model, effort and system prompt
 - Role-based access; translations for English, German, Spanish, French, Ukrainian and Danish
+
+| After one click | Plain text fields | Comment box |
+|---|---|---|
+| ![Corrected email](docs/screenshots/en-email-corrected.png) | ![Button in a text field](docs/screenshots/en-text-field.png) | ![Button in the comment box](docs/screenshots/en-comment.png) |
 
 ## Requirements
 
@@ -65,3 +73,83 @@ bench --site your-site run-tests --app frappe_ai_writer
 ## License
 
 MIT, see [license.txt](license.txt).
+
+---
+
+<a id="deutsch"></a>
+
+# Frappe AI Writer (Deutsch)
+
+[English](#frappe-ai-writer) · **Deutsch**
+
+KI-Korrekturlesen für Textfelder in Frappe und ERPNext, mit Claude von Anthropic.
+
+In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Rechtschreibung, Grammatik und Zeichensetzung, wahlweise im markierten Text oder im ganzen Feld, ohne das Formular zu verlassen.
+
+![KI-Korrekturmenü im E-Mail-Dialog](docs/screenshots/de-email-menu.png)
+
+## Funktionen
+
+- Funktioniert in **Text-Editor**-Feldern, im **E-Mail-Dialog**, im **Kommentarfeld** und in einfachen **Small-Text-, Text- und Long-Text**-Feldern
+- Drei Modi: **Korrigieren**, **Formeller**, **Lockerer**
+- Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
+- Ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine Korrektur zurück
+- Erkennt die Sprache des Textes und antwortet in derselben Sprache
+- Modell, Denkaufwand und System-Prompt sind einstellbar
+- Zugriff über Rollen; Übersetzungen für Englisch, Deutsch, Spanisch, Französisch, Ukrainisch und Dänisch
+
+| Nach einem Klick | Einfache Textfelder | Kommentarfeld |
+|---|---|---|
+| ![Korrigierte E-Mail](docs/screenshots/de-email-corrected.png) | ![Button in einem Textfeld](docs/screenshots/de-text-field.png) | ![Button im Kommentarfeld](docs/screenshots/de-comment.png) |
+
+## Voraussetzungen
+
+- Frappe Framework v15 oder v16 (ERPNext ist optional)
+- Ein [Anthropic-API-Schlüssel](https://console.anthropic.com/)
+
+## Installation
+
+```bash
+cd ~/frappe-bench
+bench get-app https://github.com/aepfelbirnen-de/frappe_ai_writer
+bench --site ihre-site install-app frappe_ai_writer
+bench --site ihre-site migrate
+```
+
+## Einrichtung
+
+1. **AI-Writer-Einstellungen** öffnen (über den Arbeitsbereich **AI Writer** oder die App-Übersicht).
+2. Den **Anthropic-API-Schlüssel** eintragen.
+3. Optional anpassen:
+   - **Modell**: Standard ist `claude-haiku-5-5`, schnell und günstig für Korrekturen
+   - **Denkaufwand**: wie gründlich das Modell vor der Antwort nachdenkt; `low` ist am schnellsten
+   - **System-Prompt**: die Anweisungen, die bei jeder Anfrage mitgehen; leer lassen stellt den Standard wieder her
+4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.
+
+| Rolle | Darf den Button nutzen | Darf die Einstellungen ändern |
+|---|---|---|
+| AI Writer User | ja | nein |
+| AI Writer Manager | ja | ja |
+| System Manager | nur mit einer der Rollen oben | ja |
+
+## Datenschutz
+
+Der zu korrigierende Text wird mit Ihrem API-Schlüssel an die Anthropic-API gesendet. Die App speichert weder den Text noch die Antwort. Prüfen Sie die Datenaufbewahrungsbedingungen von Anthropic, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
+
+## Sicherheit
+
+- Der Korrektur-Endpunkt akzeptiert nur POST, prüft die Rolle des Benutzers und ist ratenbegrenzt.
+- Vom Modell zurückgegebenes HTML wird bereinigt, bevor es in einen Editor eingefügt wird.
+- Der API-Schlüssel liegt verschlüsselt in einem Passwortfeld und wird nie an den Browser gesendet.
+
+## Entwicklung
+
+```bash
+ruff check frappe_ai_writer/
+ruff format --check frappe_ai_writer/
+bench --site ihre-site run-tests --app frappe_ai_writer
+```
+
+## Lizenz
+
+MIT, siehe [license.txt](license.txt).
