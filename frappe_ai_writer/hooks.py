@@ -1,7 +1,7 @@
 app_name = "frappe_ai_writer"
 app_title = "Frappe AI Writer"
 app_publisher = "aepfel+birnen IT GmbH"
-app_description = "AI proofreading for Frappe and ERPNext text fields, powered by Claude"
+app_description = "AI proofreading, write-out and translation for Frappe and ERPNext text fields"
 app_email = "it@aepfelbirnen.com"
 app_license = "MIT"
 app_logo_url = "/assets/frappe_ai_writer/images/frappe_ai_writer-logo.svg"

@@ -2,7 +2,7 @@
 
 **English** · [Deutsch](#deutsch)
 
-AI proofreading for Frappe and ERPNext text fields, powered by Anthropic's Claude.
+AI proofreading, write-out and translation for Frappe and ERPNext text fields.
 
 A sparkle button appears in every desk text field. One click corrects spelling, grammar and punctuation, either of the selected text or of the whole field, without leaving the form.
 
@@ -89,7 +89,7 @@ MIT, see [license.txt](license.txt).
 
 [English](#frappe-ai-writer) · **Deutsch**
 
-KI-Korrekturlesen für Textfelder in Frappe und ERPNext, mit Claude von Anthropic.
+KI-Korrekturlesen, Ausformulieren und Übersetzen für Textfelder in Frappe und ERPNext.
 
 In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Rechtschreibung, Grammatik und Zeichensetzung, wahlweise im markierten Text oder im ganzen Feld, ohne das Formular zu verlassen.
 

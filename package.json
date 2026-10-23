@@ -2,6 +2,6 @@
   "name": "frappe_ai_writer",
   "version": "0.7.0",
   "private": true,
-  "description": "AI proofreading for Frappe and ERPNext text fields, powered by Claude",
+  "description": "AI proofreading, write-out and translation for Frappe and ERPNext text fields",
   "license": "MIT"
 }
