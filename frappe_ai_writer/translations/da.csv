@@ -45,3 +45,13 @@ The answer is written in the language of the text.,Svaret skrives på tekstens s
 The text is processed by Anthropic's Claude; AI Writer does not store it.,Teksten behandles af Claude (Anthropic); AI Writer gemmer den ikke.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Retter stavning, grammatik og tegnsætning. Noter i punktform skrives ud som fuld tekst."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Gør noter og punkter til fyldig, sammenhængende tekst og forklarer begreber og baggrund uden at finde på konkrete fakta."
+Translate,Oversæt
+Translation,Oversættelse
+Translation Languages,Oversættelsessprog
+Target languages offered by the translate button. Leave empty to hide the button.,"Målsprog, som oversættelsesknappen tilbyder. Lad feltet være tomt for at skjule knappen."
+Translation into {0} is not enabled. A manager can add it in AI Writer Settings.,Oversættelse til {0} er ikke aktiveret. En administrator kan tilføje den under AI Writer-indstillinger.
+The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings.,"Globus-knappen oversætter teksten til et af de sprog, som en administrator har aktiveret under AI Writer-indstillinger."
+Language,Sprog
+AI Writer Translation Language,AI Writer-oversættelsessprog
+"Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","Tekst mellem /"" og ""/ bliver aldrig rettet eller oversat, for eksempel /""Müller & Söhne GmbH""/."
+"The text marked with /""…""/ could not be kept unchanged. Please try again.","Teksten markeret med /""…""/ kunne ikke bevares uændret. Prøv igen."

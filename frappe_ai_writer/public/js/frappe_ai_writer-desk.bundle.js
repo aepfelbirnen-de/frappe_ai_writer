@@ -185,63 +185,82 @@
 		group.className = class_name;
 
 		const main_button = make_button("ai-writer-btn", sparkle_icon(), __("AI correction"));
-		const menu_button = make_button("ai-writer-menu-btn", caret_icon(), __("AI correction options"));
-		menu_button.setAttribute("aria-haspopup", "menu");
-		menu_button.setAttribute("aria-expanded", "false");
+		main_button.addEventListener("click", () => correct(adapter, group, "correct"));
 
-		const menu = document.createElement("div");
-		menu.className = "ai-writer-menu";
+		const menu_button = make_button("ai-writer-menu-btn", caret_icon(), __("AI correction options"));
+		const mode_items = MODES.map(({ mode, label }) => ({
+			label: label(),
+			action: () => correct(adapter, group, mode),
+		}));
+		mode_items.push(
+			{ divider: true },
+			{ label: __("Help"), icon: help_icon(), class_name: "ai-writer-menu-help", action: show_help }
+		);
+		group.append(main_button, menu_button, make_menu(group, menu_button, mode_items));
+
+		const languages = frappe.boot.ai_writer?.languages || [];
+		if (languages.length) {
+			const translate_button = make_button("ai-writer-translate-btn", translate_icon(), __("Translate"));
+			const language_items = languages.map(({ code, name }) => ({
+				label: name,
+				action: () => correct(adapter, group, "translate", code),
+			}));
+			group.append(translate_button, make_menu(group, translate_button, language_items));
+		}
+		return group;
+	}
+
+	// A dropdown opened by its trigger button. Listeners live only while it is open, so closed
+	// editors leave nothing behind; clicking another trigger in the group closes it.
+	function make_menu(group, trigger, items) {
+		const menu = make_element("div", "ai-writer-menu");
 		menu.setAttribute("role", "menu");
 		menu.hidden = true;
+		trigger.setAttribute("aria-haspopup", "menu");
+		trigger.setAttribute("aria-expanded", "false");
 
-		const close_menu = () => {
+		const close = () => {
 			menu.hidden = true;
-			menu_button.setAttribute("aria-expanded", "false");
+			trigger.setAttribute("aria-expanded", "false");
 			document.removeEventListener("mousedown", on_outside_click, true);
 			document.removeEventListener("keydown", on_escape, true);
 		};
 		const on_outside_click = (event) => {
-			if (!group.contains(event.target)) close_menu();
+			if (!menu.contains(event.target) && !trigger.contains(event.target)) close();
 		};
 		const on_escape = (event) => {
-			if (event.key === "Escape") close_menu();
+			if (event.key === "Escape") close();
 		};
 
-		for (const { mode, label } of MODES) {
-			const item = make_button("ai-writer-menu-item", document.createTextNode(label()));
-			item.setAttribute("role", "menuitem");
-			item.addEventListener("click", () => {
-				close_menu();
-				correct(adapter, group, mode);
+		for (const item of items) {
+			if (item.divider) {
+				const divider = make_element("div", "ai-writer-menu-divider");
+				divider.setAttribute("role", "separator");
+				menu.append(divider);
+				continue;
+			}
+			const content = document.createDocumentFragment();
+			if (item.icon) content.append(item.icon);
+			content.append(document.createTextNode(item.label));
+			const button = make_button(["ai-writer-menu-item", item.class_name].filter(Boolean).join(" "), content);
+			button.setAttribute("role", "menuitem");
+			button.addEventListener("click", () => {
+				close();
+				item.action();
 			});
-			menu.append(item);
+			menu.append(button);
 		}
 
-		const divider = document.createElement("div");
-		divider.className = "ai-writer-menu-divider";
-		divider.setAttribute("role", "separator");
-		const help_label = document.createDocumentFragment();
-		help_label.append(help_icon(), document.createTextNode(__("Help")));
-		const help_item = make_button("ai-writer-menu-item ai-writer-menu-help", help_label);
-		help_item.setAttribute("role", "menuitem");
-		help_item.addEventListener("click", () => {
-			close_menu();
-			show_help();
-		});
-		menu.append(divider, help_item);
-
-		main_button.addEventListener("click", () => correct(adapter, group, "correct"));
-		menu_button.addEventListener("click", () => {
-			if (!menu.hidden) return close_menu();
+		trigger.addEventListener("click", () => {
+			if (!menu.hidden) return close();
+			// Toolbar menus open under their own trigger; inline menus stay right-aligned via CSS.
+			if (!group.classList.contains("ai-writer-inline")) menu.style.left = `${trigger.offsetLeft}px`;
 			menu.hidden = false;
-			menu_button.setAttribute("aria-expanded", "true");
-			// Listeners live only while the menu is open, so closed editors leave nothing behind.
+			trigger.setAttribute("aria-expanded", "true");
 			document.addEventListener("mousedown", on_outside_click, true);
 			document.addEventListener("keydown", on_escape, true);
 		});
-
-		group.append(main_button, menu_button, menu);
-		return group;
+		return menu;
 	}
 
 	// Quill-style 18x18 icons in currentColor, so they follow the surrounding button's color.
@@ -256,6 +275,14 @@
 
 	function caret_icon() {
 		return make_svg([["path", "ql-stroke", "M6 7.5L9 10.5L12 7.5"]]);
+	}
+
+	function translate_icon() {
+		return make_svg([
+			["path", "ql-stroke", "M9 2A7 7 0 1 1 9 16A7 7 0 1 1 9 2Z"],
+			["path", "ql-stroke", "M2 9H16"],
+			["path", "ql-stroke", "M9 2C11.2 4 12 6.4 12 9C12 11.6 11.2 14 9 16C6.8 14 6 11.6 6 9C6 6.4 6.8 4 9 2Z"],
+		]);
 	}
 
 	function help_icon() {
@@ -296,9 +323,20 @@
 		for (const { label, help } of MODES) {
 			modes.append(make_element("dt", null, label()), make_element("dd", null, help()));
 		}
+		modes.append(
+			make_element("dt", null, __("Translate")),
+			make_element(
+				"dd",
+				null,
+				__(
+					"The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings."
+				)
+			)
+		);
 
 		const notes = make_element("ul", "ai-writer-help-notes");
 		for (const note of [
+			__('Text between /" and "/ is never corrected or translated, for example /"Müller & Söhne GmbH"/.'),
 			__("Cmd+Z / Ctrl+Z undoes a change."),
 			__("The answer is written in the language of the text."),
 			__("The text is processed by Anthropic's Claude; AI Writer does not store it."),
@@ -345,7 +383,7 @@
 		return button;
 	}
 
-	async function correct(adapter, group, mode) {
+	async function correct(adapter, group, mode, target_language) {
 		if (group.classList.contains("ai-writer-busy") || adapter.is_disabled()) return;
 
 		const request = adapter.read();
@@ -362,6 +400,7 @@
 				mode,
 				as_html: request.as_html,
 				field_context: adapter.context,
+				target_language,
 			});
 		} catch (error) {
 			// frappe.xcall already shows the server message to the user.

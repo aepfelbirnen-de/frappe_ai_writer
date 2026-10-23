@@ -12,7 +12,9 @@
   "model",
   "effort",
   "prompt_section",
-  "system_prompt"
+  "system_prompt",
+  "translation_section",
+  "translation_languages"
  ],
  "fields": [
   {
@@ -57,12 +59,24 @@
    "fieldname": "system_prompt",
    "fieldtype": "Small Text",
    "label": "System Prompt"
+  },
+  {
+   "fieldname": "translation_section",
+   "fieldtype": "Section Break",
+   "label": "Translation"
+  },
+  {
+   "description": "Target languages offered by the translate button. Leave empty to hide the button.",
+   "fieldname": "translation_languages",
+   "fieldtype": "Table MultiSelect",
+   "label": "Translation Languages",
+   "options": "AI Writer Translation Language"
   }
  ],
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-23 12:00:00.000000",
+ "modified": "2026-10-23 17:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

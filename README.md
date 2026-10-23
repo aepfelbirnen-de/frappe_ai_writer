@@ -13,6 +13,8 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Works in **Text Editor** fields, the **email composer**, the **comment box** and plain **Small Text / Text / Long Text** fields
 - Four modes: **Correct**, **Write out**, **More formal**, **More casual**
 - Turns bullet-point notes into detailed, complete text that explains terms and background, automatically or via **Write out**, without inventing specific facts
+- **Translate** button (globe) with target languages chosen by a manager in AI Writer Settings
+- Text between `/"` and `"/` is never corrected or translated, e.g. `/"Müller & Söhne GmbH"/`; it does not reach the AI service
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
 - One undo step (Cmd+Z / Ctrl+Z) reverts a correction
@@ -46,6 +48,7 @@ bench --site your-site migrate
    - **Model**: defaults to `claude-haiku-5-5`, fast and inexpensive for proofreading
    - **Effort**: how much the model reasons before answering; `low` is fastest
    - **System Prompt**: the instructions sent with every request; leave empty to restore the default
+   - **Translation Languages**: the target languages of the translate button; leave empty to hide it
 4. Give users the **AI Writer User** role. Users without it do not see the button.
 
 | Role | Can use the button | Can edit the settings |
@@ -95,6 +98,8 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - Funktioniert in **Text-Editor**-Feldern, im **E-Mail-Dialog**, im **Kommentarfeld** und in einfachen **Small-Text-, Text- und Long-Text**-Feldern
 - Vier Modi: **Korrigieren**, **Ausformulieren**, **Formeller**, **Lockerer**
 - Formuliert Stichpunkte zu ausführlichem, vollständigem Text aus und erklärt dabei Begriffe und Hintergründe, automatisch oder über **Ausformulieren**, ohne konkrete Fakten zu erfinden
+- **Übersetzen**-Button (Globus) mit Zielsprachen, die ein Manager in den AI-Writer-Einstellungen festlegt
+- Text zwischen `/"` und `"/` wird nie korrigiert oder übersetzt, z. B. `/"Müller & Söhne GmbH"/`; er gelangt nicht zum KI-Dienst
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
 - Ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine Korrektur zurück
@@ -128,6 +133,7 @@ bench --site ihre-site migrate
    - **Modell**: Standard ist `claude-haiku-5-5`, schnell und günstig für Korrekturen
    - **Denkaufwand**: wie gründlich das Modell vor der Antwort nachdenkt; `low` ist am schnellsten
    - **System-Prompt**: die Anweisungen, die bei jeder Anfrage mitgehen; leer lassen stellt den Standard wieder her
+   - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
 4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.
 
 | Rolle | Darf den Button nutzen | Darf die Einstellungen ändern |

@@ -45,3 +45,13 @@ The answer is written in the language of the text.,Відповідь пишет
 The text is processed by Anthropic's Claude; AI Writer does not store it.,Текст обробляє Claude (Anthropic); AI Writer його не зберігає.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Виправляє орфографію, граматику та пунктуацію. Нотатки у вигляді списку перетворюються на повний текст."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Перетворює нотатки й пункти на повний, докладний текст і пояснює терміни та контекст, не вигадуючи конкретних фактів."
+Translate,Перекласти
+Translation,Переклад
+Translation Languages,Мови перекладу
+Target languages offered by the translate button. Leave empty to hide the button.,"Цільові мови для кнопки перекладу. Залиште порожнім, щоб приховати кнопку."
+Translation into {0} is not enabled. A manager can add it in AI Writer Settings.,Переклад мовою {0} не ввімкнено. Менеджер може додати його в налаштуваннях AI Writer.
+The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings.,"Кнопка з глобусом перекладає текст однією з мов, які менеджер увімкнув у налаштуваннях AI Writer."
+Language,Мова
+AI Writer Translation Language,Мова перекладу AI Writer
+"Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","Текст між /"" і ""/ ніколи не виправляється й не перекладається, наприклад /""Müller & Söhne GmbH""/."
+"The text marked with /""…""/ could not be kept unchanged. Please try again.","Текст, позначений /""…""/, не вдалося зберегти без змін. Спробуйте ще раз."

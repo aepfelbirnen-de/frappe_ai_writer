@@ -100,12 +100,12 @@
 	background: var(--fg-hover-color);
 }
 
-/* Matches the specificity of Frappe's comment-box padding rule; app CSS loads later, so it wins. */
+/* Room for up to three buttons. Matches the specificity of Frappe's comment-box padding rule; app CSS loads later, so it wins. */
 .ql-container.ql-bubble.ai-writer-has-inline .ql-editor {
-	padding-right: 56px;
+	padding-right: 84px;
 }
 
-/* Textareas: clear of the resize handle and the scrollbar; text wraps before the buttons. */
+/* Textareas: clear of the resize handle and the scrollbar; text wraps before the buttons (up to three). */
 .ai-writer-has-textarea {
 	position: relative;
 }
@@ -116,7 +116,7 @@
 }
 
 .ai-writer-has-textarea > textarea.form-control {
-	padding-right: 64px;
+	padding-right: 92px;
 }
 
 .ai-writer-group .ai-writer-menu {

@@ -9,6 +9,7 @@ from frappe.tests.utils import FrappeTestCase
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
     DEFAULT_MODEL,
     DEFAULT_SYSTEM_PROMPT,
+    get_translation_languages,
 )
 
 TEST_USER = "ai-writer-settings-test@example.com"
@@ -42,6 +43,20 @@ class TestAIWriterSettings(FrappeTestCase):
         settings = frappe.get_single("AI Writer Settings")
         settings.model = "../../etc/passwd"
         self.assertRaises(frappe.ValidationError, settings.save)
+
+    def test_duplicate_translation_languages_are_removed(self) -> None:
+        settings = frappe.get_single("AI Writer Settings")
+        settings.set("translation_languages", [{"language": "de"}, {"language": "en"}, {"language": "de"}])
+        settings.save()
+        self.assertEqual([row.language for row in settings.translation_languages], ["de", "en"])
+
+    def test_translation_languages_come_with_native_names(self) -> None:
+        settings = frappe.get_single("AI Writer Settings")
+        settings.set("translation_languages", [{"language": "de"}])
+        settings.save()
+        languages = get_translation_languages()
+        self.assertEqual(languages[0]["code"], "de")
+        self.assertEqual(languages[0]["name"], frappe.db.get_value("Language", "de", "language_name"))
 
     def test_ai_writer_user_cannot_read_settings(self) -> None:
         # Settings hold the API key, so only managers may open them.

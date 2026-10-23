@@ -36,6 +36,7 @@ class TestBootSession(FrappeTestCase):
         frappe.get_doc("User", TEST_USER).add_roles("AI Writer User")
         bootinfo = self._boot_as_test_user()
         self.assertIn("enabled", bootinfo.ai_writer)
+        self.assertIsInstance(bootinfo.ai_writer["languages"], list)
         self.assertEqual(bootinfo.ai_writer_change_log["title"], frappe.get_hooks("app_title", app_name=APP_NAME)[0])
 
     def test_user_without_access_gets_nothing(self) -> None:

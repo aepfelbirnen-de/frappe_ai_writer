@@ -13,7 +13,10 @@ def before_install() -> None:
 def after_install() -> None:
     ensure_roles()
     # Saving runs the controller's validate(), which fills in model and system prompt defaults.
-    frappe.get_single("AI Writer Settings").save()
+    settings = frappe.get_single("AI Writer Settings")
+    if not settings.translation_languages:
+        settings.set_default_translation_languages()
+    settings.save()
 
 
 def after_migrate() -> None:

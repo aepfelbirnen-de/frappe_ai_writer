@@ -45,3 +45,13 @@ The answer is written in the language of the text.,La respuesta se escribe en el
 The text is processed by Anthropic's Claude; AI Writer does not store it.,El texto lo procesa Claude (Anthropic); AI Writer no lo guarda.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Corrige la ortografía, la gramática y la puntuación. Las notas en viñetas se redactan como texto completo."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Convierte notas y viñetas en un texto completo y detallado, y explica términos y contexto sin inventar datos concretos."
+Translate,Traducir
+Translation,Traducción
+Translation Languages,Idiomas de traducción
+Target languages offered by the translate button. Leave empty to hide the button.,Idiomas de destino que ofrece el botón de traducción. Déjelo vacío para ocultar el botón.
+Translation into {0} is not enabled. A manager can add it in AI Writer Settings.,La traducción al idioma {0} no está habilitada. Un responsable puede añadirla en los ajustes de AI Writer.
+The globe button translates the text into one of the languages a manager has enabled in AI Writer Settings.,El botón del globo traduce el texto a uno de los idiomas que un responsable ha habilitado en los ajustes de AI Writer.
+Language,Idioma
+AI Writer Translation Language,Idioma de traducción de AI Writer
+"Text between /"" and ""/ is never corrected or translated, for example /""Müller & Söhne GmbH""/.","El texto entre /"" y ""/ nunca se corrige ni se traduce, por ejemplo /""Müller & Söhne GmbH""/."
+"The text marked with /""…""/ could not be kept unchanged. Please try again.","El texto marcado con /""…""/ no se pudo conservar sin cambios. Inténtelo de nuevo."
