@@ -1,4 +1,4 @@
-"""Proofreading endpoint that sends editor text to Claude."""
+"""Proofreading endpoint that sends editor text to the AI service configured in AI Writer Settings."""
 
 from __future__ import annotations
 
@@ -6,13 +6,13 @@ import json
 import re
 from html import unescape
 
-import anthropic
 import frappe
 from frappe import _
 from frappe.rate_limiter import rate_limit
 from frappe.utils import escape_html, sbool
 from frappe.utils.html_utils import sanitize_html
 
+from frappe_ai_writer import providers
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
     DEFAULT_EXPAND_PROMPT,
     DEFAULT_MODEL,
@@ -81,6 +81,7 @@ LIST_ITEM_PATTERN = re.compile(r"<li\b[^>]*>(.*?)</li>", re.IGNORECASE | re.DOTA
 PARAGRAPH_PATTERN = re.compile(r"<p\b[^>]*>(.*?)</p>", re.IGNORECASE | re.DOTALL)
 TAG_PATTERN = re.compile(r"<[^>]+>")
 WORD_PATTERN = re.compile(r"\w+")
+THINK_PATTERN = re.compile(r"^\s*<think>.*?</think>", re.DOTALL)
 
 
 @frappe.whitelist(methods=["POST"])
@@ -124,9 +125,10 @@ def correct_text(
     if not settings.enabled:
         frappe.throw(_("AI Writer is disabled."))
 
+    provider = providers.normalize_provider(settings.provider)
     api_key = settings.get_password("api_key", raise_exception=False)
-    if not api_key:
-        frappe.throw(_("No Anthropic API key configured. Please set one in AI Writer Settings."))
+    if not api_key and provider in providers.KEY_REQUIRED:
+        frappe.throw(_("No API key configured. Please set one in AI Writer Settings."))
 
     # sbool() passes non-strings such as int 1 through unchanged, so bool() normalizes the result.
     as_html = bool(sbool(as_html))
@@ -140,12 +142,14 @@ def correct_text(
         mode = "expand"
     field_context = _clean_context(field_context)
     corrected = _request_correction(
+        settings=settings,
         api_key=api_key,
         mode=mode,
         # Per-user counting is opt-in because it can be subject to data protection and co-determination law.
         usage_user=frappe.session.user if settings.track_usage_per_user else None,
         model=settings.model or DEFAULT_MODEL,
-        effort=_effort_for(mode, settings.effort),
+        # Effort is an Anthropic parameter; other services ignore it or reject unknown fields.
+        effort=_effort_for(mode, settings.effort) if provider == providers.ANTHROPIC else None,
         system_prompt=_build_system_prompt(
             settings,
             mode,
@@ -285,7 +289,8 @@ def _build_user_message(text: str, field_context: str) -> str:
 
 def _request_correction(
     *,
-    api_key: str,
+    settings: frappe._dict,
+    api_key: str | None,
     mode: str,
     usage_user: str | None,
     model: str,
@@ -293,44 +298,29 @@ def _request_correction(
     system_prompt: str,
     user_message: str,
 ) -> str:
-    client = anthropic.Anthropic(api_key=api_key, timeout=REQUEST_TIMEOUT_SECONDS, max_retries=MAX_RETRIES)
-    request = {
-        "model": model,
-        "max_tokens": MAX_OUTPUT_TOKENS,
-        "system": system_prompt,
-        "messages": [{"role": "user", "content": user_message}],
-    }
-    if effort:
-        request["output_config"] = {"effort": effort}
-
-    try:
-        response = client.messages.create(**request)
-    except (anthropic.AuthenticationError, anthropic.PermissionDeniedError):
-        _log_api_error()
-        frappe.throw(_("The Anthropic API key is invalid or lacks permission."))
-    except anthropic.NotFoundError:
-        _log_api_error()
-        frappe.throw(_("The configured AI model is not available: {0}").format(model))
-    except anthropic.RateLimitError:
-        _log_api_error()
-        frappe.throw(_("The AI service is busy. Please try again in a moment."))
-    except anthropic.APIStatusError:
-        _log_api_error()
-        frappe.throw(_("The AI service returned an error. Please try again later."))
-    except anthropic.APIConnectionError:
-        _log_api_error()
-        frappe.throw(_("The AI service could not be reached. Please try again later."))
+    completion = providers.complete(
+        provider=settings.provider,
+        api_key=api_key,
+        base_url=settings.base_url,
+        model=model,
+        effort=effort,
+        system_prompt=system_prompt,
+        user_message=user_message,
+        max_tokens=MAX_OUTPUT_TOKENS,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+        max_retries=MAX_RETRIES,
+    )
 
     # Billed tokens are recorded before any check below can reject the answer.
-    _record_usage(usage_user, mode, model, getattr(response, "usage", None))
+    _record_usage(usage_user, mode, model, completion.input_tokens, completion.output_tokens)
 
-    if response.stop_reason == "refusal":
+    if completion.stop == "refusal":
         frappe.throw(_("The AI service declined to process this text."))
-    if response.stop_reason == "max_tokens":
+    if completion.stop == "length":
         frappe.throw(_("The corrected text would be too long. Please correct a shorter passage."))
 
-    # Responses may start with thinking blocks, so only text blocks carry the answer.
-    corrected = "".join(block.text for block in response.content if block.type == "text").strip()
+    # Some local models (e.g. via Ollama) prepend their reasoning in <think> tags.
+    corrected = THINK_PATTERN.sub("", completion.text).strip()
     if corrected.startswith("<text>") and corrected.endswith("</text>"):
         corrected = corrected.removeprefix("<text>").removesuffix("</text>").strip()
     if not corrected:
@@ -338,9 +328,7 @@ def _request_correction(
     return corrected
 
 
-def _record_usage(usage_user: str | None, mode: str, model: str, usage) -> None:
-    if usage is None:
-        return
+def _record_usage(usage_user: str | None, mode: str, model: str, input_tokens: int, output_tokens: int) -> None:
     try:
         # Enqueued instead of written here, so the count survives the rollback of a request that fails later.
         frappe.enqueue(
@@ -350,8 +338,8 @@ def _record_usage(usage_user: str | None, mode: str, model: str, usage) -> None:
             usage_user=usage_user,
             mode=mode,
             model=model,
-            input_tokens=int(getattr(usage, "input_tokens", 0) or 0),
-            output_tokens=int(getattr(usage, "output_tokens", 0) or 0),
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
         )
     except Exception:
         # Usage tracking must never block the correction itself.
@@ -366,8 +354,3 @@ def _sanitize_editor_html(html: str) -> str:
     except ValueError:
         return sanitize_html(html, always_sanitize=True)
     return escape_html(html)
-
-
-def _log_api_error() -> None:
-    # Deferred so the entry survives the rollback triggered by the frappe.throw that follows.
-    frappe.log_error(title="AI Writer: Anthropic API request failed", defer_insert=True)

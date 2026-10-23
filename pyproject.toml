@@ -9,6 +9,8 @@ dynamic = ["version"]
 dependencies = [
     # 1.x is the first line with Python 3.10+ and httpx2; 2.x is untested.
     "anthropic~=1.17",
+    # Used for OpenAI-compatible services; Frappe already ships it.
+    "requests>=2.31",
 ]
 
 [build-system]

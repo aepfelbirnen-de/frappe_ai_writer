@@ -1,10 +1,8 @@
 You are not permitted to use AI Writer.,Du har ikke tilladelse til at bruge AI Writer.
 AI Writer is disabled.,AI Writer er deaktiveret.
-No Anthropic API key configured. Please set one in AI Writer Settings.,Der er ikke konfigureret nogen Anthropic API-nøgle. Angiv en under AI Writer-indstillinger.
 Nothing to correct.,Der er intet at rette.
 The text is too long ({0} characters). The maximum is {1} characters.,Teksten er for lang ({0} tegn). Maksimum er {1} tegn.
 Invalid correction mode: {0},Ugyldig rettelsestilstand: {0}
-The Anthropic API key is invalid or lacks permission.,Anthropic API-nøglen er ugyldig eller mangler tilladelser.
 The configured AI model is not available: {0},Den konfigurerede AI-model er ikke tilgængelig: {0}
 The AI service is busy. Please try again in a moment.,AI-tjenesten er optaget. Prøv igen om et øjeblik.
 The AI service returned an error. Please try again later.,AI-tjenesten returnerede en fejl. Prøv igen senere.
@@ -18,13 +16,10 @@ AI correction options,Indstillinger for AI-korrektur
 Correct,Ret
 More formal,Mere formel
 More casual,Mere uformel
-Enter an Anthropic API key to use AI correction.,Angiv en Anthropic API-nøgle for at bruge AI-korrektur.
 AI Writer Settings,AI Writer-indstillinger
 Enabled,Aktiveret
 Connection,Forbindelse
-Anthropic API Key,Anthropic API-nøgle
 Model,Model
-"Anthropic model ID, e.g. claude-haiku-5-5","Anthropic-model-id, f.eks. claude-haiku-5-5"
 Effort,Indsats
 How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,"Hvor meget modellen overvejer, før den svarer. »low« er hurtigst og billigst. Lad feltet være tomt for modeller uden understøttelse af indsats."
 Prompt,Prompt
@@ -42,7 +37,6 @@ Corrects the text and makes the tone more formal and business-like.,Retter tekst
 Corrects the text and makes the tone friendlier and less formal.,Retter teksten og gør tonen venligere og mindre formel.
 Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Ctrl+Z fortryder en ændring.
 The answer is written in the language of the text.,Svaret skrives på tekstens sprog.
-The text is processed by Anthropic's Claude; AI Writer does not store it.,Teksten behandles af Claude (Anthropic); AI Writer gemmer den ikke.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Retter stavning, grammatik og tegnsætning. Noter i punktform skrives ud som fuld tekst."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Gør noter og punkter til fyldig, sammenhængende tekst og forklarer begreber og baggrund uden at finde på konkrete fakta."
 Translate,Oversæt
@@ -89,3 +83,17 @@ Usage Key,Forbrugsnøgle
 Track Usage per User,Registrér forbrug pr. bruger
 "Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Registrerer tokenforbruget pr. bruger og ikke kun samlet. Før du aktiverer det, skal du undersøge den lovgivning, der gælder i dit land, f.eks. om databeskyttelse og medarbejderrepræsentanters medbestemmelse."
 Usage per user is not recorded. Enable Track Usage per User above to record it.,Forbrug pr. bruger registreres ikke. Aktivér »Registrér forbrug pr. bruger« ovenfor for at registrere det.
+API Key,API-nøgle
+The API key of the AI service is invalid or lacks permission.,API-nøglen til AI-tjenesten er ugyldig eller mangler tilladelser.
+No API key configured. Please set one in AI Writer Settings.,Der er ikke konfigureret nogen API-nøgle. Angiv en under AI Writer-indstillinger.
+Enter an API key to use AI correction.,Angiv en API-nøgle for at bruge AI-korrektur.
+The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it.,"Teksten behandles af den AI-tjeneste, der er valgt under AI Writer-indstillinger; AI Writer gemmer den ikke."
+"Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama.","Modelnavn hos udbyderen, f.eks. claude-haiku-5-5 til Anthropic eller llama3.2 til Ollama."
+Provider,Udbyder
+"AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.","AI-tjeneste, der behandler teksterne. »OpenAI-kompatibel« dækker de fleste andre platforme, f.eks. Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio eller vLLM."
+OpenAI-compatible,OpenAI-kompatibel
+Base URL,Basis-URL
+"Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default.","Adresse på chat completions-API'en uden /chat/completions, f.eks. http://localhost:11434/v1 til Ollama. Lad feltet være tomt for udbyderens standard."
+Not needed for Ollama and many local servers.,Ikke nødvendig for Ollama og mange lokale servere.
+Invalid base URL: {0},Ugyldig basis-URL: {0}
+Enter the name of a model offered by {0}.,"Angiv navnet på en model, som {0} tilbyder."

@@ -1,10 +1,8 @@
 You are not permitted to use AI Writer.,Ви не маєте дозволу на використання AI Writer.
 AI Writer is disabled.,AI Writer вимкнено.
-No Anthropic API key configured. Please set one in AI Writer Settings.,Ключ API Anthropic не налаштовано. Укажіть його в налаштуваннях AI Writer.
 Nothing to correct.,Немає чого виправляти.
 The text is too long ({0} characters). The maximum is {1} characters.,Текст задовгий ({0} символів). Максимум — {1} символів.
 Invalid correction mode: {0},Недійсний режим виправлення: {0}
-The Anthropic API key is invalid or lacks permission.,Ключ API Anthropic недійсний або не має потрібних дозволів.
 The configured AI model is not available: {0},Налаштована модель ШІ недоступна: {0}
 The AI service is busy. Please try again in a moment.,Сервіс ШІ перевантажений. Спробуйте ще раз за мить.
 The AI service returned an error. Please try again later.,Сервіс ШІ повернув помилку. Спробуйте пізніше.
@@ -18,13 +16,10 @@ AI correction options,Параметри виправлення ШІ
 Correct,Виправити
 More formal,Офіційніше
 More casual,Невимушеніше
-Enter an Anthropic API key to use AI correction.,"Введіть ключ API Anthropic, щоб користуватися виправленням ШІ."
 AI Writer Settings,Налаштування AI Writer
 Enabled,Увімкнено
 Connection,Підключення
-Anthropic API Key,Ключ API Anthropic
 Model,Модель
-"Anthropic model ID, e.g. claude-haiku-5-5","Ідентифікатор моделі Anthropic, напр. claude-haiku-5-5"
 Effort,Рівень зусиль
 How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,Наскільки ретельно модель міркує перед відповіддю. «low» — найшвидше й найдешевше. Залиште порожнім для моделей без підтримки цього параметра.
 Prompt,Промпт
@@ -42,7 +37,6 @@ Corrects the text and makes the tone more formal and business-like.,Виправ
 Corrects the text and makes the tone friendlier and less formal.,Виправляє текст і робить тон дружнішим і менш офіційним.
 Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Ctrl+Z скасовує зміну.
 The answer is written in the language of the text.,Відповідь пишеться мовою тексту.
-The text is processed by Anthropic's Claude; AI Writer does not store it.,Текст обробляє Claude (Anthropic); AI Writer його не зберігає.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Виправляє орфографію, граматику та пунктуацію. Нотатки у вигляді списку перетворюються на повний текст."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Перетворює нотатки й пункти на повний, докладний текст і пояснює терміни та контекст, не вигадуючи конкретних фактів."
 Translate,Перекласти
@@ -89,3 +83,17 @@ Usage Key,Ключ використання
 Track Usage per User,Відстежувати використання за користувачами
 "Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Фіксує використання токенів за кожним користувачем, а не лише загалом. Перш ніж увімкнути, перевірте законодавство вашої країни, наприклад щодо захисту даних і участі представників працівників."
 Usage per user is not recorded. Enable Track Usage per User above to record it.,Використання за користувачами не фіксується. Увімкніть вище «Відстежувати використання за користувачами».
+API Key,Ключ API
+The API key of the AI service is invalid or lacks permission.,Ключ API сервісу ШІ недійсний або не має потрібних дозволів.
+No API key configured. Please set one in AI Writer Settings.,Ключ API не налаштовано. Укажіть його в налаштуваннях AI Writer.
+Enter an API key to use AI correction.,"Введіть ключ API, щоб користуватися виправленням ШІ."
+The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it.,"Текст обробляє сервіс ШІ, вибраний у налаштуваннях AI Writer; AI Writer його не зберігає."
+"Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama.","Назва моделі в постачальника, напр. claude-haiku-5-5 для Anthropic або llama3.2 для Ollama."
+Provider,Постачальник
+"AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.","Сервіс ШІ, який обробляє тексти. «Сумісний з OpenAI» охоплює більшість інших платформ, як-от Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio або vLLM."
+OpenAI-compatible,Сумісний з OpenAI
+Base URL,Базова URL-адреса
+"Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default.","Адреса API chat completions без /chat/completions, напр. http://localhost:11434/v1 для Ollama. Залиште порожнім для типового значення постачальника."
+Not needed for Ollama and many local servers.,Не потрібен для Ollama та багатьох локальних серверів.
+Invalid base URL: {0},Недійсна базова URL-адреса: {0}
+Enter the name of a model offered by {0}.,"Введіть назву моделі, яку пропонує {0}."

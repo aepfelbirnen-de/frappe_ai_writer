@@ -10,6 +10,8 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cint
 
+from frappe_ai_writer import providers
+
 DEFAULT_MODEL = "claude-haiku-5-5"
 DEFAULT_SYSTEM_PROMPT = """You are a copy editor. Correct the text you receive:
 - spelling and grammar
@@ -46,7 +48,8 @@ DEFAULT_TRANSLATION_LANGUAGES = ("de", "en")
 # USD per million input and output tokens for the default model.
 DEFAULT_PRICES = (0.10, 0.50)
 
-MODEL_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9.\-]*$")
+# Also covers Ollama tags such as "llama3.2:3b" and router names such as "mistralai/mistral-small".
+MODEL_NAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/\-]*$")
 
 
 class AIWriterSettings(Document):
@@ -63,6 +66,7 @@ class AIWriterSettings(Document):
         )
 
         api_key: DF.Password | None
+        base_url: DF.Data | None
         effort: DF.Literal["", "low", "medium", "high"]
         enabled: DF.Check
         expand_prompt: DF.SmallText | None
@@ -70,6 +74,7 @@ class AIWriterSettings(Document):
         expansion_factor_min: DF.Int
         input_price_per_million: DF.Float
         output_price_per_million: DF.Float
+        provider: DF.Literal["Anthropic", "OpenAI", "Ollama", "OpenAI-compatible"]
         model: DF.Data | None
         system_prompt: DF.SmallText | None
         track_usage_per_user: DF.Check
@@ -77,7 +82,19 @@ class AIWriterSettings(Document):
     # end: auto-generated types
 
     def validate(self) -> None:
-        self.model = (self.model or "").strip() or DEFAULT_MODEL
+        self.provider = providers.normalize_provider(self.provider)
+        if self.provider == providers.ANTHROPIC:
+            self.base_url = None
+            self.model = (self.model or "").strip() or DEFAULT_MODEL
+        else:
+            self.base_url = providers.validate_base_url(
+                self.base_url or providers.DEFAULT_BASE_URLS.get(self.provider, "")
+            )
+            self.model = (self.model or "").strip()
+            if not self.model or self.model == DEFAULT_MODEL:
+                frappe.throw(_("Enter the name of a model offered by {0}.").format(self.provider))
+            # Effort is an Anthropic parameter.
+            self.effort = ""
         if not MODEL_NAME_PATTERN.match(self.model):
             frappe.throw(_("Invalid model name: {0}").format(self.model))
 

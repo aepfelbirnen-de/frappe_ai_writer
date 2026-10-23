@@ -5,8 +5,9 @@
 (() => {
 	frappe.ui.form.on("AI Writer Settings", {
 		refresh(frm) {
-			if (!frm.doc.api_key) {
-				frm.set_intro(__("Enter an Anthropic API key to use AI correction."), "yellow");
+			const needs_key = !frm.doc.provider || ["Anthropic", "OpenAI"].includes(frm.doc.provider);
+			if (needs_key && !frm.doc.api_key) {
+				frm.set_intro(__("Enter an API key to use AI correction."), "yellow");
 			}
 			render_usage(frm);
 		},

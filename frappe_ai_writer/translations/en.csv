@@ -1,10 +1,8 @@
 You are not permitted to use AI Writer.,You are not permitted to use AI Writer.
 AI Writer is disabled.,AI Writer is disabled.
-No Anthropic API key configured. Please set one in AI Writer Settings.,No Anthropic API key configured. Please set one in AI Writer Settings.
 Nothing to correct.,Nothing to correct.
 The text is too long ({0} characters). The maximum is {1} characters.,The text is too long ({0} characters). The maximum is {1} characters.
 Invalid correction mode: {0},Invalid correction mode: {0}
-The Anthropic API key is invalid or lacks permission.,The Anthropic API key is invalid or lacks permission.
 The configured AI model is not available: {0},The configured AI model is not available: {0}
 The AI service is busy. Please try again in a moment.,The AI service is busy. Please try again in a moment.
 The AI service returned an error. Please try again later.,The AI service returned an error. Please try again later.
@@ -18,13 +16,10 @@ AI correction options,AI correction options
 Correct,Correct
 More formal,More formal
 More casual,More casual
-Enter an Anthropic API key to use AI correction.,Enter an Anthropic API key to use AI correction.
 AI Writer Settings,AI Writer Settings
 Enabled,Enabled
 Connection,Connection
-Anthropic API Key,Anthropic API Key
 Model,Model
-"Anthropic model ID, e.g. claude-haiku-5-5","Anthropic model ID, e.g. claude-haiku-5-5"
 Effort,Effort
 How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.
 Prompt,Prompt
@@ -42,7 +37,6 @@ Corrects the text and makes the tone more formal and business-like.,Corrects the
 Corrects the text and makes the tone friendlier and less formal.,Corrects the text and makes the tone friendlier and less formal.
 Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Ctrl+Z undoes a change.
 The answer is written in the language of the text.,The answer is written in the language of the text.
-The text is processed by Anthropic's Claude; AI Writer does not store it.,The text is processed by Anthropic's Claude; AI Writer does not store it.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts."
 Translate,Translate
@@ -89,3 +83,17 @@ Usage Key,Usage Key
 Track Usage per User,Track Usage per User
 "Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives."
 Usage per user is not recorded. Enable Track Usage per User above to record it.,Usage per user is not recorded. Enable Track Usage per User above to record it.
+API Key,API Key
+The API key of the AI service is invalid or lacks permission.,The API key of the AI service is invalid or lacks permission.
+No API key configured. Please set one in AI Writer Settings.,No API key configured. Please set one in AI Writer Settings.
+Enter an API key to use AI correction.,Enter an API key to use AI correction.
+The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it.,The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it.
+"Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama.","Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama."
+Provider,Provider
+"AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.","AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM."
+OpenAI-compatible,OpenAI-compatible
+Base URL,Base URL
+"Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default.","Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default."
+Not needed for Ollama and many local servers.,Not needed for Ollama and many local servers.
+Invalid base URL: {0},Invalid base URL: {0}
+Enter the name of a model offered by {0}.,Enter the name of a model offered by {0}.

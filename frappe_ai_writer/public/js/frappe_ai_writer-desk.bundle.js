@@ -343,7 +343,7 @@
 			__('Text between /" and "/ is never corrected or translated, for example /"Müller & Söhne GmbH"/.'),
 			__("Cmd+Z / Ctrl+Z undoes a change."),
 			__("The answer is written in the language of the text."),
-			__("The text is processed by Anthropic's Claude; AI Writer does not store it."),
+			__("The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it."),
 		]) {
 			notes.append(make_element("li", null, note));
 		}

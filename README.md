@@ -2,7 +2,7 @@
 
 **English** · [Deutsch](#deutsch)
 
-AI proofreading, write-out and translation for Frappe and ERPNext text fields.
+AI proofreading, write-out and translation for Frappe and ERPNext text fields. Works with Anthropic, OpenAI, local models via Ollama and other OpenAI-compatible services.
 
 A sparkle button appears in every desk text field. One click corrects spelling, grammar and punctuation, either of the selected text or of the whole field, without leaving the form.
 
@@ -29,7 +29,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 ## Requirements
 
 - Frappe Framework v15 or v16 (ERPNext is optional)
-- An [Anthropic API key](https://console.anthropic.com/)
+- One AI service: an Anthropic or OpenAI API key, a local [Ollama](https://ollama.com/) server, or any other OpenAI-compatible API
 
 ## Installation
 
@@ -43,10 +43,18 @@ bench --site your-site migrate
 ## Configuration
 
 1. Open **AI Writer Settings** (from the **AI Writer** workspace or the apps screen).
-2. Enter your **Anthropic API Key**.
+2. Choose the **Provider** and enter the **API Key** if the service needs one:
+
+   | Provider | Base URL | Example model |
+   |---|---|---|
+   | Anthropic | (built in) | `claude-haiku-5-5` (default) |
+   | OpenAI | `https://api.openai.com/v1` (default) | a model from your OpenAI account |
+   | Ollama | `http://localhost:11434/v1` (default) | `llama3.2` |
+   | OpenAI-compatible | the service's API address, e.g. Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio, vLLM | a model of that service |
+
 3. Optionally adjust:
-   - **Model**: defaults to `claude-haiku-5-5`, fast and inexpensive for proofreading
-   - **Effort**: how much the model reasons before answering; `low` is fastest
+   - **Model**: the model name at the provider
+   - **Effort** (Anthropic only): how much the model reasons before answering; `low` is fastest
    - **System Prompt**: the instructions sent with every request; leave empty to restore the default
    - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
@@ -62,13 +70,14 @@ bench --site your-site migrate
 
 ## Privacy
 
-The text being corrected is sent to the Anthropic API using your API key. The app does not store the text or the response. It records token counts per day and mode (no text) so managers can see usage and costs. Per-user counts are only recorded when **Track Usage per User** is enabled; check the law that applies in your country before enabling it, for example on data protection and employee co-determination. Review Anthropic's data retention terms before using the app with personal or confidential data.
+The text being corrected is sent to the AI service you configure: Anthropic, OpenAI, another OpenAI-compatible provider, or your own Ollama server, where it never leaves your network. The app does not store the text or the response. It records token counts per day and mode (no text) so managers can see usage and costs. Per-user counts are only recorded when **Track Usage per User** is enabled; check the law that applies in your country before enabling it, for example on data protection and employee co-determination. Review the provider's data processing and retention terms before using the app with personal or confidential data.
 
 ## Security
 
 - The correction endpoint accepts POST only, checks the user's role and is rate limited.
 - HTML returned by the model is sanitized before it is inserted into an editor.
 - The API key is stored encrypted in a Password field and never sent to the browser.
+- The base URL accepts plain http(s) addresses only, without credentials; redirects are not followed and error logs contain only the HTTP status, never response bodies.
 
 ## Development
 
@@ -90,7 +99,7 @@ MIT, see [license.txt](license.txt).
 
 [English](#frappe-ai-writer) · **Deutsch**
 
-KI-Korrekturlesen, Ausformulieren und Übersetzen für Textfelder in Frappe und ERPNext.
+KI-Korrekturlesen, Ausformulieren und Übersetzen für Textfelder in Frappe und ERPNext. Funktioniert mit Anthropic, OpenAI, lokalen Modellen über Ollama und weiteren OpenAI-kompatiblen Diensten.
 
 In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Rechtschreibung, Grammatik und Zeichensetzung, wahlweise im markierten Text oder im ganzen Feld, ohne das Formular zu verlassen.
 
@@ -117,7 +126,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 ## Voraussetzungen
 
 - Frappe Framework v15 oder v16 (ERPNext ist optional)
-- Ein [Anthropic-API-Schlüssel](https://console.anthropic.com/)
+- Ein KI-Dienst: ein API-Schlüssel von Anthropic oder OpenAI, ein lokaler [Ollama](https://ollama.com/)-Server oder eine andere OpenAI-kompatible API
 
 ## Installation
 
@@ -131,10 +140,18 @@ bench --site ihre-site migrate
 ## Einrichtung
 
 1. **AI-Writer-Einstellungen** öffnen (über den Arbeitsbereich **AI Writer** oder die App-Übersicht).
-2. Den **Anthropic-API-Schlüssel** eintragen.
+2. Den **Anbieter** wählen und, falls der Dienst einen braucht, den **API-Schlüssel** eintragen:
+
+   | Anbieter | Basis-URL | Beispielmodell |
+   |---|---|---|
+   | Anthropic | (eingebaut) | `claude-haiku-5-5` (Standard) |
+   | OpenAI | `https://api.openai.com/v1` (Standard) | ein Modell aus Ihrem OpenAI-Konto |
+   | Ollama | `http://localhost:11434/v1` (Standard) | `llama3.2` |
+   | OpenAI-kompatibel | die API-Adresse des Dienstes, z. B. Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio, vLLM | ein Modell dieses Dienstes |
+
 3. Optional anpassen:
-   - **Modell**: Standard ist `claude-haiku-5-5`, schnell und günstig für Korrekturen
-   - **Denkaufwand**: wie gründlich das Modell vor der Antwort nachdenkt; `low` ist am schnellsten
+   - **Modell**: der Modellname beim Anbieter
+   - **Denkaufwand** (nur Anthropic): wie gründlich das Modell vor der Antwort nachdenkt; `low` ist am schnellsten
    - **System-Prompt**: die Anweisungen, die bei jeder Anfrage mitgehen; leer lassen stellt den Standard wieder her
    - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
@@ -150,13 +167,14 @@ bench --site ihre-site migrate
 
 ## Datenschutz
 
-Der zu korrigierende Text wird mit Ihrem API-Schlüssel an die Anthropic-API gesendet. Die App speichert weder den Text noch die Antwort. Sie erfasst die Token-Anzahl pro Tag und Modus (ohne Text), damit Manager Verbrauch und Kosten sehen. Pro Benutzer wird nur gezählt, wenn **Verbrauch pro Benutzer erfassen** aktiviert ist; prüfen Sie vor dem Einschalten das in Ihrem Land geltende Recht, etwa zu Datenschutz und Mitbestimmung. Prüfen Sie die Datenaufbewahrungsbedingungen von Anthropic, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
+Der zu korrigierende Text wird an den KI-Dienst gesendet, den Sie einstellen: Anthropic, OpenAI, einen anderen OpenAI-kompatiblen Anbieter oder Ihren eigenen Ollama-Server, bei dem er Ihr Netzwerk nicht verlässt. Die App speichert weder den Text noch die Antwort. Sie erfasst die Token-Anzahl pro Tag und Modus (ohne Text), damit Manager Verbrauch und Kosten sehen. Pro Benutzer wird nur gezählt, wenn **Verbrauch pro Benutzer erfassen** aktiviert ist; prüfen Sie vor dem Einschalten das in Ihrem Land geltende Recht, etwa zu Datenschutz und Mitbestimmung. Prüfen Sie die Bedingungen des Anbieters zu Datenverarbeitung und -aufbewahrung, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
 
 ## Sicherheit
 
 - Der Korrektur-Endpunkt akzeptiert nur POST, prüft die Rolle des Benutzers und ist ratenbegrenzt.
 - Vom Modell zurückgegebenes HTML wird bereinigt, bevor es in einen Editor eingefügt wird.
 - Der API-Schlüssel liegt verschlüsselt in einem Passwortfeld und wird nie an den Browser gesendet.
+- Die Basis-URL akzeptiert nur einfache http(s)-Adressen ohne Zugangsdaten; Weiterleitungen werden nicht verfolgt, und Fehlerprotokolle enthalten nur den HTTP-Status, nie den Inhalt der Antwort.
 
 ## Entwicklung
 

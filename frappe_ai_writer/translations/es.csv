@@ -1,10 +1,8 @@
 You are not permitted to use AI Writer.,No tiene permiso para usar AI Writer.
 AI Writer is disabled.,AI Writer está desactivado.
-No Anthropic API key configured. Please set one in AI Writer Settings.,No hay ninguna clave de API de Anthropic configurada. Configúrela en los ajustes de AI Writer.
 Nothing to correct.,No hay nada que corregir.
 The text is too long ({0} characters). The maximum is {1} characters.,El texto es demasiado largo ({0} caracteres). El máximo es de {1} caracteres.
 Invalid correction mode: {0},Modo de corrección no válido: {0}
-The Anthropic API key is invalid or lacks permission.,La clave de API de Anthropic no es válida o no tiene permisos.
 The configured AI model is not available: {0},El modelo de IA configurado no está disponible: {0}
 The AI service is busy. Please try again in a moment.,El servicio de IA está ocupado. Inténtelo de nuevo en un momento.
 The AI service returned an error. Please try again later.,El servicio de IA ha devuelto un error. Inténtelo de nuevo más tarde.
@@ -18,13 +16,10 @@ AI correction options,Opciones de corrección con IA
 Correct,Corregir
 More formal,Más formal
 More casual,Más informal
-Enter an Anthropic API key to use AI correction.,Introduzca una clave de API de Anthropic para usar la corrección con IA.
 AI Writer Settings,Ajustes de AI Writer
 Enabled,Activado
 Connection,Conexión
-Anthropic API Key,Clave de API de Anthropic
 Model,Modelo
-"Anthropic model ID, e.g. claude-haiku-5-5","ID del modelo de Anthropic, p. ej. claude-haiku-5-5"
 Effort,Esfuerzo
 How much the model reasons before answering. Low is fastest and cheapest. Leave empty for models without effort support.,Cuánto razona el modelo antes de responder. «low» es lo más rápido y económico. Déjelo vacío para modelos sin soporte de esfuerzo.
 Prompt,Prompt
@@ -42,7 +37,6 @@ Corrects the text and makes the tone more formal and business-like.,Corrige el t
 Corrects the text and makes the tone friendlier and less formal.,Corrige el texto y le da un tono más cercano y menos formal.
 Cmd+Z / Ctrl+Z undoes a change.,Cmd+Z / Ctrl+Z deshace un cambio.
 The answer is written in the language of the text.,La respuesta se escribe en el idioma del texto.
-The text is processed by Anthropic's Claude; AI Writer does not store it.,El texto lo procesa Claude (Anthropic); AI Writer no lo guarda.
 "Fixes spelling, grammar and punctuation. Bullet-point notes are written out as complete text.","Corrige la ortografía, la gramática y la puntuación. Las notas en viñetas se redactan como texto completo."
 "Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts.","Convierte notas y viñetas en un texto completo y detallado, y explica términos y contexto sin inventar datos concretos."
 Translate,Traducir
@@ -89,3 +83,17 @@ Usage Key,Clave de consumo
 Track Usage per User,Registrar el consumo por usuario
 "Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Registra el consumo de tokens por usuario, no solo en total. Antes de activarlo, compruebe la legislación aplicable en su país, por ejemplo sobre protección de datos y sobre la participación de los representantes de los trabajadores."
 Usage per user is not recorded. Enable Track Usage per User above to record it.,El consumo por usuario no se registra. Active «Registrar el consumo por usuario» más arriba para registrarlo.
+API Key,Clave de API
+The API key of the AI service is invalid or lacks permission.,La clave de API del servicio de IA no es válida o no tiene permisos.
+No API key configured. Please set one in AI Writer Settings.,No hay ninguna clave de API configurada. Configúrela en los ajustes de AI Writer.
+Enter an API key to use AI correction.,Introduzca una clave de API para usar la corrección con IA.
+The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it.,El texto lo procesa el servicio de IA configurado en los ajustes de AI Writer; AI Writer no lo guarda.
+"Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama.","Nombre del modelo del proveedor, p. ej. claude-haiku-5-5 para Anthropic o llama3.2 para Ollama."
+Provider,Proveedor
+"AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.","Servicio de IA que procesa los textos. «Compatible con OpenAI» cubre la mayoría de las demás plataformas, como Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio o vLLM."
+OpenAI-compatible,Compatible con OpenAI
+Base URL,URL base
+"Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default.","Dirección de la API de chat completions sin /chat/completions, p. ej. http://localhost:11434/v1 para Ollama. Déjelo vacío para usar el valor predeterminado del proveedor."
+Not needed for Ollama and many local servers.,No es necesaria para Ollama ni para muchos servidores locales.
+Invalid base URL: {0},URL base no válida: {0}
+Enter the name of a model offered by {0}.,Introduzca el nombre de un modelo que ofrezca {0}.

@@ -8,6 +8,8 @@
  "field_order": [
   "enabled",
   "connection_section",
+  "provider",
+  "base_url",
   "api_key",
   "model",
   "effort",
@@ -40,14 +42,30 @@
    "label": "Connection"
   },
   {
+   "default": "Anthropic",
+   "description": "AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.",
+   "fieldname": "provider",
+   "fieldtype": "Select",
+   "label": "Provider",
+   "options": "Anthropic\nOpenAI\nOllama\nOpenAI-compatible"
+  },
+  {
+   "depends_on": "eval:doc.provider && doc.provider !== 'Anthropic'",
+   "description": "Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default.",
+   "fieldname": "base_url",
+   "fieldtype": "Data",
+   "label": "Base URL"
+  },
+  {
    "fieldname": "api_key",
    "fieldtype": "Password",
-   "label": "Anthropic API Key",
-   "length": 255
+   "label": "API Key",
+   "length": 255,
+   "description": "Not needed for Ollama and many local servers."
   },
   {
    "default": "claude-haiku-5-5",
-   "description": "Anthropic model ID, e.g. claude-haiku-5-5",
+   "description": "Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama.",
    "fieldname": "model",
    "fieldtype": "Data",
    "label": "Model"
@@ -58,7 +76,8 @@
    "fieldname": "effort",
    "fieldtype": "Select",
    "label": "Effort",
-   "options": "\nlow\nmedium\nhigh"
+   "options": "\nlow\nmedium\nhigh",
+   "depends_on": "eval:!doc.provider || doc.provider === 'Anthropic'"
   },
   {
    "fieldname": "prompt_section",
@@ -155,7 +174,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-23 19:00:00.000000",
+ "modified": "2026-10-23 20:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

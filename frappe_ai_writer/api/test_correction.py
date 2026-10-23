@@ -60,7 +60,7 @@ class TestCorrectText(FrappeTestCase):
         settings.save()
 
     def _correct(self, response=None, side_effect=None, **kwargs) -> tuple[str, dict]:
-        with patch("frappe_ai_writer.api.correction.anthropic.Anthropic") as client_cls:
+        with patch("frappe_ai_writer.providers.anthropic.Anthropic") as client_cls:
             create = client_cls.return_value.messages.create
             create.return_value = response or _response("Ein Fehler.")
             create.side_effect = side_effect
@@ -185,7 +185,7 @@ class TestCorrectText(FrappeTestCase):
         )
 
     def test_fully_protected_text_is_returned_without_a_request(self) -> None:
-        with patch("frappe_ai_writer.api.correction.anthropic.Anthropic") as client_cls:
+        with patch("frappe_ai_writer.providers.anthropic.Anthropic") as client_cls:
             self.assertEqual(correct_text(text='/"Nicht anfassen"/'), '/"Nicht anfassen"/')
             client_cls.return_value.messages.create.assert_not_called()
 
