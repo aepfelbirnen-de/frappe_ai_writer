@@ -63,3 +63,29 @@ The written-out text should have at least about this many times the words of the
 The written-out text should have at most about this many times the words of the notes.,Der ausformulierte Text soll ungefähr höchstens so viele Wörter haben wie die Notizen mal diesem Faktor.
 Expansion factors must be between 1 and {0}.,Die Erweiterungsfaktoren müssen zwischen 1 und {0} liegen.
 The maximum expansion factor must be at least the minimum.,Der maximale Erweiterungsfaktor muss mindestens so groß sein wie der minimale.
+Usage,Verbrauch
+Input Price per Million Tokens (USD),Eingabepreis pro Million Token (USD)
+Output Price per Million Tokens (USD),Ausgabepreis pro Million Token (USD)
+Used to estimate costs. The default is the price of claude-haiku-5-5.,Dient zur Kostenschätzung. Der Standard ist der Preis von claude-haiku-5-5.
+Usage Summary,Verbrauchsübersicht
+Loading…,Wird geladen …
+Usage could not be loaded.,Der Verbrauch konnte nicht geladen werden.
+Requests,Anfragen
+Input Tokens,Eingabe-Token
+Output Tokens,Ausgabe-Token
+Estimated Cost,Geschätzte Kosten
+Today,Heute
+This Month,Dieser Monat
+Total,Gesamt
+User,Benutzer
+No usage recorded this month.,In diesem Monat wurde noch kein Verbrauch erfasst.
+Open Usage Log,Verbrauchsprotokoll öffnen
+Per User This Month,Pro Benutzer in diesem Monat
+You are not permitted to view AI Writer usage.,"Sie sind nicht berechtigt, den AI-Writer-Verbrauch einzusehen."
+AI Writer Usage,AI-Writer-Verbrauch
+Date,Datum
+Mode,Modus
+Usage Key,Verbrauchsschlüssel
+Track Usage per User,Verbrauch pro Benutzer erfassen
+"Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Erfasst den Token-Verbrauch pro Benutzer, nicht nur insgesamt. Prüfen Sie vor dem Einschalten das in Ihrem Land geltende Recht, etwa zum Datenschutz und zur Mitbestimmung durch Arbeitnehmervertretungen (in Deutschland z. B. DSGVO, BDSG und § 87 Abs. 1 Nr. 6 BetrVG)."
+Usage per user is not recorded. Enable Track Usage per User above to record it.,Der Verbrauch pro Benutzer wird nicht erfasst. Aktivieren Sie dafür oben „Verbrauch pro Benutzer erfassen“.

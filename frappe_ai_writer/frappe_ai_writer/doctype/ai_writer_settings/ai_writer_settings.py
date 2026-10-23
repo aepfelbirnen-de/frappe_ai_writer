@@ -43,6 +43,8 @@ The existing mailboxes will be migrated to Microsoft 365, so that email, calenda
 DEFAULT_EXPANSION_FACTORS = (4, 10)
 MAX_EXPANSION_FACTOR = 50
 DEFAULT_TRANSLATION_LANGUAGES = ("de", "en")
+# USD per million input and output tokens for the default model.
+DEFAULT_PRICES = (0.10, 0.50)
 
 MODEL_NAME_PATTERN = re.compile(r"^[a-z0-9][a-z0-9.\-]*$")
 
@@ -66,8 +68,11 @@ class AIWriterSettings(Document):
         expand_prompt: DF.SmallText | None
         expansion_factor_max: DF.Int
         expansion_factor_min: DF.Int
+        input_price_per_million: DF.Float
+        output_price_per_million: DF.Float
         model: DF.Data | None
         system_prompt: DF.SmallText | None
+        track_usage_per_user: DF.Check
         translation_languages: DF.TableMultiSelect[AIWriterTranslationLanguage]
     # end: auto-generated types
 
@@ -90,6 +95,11 @@ class AIWriterSettings(Document):
             frappe.throw(_("Expansion factors must be between 1 and {0}.").format(MAX_EXPANSION_FACTOR))
         if self.expansion_factor_max < self.expansion_factor_min:
             frappe.throw(_("The maximum expansion factor must be at least the minimum."))
+
+        if self.input_price_per_million is None:
+            self.input_price_per_million = DEFAULT_PRICES[0]
+        if self.output_price_per_million is None:
+            self.output_price_per_million = DEFAULT_PRICES[1]
 
         seen = set()
         for row in list(self.translation_languages):

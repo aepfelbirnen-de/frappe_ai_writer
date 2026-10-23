@@ -63,3 +63,29 @@ The written-out text should have at least about this many times the words of the
 The written-out text should have at most about this many times the words of the notes.,Den udskrevne tekst skal have højst omtrent så mange gange ordene i noterne.
 Expansion factors must be between 1 and {0}.,Udvidelsesfaktorerne skal ligge mellem 1 og {0}.
 The maximum expansion factor must be at least the minimum.,Den største udvidelsesfaktor skal mindst være lig med den mindste.
+Usage,Forbrug
+Input Price per Million Tokens (USD),Inputpris pr. million tokens (USD)
+Output Price per Million Tokens (USD),Outputpris pr. million tokens (USD)
+Used to estimate costs. The default is the price of claude-haiku-5-5.,Bruges til at anslå omkostninger. Standarden er prisen for claude-haiku-5-5.
+Usage Summary,Forbrugsoversigt
+Loading…,Indlæser…
+Usage could not be loaded.,Forbruget kunne ikke indlæses.
+Requests,Forespørgsler
+Input Tokens,Input-tokens
+Output Tokens,Output-tokens
+Estimated Cost,Anslåede omkostninger
+Today,I dag
+This Month,Denne måned
+Total,I alt
+User,Bruger
+No usage recorded this month.,Der er ikke registreret noget forbrug i denne måned.
+Open Usage Log,Åbn forbrugslog
+Per User This Month,Pr. bruger denne måned
+You are not permitted to view AI Writer usage.,Du har ikke tilladelse til at se forbruget for AI Writer.
+AI Writer Usage,AI Writer-forbrug
+Date,Dato
+Mode,Tilstand
+Usage Key,Forbrugsnøgle
+Track Usage per User,Registrér forbrug pr. bruger
+"Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Registrerer tokenforbruget pr. bruger og ikke kun samlet. Før du aktiverer det, skal du undersøge den lovgivning, der gælder i dit land, f.eks. om databeskyttelse og medarbejderrepræsentanters medbestemmelse."
+Usage per user is not recorded. Enable Track Usage per User above to record it.,Forbrug pr. bruger registreres ikke. Aktivér »Registrér forbrug pr. bruger« ovenfor for at registrere det.

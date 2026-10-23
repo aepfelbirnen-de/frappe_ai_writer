@@ -63,3 +63,29 @@ The written-out text should have at least about this many times the words of the
 The written-out text should have at most about this many times the words of the notes.,Le texte rédigé doit compter environ au plus ce multiple du nombre de mots des notes.
 Expansion factors must be between 1 and {0}.,Les facteurs d'extension doivent être compris entre 1 et {0}.
 The maximum expansion factor must be at least the minimum.,Le facteur d'extension maximal doit être au moins égal au minimal.
+Usage,Consommation
+Input Price per Million Tokens (USD),Prix d'entrée par million de jetons (USD)
+Output Price per Million Tokens (USD),Prix de sortie par million de jetons (USD)
+Used to estimate costs. The default is the price of claude-haiku-5-5.,Sert à estimer les coûts. La valeur par défaut est le prix de claude-haiku-5-5.
+Usage Summary,Récapitulatif de consommation
+Loading…,Chargement…
+Usage could not be loaded.,La consommation n'a pas pu être chargée.
+Requests,Requêtes
+Input Tokens,Jetons d'entrée
+Output Tokens,Jetons de sortie
+Estimated Cost,Coût estimé
+Today,Aujourd'hui
+This Month,Ce mois-ci
+Total,Total
+User,Utilisateur
+No usage recorded this month.,Aucune consommation enregistrée ce mois-ci.
+Open Usage Log,Ouvrir le journal de consommation
+Per User This Month,Par utilisateur ce mois-ci
+You are not permitted to view AI Writer usage.,Vous n'êtes pas autorisé à consulter la consommation d'AI Writer.
+AI Writer Usage,Consommation d'AI Writer
+Date,Date
+Mode,Mode
+Usage Key,Clé de consommation
+Track Usage per User,Suivre la consommation par utilisateur
+"Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Enregistre la consommation de jetons par utilisateur, et pas seulement au total. Avant de l'activer, vérifiez la législation applicable dans votre pays, par exemple en matière de protection des données et de consultation des représentants du personnel."
+Usage per user is not recorded. Enable Track Usage per User above to record it.,La consommation par utilisateur n'est pas enregistrée. Activez « Suivre la consommation par utilisateur » ci-dessus pour l'enregistrer.

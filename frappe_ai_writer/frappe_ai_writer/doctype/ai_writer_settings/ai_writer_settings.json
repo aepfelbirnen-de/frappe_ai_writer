@@ -19,7 +19,13 @@
   "expansion_factor_min",
   "expansion_factor_max",
   "translation_section",
-  "translation_languages"
+  "translation_languages",
+  "usage_section",
+  "track_usage_per_user",
+  "input_price_per_million",
+  "output_price_per_million",
+  "usage_overview_section",
+  "usage_summary"
  ],
  "fields": [
   {
@@ -107,12 +113,49 @@
    "fieldtype": "Table MultiSelect",
    "label": "Translation Languages",
    "options": "AI Writer Translation Language"
+  },
+  {
+   "fieldname": "usage_section",
+   "fieldtype": "Section Break",
+   "label": "Usage"
+  },
+  {
+   "default": "0",
+   "description": "Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.",
+   "fieldname": "track_usage_per_user",
+   "fieldtype": "Check",
+   "label": "Track Usage per User"
+  },
+  {
+   "default": "0.1",
+   "description": "Used to estimate costs. The default is the price of claude-haiku-5-5.",
+   "fieldname": "input_price_per_million",
+   "fieldtype": "Float",
+   "label": "Input Price per Million Tokens (USD)",
+   "non_negative": 1
+  },
+  {
+   "default": "0.5",
+   "description": "Used to estimate costs. The default is the price of claude-haiku-5-5.",
+   "fieldname": "output_price_per_million",
+   "fieldtype": "Float",
+   "label": "Output Price per Million Tokens (USD)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "usage_overview_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "usage_summary",
+   "fieldtype": "HTML",
+   "label": "Usage Summary"
   }
  ],
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-23 18:00:00.000000",
+ "modified": "2026-10-23 19:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

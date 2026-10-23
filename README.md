@@ -51,6 +51,7 @@ bench --site your-site migrate
    - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
+   - **Usage**: token usage today, this month and in total, with estimated costs based on the configured prices; **Track Usage per User** (off by default) adds a per-user table
 4. Give users the **AI Writer User** role. Users without it do not see the button.
 
 | Role | Can use the button | Can edit the settings |
@@ -61,7 +62,7 @@ bench --site your-site migrate
 
 ## Privacy
 
-The text being corrected is sent to the Anthropic API using your API key. The app does not store the text or the response. Review Anthropic's data retention terms before using the app with personal or confidential data.
+The text being corrected is sent to the Anthropic API using your API key. The app does not store the text or the response. It records token counts per day and mode (no text) so managers can see usage and costs. Per-user counts are only recorded when **Track Usage per User** is enabled; check the law that applies in your country before enabling it, for example on data protection and employee co-determination. Review Anthropic's data retention terms before using the app with personal or confidential data.
 
 ## Security
 
@@ -138,6 +139,7 @@ bench --site ihre-site migrate
    - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
+   - **Verbrauch**: Token-Verbrauch heute, im laufenden Monat und gesamt, mit geschätzten Kosten anhand der eingestellten Preise; **Verbrauch pro Benutzer erfassen** (standardmäßig aus) ergänzt eine Tabelle pro Benutzer
 4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.
 
 | Rolle | Darf den Button nutzen | Darf die Einstellungen ändern |
@@ -148,7 +150,7 @@ bench --site ihre-site migrate
 
 ## Datenschutz
 
-Der zu korrigierende Text wird mit Ihrem API-Schlüssel an die Anthropic-API gesendet. Die App speichert weder den Text noch die Antwort. Prüfen Sie die Datenaufbewahrungsbedingungen von Anthropic, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
+Der zu korrigierende Text wird mit Ihrem API-Schlüssel an die Anthropic-API gesendet. Die App speichert weder den Text noch die Antwort. Sie erfasst die Token-Anzahl pro Tag und Modus (ohne Text), damit Manager Verbrauch und Kosten sehen. Pro Benutzer wird nur gezählt, wenn **Verbrauch pro Benutzer erfassen** aktiviert ist; prüfen Sie vor dem Einschalten das in Ihrem Land geltende Recht, etwa zu Datenschutz und Mitbestimmung. Prüfen Sie die Datenaufbewahrungsbedingungen von Anthropic, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
 
 ## Sicherheit
 

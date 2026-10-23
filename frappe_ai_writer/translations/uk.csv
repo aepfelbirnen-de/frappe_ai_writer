@@ -63,3 +63,29 @@ The written-out text should have at least about this many times the words of the
 The written-out text should have at most about this many times the words of the notes.,"Розгорнутий текст має містити приблизно щонайбільше стільки разів більше слів, ніж нотатки."
 Expansion factors must be between 1 and {0}.,Коефіцієнти розширення мають бути від 1 до {0}.
 The maximum expansion factor must be at least the minimum.,Максимальний коефіцієнт розширення має бути не меншим за мінімальний.
+Usage,Використання
+Input Price per Million Tokens (USD),Ціна вводу за мільйон токенів (USD)
+Output Price per Million Tokens (USD),Ціна виводу за мільйон токенів (USD)
+Used to estimate costs. The default is the price of claude-haiku-5-5.,Використовується для оцінки витрат. Типове значення — ціна claude-haiku-5-5.
+Usage Summary,Зведення використання
+Loading…,Завантаження…
+Usage could not be loaded.,Не вдалося завантажити дані використання.
+Requests,Запити
+Input Tokens,Токени вводу
+Output Tokens,Токени виводу
+Estimated Cost,Орієнтовна вартість
+Today,Сьогодні
+This Month,Цього місяця
+Total,Усього
+User,Користувач
+No usage recorded this month.,Цього місяця використання ще не зафіксовано.
+Open Usage Log,Відкрити журнал використання
+Per User This Month,За користувачами цього місяця
+You are not permitted to view AI Writer usage.,Ви не маєте дозволу переглядати використання AI Writer.
+AI Writer Usage,Використання AI Writer
+Date,Дата
+Mode,Режим
+Usage Key,Ключ використання
+Track Usage per User,Відстежувати використання за користувачами
+"Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Фіксує використання токенів за кожним користувачем, а не лише загалом. Перш ніж увімкнути, перевірте законодавство вашої країни, наприклад щодо захисту даних і участі представників працівників."
+Usage per user is not recorded. Enable Track Usage per User above to record it.,Використання за користувачами не фіксується. Увімкніть вище «Відстежувати використання за користувачами».

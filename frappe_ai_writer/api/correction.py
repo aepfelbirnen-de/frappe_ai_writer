@@ -141,6 +141,9 @@ def correct_text(
     field_context = _clean_context(field_context)
     corrected = _request_correction(
         api_key=api_key,
+        mode=mode,
+        # Per-user counting is opt-in because it can be subject to data protection and co-determination law.
+        usage_user=frappe.session.user if settings.track_usage_per_user else None,
         model=settings.model or DEFAULT_MODEL,
         effort=_effort_for(mode, settings.effort),
         system_prompt=_build_system_prompt(
@@ -280,7 +283,16 @@ def _build_user_message(text: str, field_context: str) -> str:
     return f"<context>{field_context}</context>\n{message}" if field_context else message
 
 
-def _request_correction(*, api_key: str, model: str, effort: str | None, system_prompt: str, user_message: str) -> str:
+def _request_correction(
+    *,
+    api_key: str,
+    mode: str,
+    usage_user: str | None,
+    model: str,
+    effort: str | None,
+    system_prompt: str,
+    user_message: str,
+) -> str:
     client = anthropic.Anthropic(api_key=api_key, timeout=REQUEST_TIMEOUT_SECONDS, max_retries=MAX_RETRIES)
     request = {
         "model": model,
@@ -309,6 +321,9 @@ def _request_correction(*, api_key: str, model: str, effort: str | None, system_
         _log_api_error()
         frappe.throw(_("The AI service could not be reached. Please try again later."))
 
+    # Billed tokens are recorded before any check below can reject the answer.
+    _record_usage(usage_user, mode, model, getattr(response, "usage", None))
+
     if response.stop_reason == "refusal":
         frappe.throw(_("The AI service declined to process this text."))
     if response.stop_reason == "max_tokens":
@@ -321,6 +336,26 @@ def _request_correction(*, api_key: str, model: str, effort: str | None, system_
     if not corrected:
         frappe.throw(_("The AI service returned an empty response."))
     return corrected
+
+
+def _record_usage(usage_user: str | None, mode: str, model: str, usage) -> None:
+    if usage is None:
+        return
+    try:
+        # Enqueued instead of written here, so the count survives the rollback of a request that fails later.
+        frappe.enqueue(
+            "frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_usage.ai_writer_usage.record_usage",
+            queue="short",
+            now=bool(frappe.flags.in_test),
+            usage_user=usage_user,
+            mode=mode,
+            model=model,
+            input_tokens=int(getattr(usage, "input_tokens", 0) or 0),
+            output_tokens=int(getattr(usage, "output_tokens", 0) or 0),
+        )
+    except Exception:
+        # Usage tracking must never block the correction itself.
+        frappe.log_error(title="AI Writer: recording token usage failed", defer_insert=True)
 
 
 def _sanitize_editor_html(html: str) -> str:

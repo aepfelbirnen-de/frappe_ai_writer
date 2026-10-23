@@ -63,3 +63,29 @@ The written-out text should have at least about this many times the words of the
 The written-out text should have at most about this many times the words of the notes.,El texto redactado debe tener aproximadamente como máximo este múltiplo de palabras de las notas.
 Expansion factors must be between 1 and {0}.,Los factores de ampliación deben estar entre 1 y {0}.
 The maximum expansion factor must be at least the minimum.,El factor de ampliación máximo debe ser al menos igual al mínimo.
+Usage,Consumo
+Input Price per Million Tokens (USD),Precio de entrada por millón de tokens (USD)
+Output Price per Million Tokens (USD),Precio de salida por millón de tokens (USD)
+Used to estimate costs. The default is the price of claude-haiku-5-5.,Se usa para estimar los costes. El valor predeterminado es el precio de claude-haiku-5-5.
+Usage Summary,Resumen de consumo
+Loading…,Cargando…
+Usage could not be loaded.,No se pudo cargar el consumo.
+Requests,Solicitudes
+Input Tokens,Tokens de entrada
+Output Tokens,Tokens de salida
+Estimated Cost,Coste estimado
+Today,Hoy
+This Month,Este mes
+Total,Total
+User,Usuario
+No usage recorded this month.,No se ha registrado consumo este mes.
+Open Usage Log,Abrir registro de consumo
+Per User This Month,Por usuario este mes
+You are not permitted to view AI Writer usage.,No tiene permiso para ver el consumo de AI Writer.
+AI Writer Usage,Consumo de AI Writer
+Date,Fecha
+Mode,Modo
+Usage Key,Clave de consumo
+Track Usage per User,Registrar el consumo por usuario
+"Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Registra el consumo de tokens por usuario, no solo en total. Antes de activarlo, compruebe la legislación aplicable en su país, por ejemplo sobre protección de datos y sobre la participación de los representantes de los trabajadores."
+Usage per user is not recorded. Enable Track Usage per User above to record it.,El consumo por usuario no se registra. Active «Registrar el consumo por usuario» más arriba para registrarlo.

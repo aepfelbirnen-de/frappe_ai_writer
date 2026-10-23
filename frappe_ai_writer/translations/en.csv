@@ -63,3 +63,29 @@ The written-out text should have at least about this many times the words of the
 The written-out text should have at most about this many times the words of the notes.,The written-out text should have at most about this many times the words of the notes.
 Expansion factors must be between 1 and {0}.,Expansion factors must be between 1 and {0}.
 The maximum expansion factor must be at least the minimum.,The maximum expansion factor must be at least the minimum.
+Usage,Usage
+Input Price per Million Tokens (USD),Input Price per Million Tokens (USD)
+Output Price per Million Tokens (USD),Output Price per Million Tokens (USD)
+Used to estimate costs. The default is the price of claude-haiku-5-5.,Used to estimate costs. The default is the price of claude-haiku-5-5.
+Usage Summary,Usage Summary
+Loading…,Loading…
+Usage could not be loaded.,Usage could not be loaded.
+Requests,Requests
+Input Tokens,Input Tokens
+Output Tokens,Output Tokens
+Estimated Cost,Estimated Cost
+Today,Today
+This Month,This Month
+Total,Total
+User,User
+No usage recorded this month.,No usage recorded this month.
+Open Usage Log,Open Usage Log
+Per User This Month,Per User This Month
+You are not permitted to view AI Writer usage.,You are not permitted to view AI Writer usage.
+AI Writer Usage,AI Writer Usage
+Date,Date
+Mode,Mode
+Usage Key,Usage Key
+Track Usage per User,Track Usage per User
+"Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives."
+Usage per user is not recorded. Enable Track Usage per User above to record it.,Usage per user is not recorded. Enable Track Usage per User above to record it.

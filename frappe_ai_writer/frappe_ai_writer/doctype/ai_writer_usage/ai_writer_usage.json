@@ -1,0 +1,131 @@
+{
+ "actions": [],
+ "autoname": "field:usage_key",
+ "creation": "2026-10-23 19:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "user",
+  "column_break_user",
+  "mode",
+  "model",
+  "section_break_tokens",
+  "requests",
+  "input_tokens",
+  "output_tokens",
+  "usage_key"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_user",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Mode",
+   "options": "correct\nexpand\nformal\ncasual\ntranslate",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_tokens",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "requests",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Requests",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "input_tokens",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Input Tokens",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "output_tokens",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Output Tokens",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "usage_key",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Usage Key",
+   "read_only": 1,
+   "unique": 1
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-10-23 19:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Frappe AI Writer",
+ "name": "AI Writer Usage",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "AI Writer Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "user,mode,model",
+ "sort_field": "date",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "mode",
+ "track_changes": 0
+}

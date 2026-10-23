@@ -46,6 +46,7 @@ class TestCorrectText(FrappeTestCase):
             expand_prompt="",
             expansion_factor_min=4,
             expansion_factor_max=10,
+            track_usage_per_user=0,
         )
         frappe.get_doc("User", TEST_USER).remove_roles(*frappe.get_roles(TEST_USER))
 
@@ -72,6 +73,30 @@ class TestCorrectText(FrappeTestCase):
         self.assertEqual(request["model"], "claude-haiku-5-5")
         self.assertEqual(request["output_config"], {"effort": "low"})
         self.assertEqual(request["messages"][0]["content"], "<text>\nEin Fehlr.\n</text>")
+
+    def test_tokens_are_recorded_without_user_by_default(self) -> None:
+        frappe.db.delete("AI Writer Usage")
+        response = _response("Ein Fehler.")
+        response.usage = SimpleNamespace(input_tokens=5, output_tokens=5)
+        self._correct(response=response)
+        self.assertEqual(frappe.db.get_value("AI Writer Usage", {"mode": "correct"}, "user"), None)
+
+    def test_billed_tokens_are_recorded(self) -> None:
+        frappe.db.delete("AI Writer Usage")
+        self._update_settings(track_usage_per_user=1)
+        response = _response("Ein Fehler.")
+        response.usage = SimpleNamespace(input_tokens=120, output_tokens=30)
+        self._correct(response=response)
+        row = frappe.get_all("AI Writer Usage", filters={"user": "Administrator", "mode": "correct"}, fields=["*"])[0]
+        self.assertEqual((row.requests, row.input_tokens, row.output_tokens), (1, 120, 30))
+
+    def test_tokens_are_recorded_even_when_the_answer_is_rejected(self) -> None:
+        frappe.db.delete("AI Writer Usage")
+        self._update_settings(track_usage_per_user=1)
+        response = _response("Ein", stop_reason="max_tokens")
+        response.usage = SimpleNamespace(input_tokens=10, output_tokens=16000)
+        self.assertRaises(frappe.ValidationError, self._correct, response=response)
+        self.assertEqual(frappe.db.get_value("AI Writer Usage", {"user": "Administrator"}, "output_tokens"), 16000)
 
     def test_mode_adds_instruction(self) -> None:
         _, request = self._correct(mode="formal")

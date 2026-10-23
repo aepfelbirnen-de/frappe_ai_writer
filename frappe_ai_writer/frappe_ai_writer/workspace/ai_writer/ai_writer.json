@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"ws_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Shortcuts</b></span>\",\"col\":12}},{\"id\":\"ws_sc_1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AI Writer Settings\",\"col\":3}},{\"id\":\"ws_spacer\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ws_card_1\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
+ "content": "[{\"id\":\"ws_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Shortcuts</b></span>\",\"col\":12}},{\"id\":\"ws_sc_1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AI Writer Settings\",\"col\":3}},{\"id\":\"ws_sc_2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AI Writer Usage\",\"col\":3}},{\"id\":\"ws_spacer\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ws_card_1\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
  "creation": "2026-10-23 12:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -16,7 +16,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Settings",
-   "link_count": 1,
+   "link_count": 2,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -30,9 +30,20 @@
    "link_type": "DocType",
    "onboard": 1,
    "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "AI Writer Usage",
+   "link_count": 0,
+   "link_to": "AI Writer Usage",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-10-23 12:00:00.000000",
+ "modified": "2026-10-23 19:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer",
@@ -57,6 +68,14 @@
    "doc_view": "",
    "label": "AI Writer Settings",
    "link_to": "AI Writer Settings",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "",
+   "doc_view": "List",
+   "label": "AI Writer Usage",
+   "link_to": "AI Writer Usage",
    "stats_filter": "",
    "type": "DocType"
   }
