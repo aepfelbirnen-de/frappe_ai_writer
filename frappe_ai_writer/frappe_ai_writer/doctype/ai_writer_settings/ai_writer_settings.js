@@ -40,7 +40,7 @@
 			[
 				[__("Today"), ...values(summary.periods.today)],
 				[__("This Month"), ...values(summary.periods.month)],
-				[__("Total"), ...values(summary.periods.total)],
+				[__("Total", null, "AI Writer"), ...values(summary.periods.total)],
 			]
 		);
 

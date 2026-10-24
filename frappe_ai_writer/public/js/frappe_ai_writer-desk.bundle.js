@@ -10,6 +10,7 @@
 	const METHOD = "frappe_ai_writer.api.correction.correct_text";
 	const COVER_LETTER_METHOD = "frappe_ai_writer.api.cover_letter.write_cover_letter";
 	const REPLY_METHOD = "frappe_ai_writer.api.reply.draft_reply";
+	const SUMMARY_METHOD = "frappe_ai_writer.api.summary.summarize";
 	const MODES = [
 		{
 			mode: "correct",
@@ -58,6 +59,7 @@
 
 	localize_change_log();
 	setup_cover_letter();
+	setup_summary();
 	setup_shortcuts();
 	$(document).one("app_ready", () => setTimeout(show_change_log_to_writers, 1000));
 
@@ -152,7 +154,7 @@
 					fieldname: "style",
 					label: __("Format"),
 					options: [
-						{ value: "Letter", label: __("Letter") },
+						{ value: "Letter", label: __("Letter", null, "AI Writer") },
 						{ value: "Structured", label: __("Structured") },
 					],
 					default: style,
@@ -192,6 +194,119 @@
 		} finally {
 			frappe.dom.unfreeze();
 		}
+	}
+
+	// Conversation summaries: the server collects the timeline itself; nothing is stored until the user
+	// adds the summary as a comment through Frappe's own comment endpoint.
+	function setup_summary() {
+		for (const doctype of frappe.boot.ai_writer?.summary_doctypes || []) {
+			frappe.ui.form.on(doctype, {
+				refresh(frm) {
+					if (!is_enabled() || frm.is_new()) return;
+					frm.add_custom_button(__("Summarize Conversation"), () => summarize_conversation(frm), __("Actions"));
+				},
+			});
+		}
+	}
+
+	async function summarize_conversation(frm) {
+		let style = frappe.boot.ai_writer?.summary_style || "Bullet List";
+		let result = await request_summary(frm, style);
+		if (!result) return;
+
+		const regenerate = async () => {
+			const next = await request_summary(frm, style);
+			if (!next) return;
+			result = next;
+			dialog.set_value("summary", next.summary);
+		};
+		const dialog = new frappe.ui.Dialog({
+			title: __("Conversation Summary"),
+			size: "large",
+			fields: [
+				{
+					fieldtype: "Select",
+					fieldname: "style",
+					label: __("Format"),
+					options: [
+						{ value: "Bullet List", label: __("Bullet List") },
+						{ value: "Prose", label: __("Prose") },
+					],
+					default: style,
+					onchange() {
+						const value = dialog.get_value("style");
+						if (!value || value === style) return;
+						style = value;
+						regenerate();
+					},
+				},
+				{
+					fieldtype: "Text Editor",
+					fieldname: "summary",
+					label: __("Preview"),
+					default: result.summary,
+					description: __("Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.", [
+						result.considered,
+						result.total,
+					]),
+				},
+			],
+			primary_action_label: __("Add as Comment"),
+			async primary_action(values) {
+				if (await add_summary_comment(frm, values.summary || "", result.footer)) dialog.hide();
+			},
+			secondary_action_label: __("Regenerate"),
+			secondary_action: regenerate,
+		});
+		dialog.add_custom_action(__("Copy"), () =>
+			frappe.utils.copy_to_clipboard(html_to_plain_text(dialog.get_value("summary") || ""))
+		);
+		dialog.show();
+	}
+
+	// Returns { summary, considered, total, footer }, or null if the request failed (the server message is already shown).
+	async function request_summary(frm, style) {
+		frappe.dom.freeze(__("Summarizing conversation…"));
+		try {
+			return await frappe.xcall(SUMMARY_METHOD, { doctype: frm.doctype, name: frm.docname, style });
+		} catch (error) {
+			console.error(error);
+			return null;
+		} finally {
+			frappe.dom.unfreeze();
+		}
+	}
+
+	async function add_summary_comment(frm, summary, footer) {
+		let comment;
+		try {
+			comment = await frappe.xcall("frappe.desk.form.utils.add_comment", {
+				reference_doctype: frm.doctype,
+				reference_name: frm.docname,
+				content: `${summary}<p><em>${frappe.utils.escape_html(footer)}</em></p>`,
+				comment_email: frappe.session.user,
+				comment_by: frappe.session.user_fullname,
+			});
+		} catch (error) {
+			console.error(error);
+			return false;
+		}
+		frappe.show_alert({ message: __("Summary added as a comment."), indicator: "green" });
+		// v16 adds new comments to the timeline through realtime docinfo updates; v15 forms may not.
+		setTimeout(() => {
+			const comments = frm.get_docinfo?.()?.comments;
+			if (!comments || comments.some((row) => row.name === comment.name)) return;
+			comments.push(comment);
+			frm.timeline?.refresh();
+		}, 1500);
+		return true;
+	}
+
+	function html_to_plain_text(html) {
+		const doc = new DOMParser().parseFromString(html, "text/html");
+		doc.querySelectorAll("li").forEach((item) => item.prepend("- "));
+		doc.querySelectorAll("p, li, h1, h2, h3, h4, h5, h6, br").forEach((node) => node.after("\n"));
+		return doc.body.textContent.replace(/\n{3,}/g, "\n\n").trim();
 	}
 
 	function attach_reply_button(composer) {
@@ -401,7 +516,7 @@
 		}));
 		mode_items.push(
 			{ divider: true },
-			{ label: __("Help"), icon: help_icon(), class_name: "ai-writer-menu-help", action: show_help }
+			{ label: __("Help", null, "AI Writer"), icon: help_icon(), class_name: "ai-writer-menu-help", action: show_help }
 		);
 		const mode_menu = make_menu(group, menu_button, mode_items);
 		group.append(main_button, menu_button, mode_menu);
@@ -575,6 +690,18 @@
 				)
 			)
 		);
+		if (frappe.boot.ai_writer?.summary_doctypes?.length) {
+			modes.append(
+				make_element("dt", null, __("Summarize Conversation")),
+				make_element(
+					"dd",
+					null,
+					__(
+						"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service."
+					)
+				)
+			);
+		}
 		if (frappe.boot.ai_writer?.cover_letter_field) {
 			modes.append(
 				make_element("dt", null, __("Write Cover Letter")),
@@ -738,9 +865,9 @@
 		// The word-level LCS needs len(before) x len(after) cells; very long texts are shown side by side instead.
 		if (before_words.length * after_words.length > 2_500_000) {
 			root.append(
-				make_element("h6", null, __("Before")),
+				make_element("h6", null, __("Before", null, "AI Writer")),
 				make_element("div", "ai-writer-preview-text", before),
-				make_element("h6", "mt-3", __("After")),
+				make_element("h6", "mt-3", __("After", null, "AI Writer")),
 				make_element("div", "ai-writer-preview-text", after)
 			);
 			return root;

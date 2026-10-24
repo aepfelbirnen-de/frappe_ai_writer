@@ -30,7 +30,8 @@ Settings,Paramètres
 Frappe AI Writer,Frappe AI Writer
 Write out,Rédiger
 Text updated,Texte mis à jour
-Help,Aide
+Help,Aide,AI Writer
+Help,Aidez-moi
 How AI Writer works,Fonctionnement d'AI Writer
 "Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Cliquez sur ✦ pour corriger le texte immédiatement, ou ouvrez le menu de la flèche pour choisir un mode. Sans sélection, tout le champ est utilisé ; avec une sélection, seule la partie sélectionnée."
 Corrects the text and makes the tone more formal and business-like.,Corrige le texte et rend le ton plus formel et professionnel.
@@ -70,6 +71,7 @@ Output Tokens,Jetons de sortie
 Estimated Cost,Coût estimé
 Today,Aujourd'hui
 This Month,Ce mois-ci
+Total,Total,AI Writer
 Total,Total
 User,Utilisateur
 No usage recorded this month.,Aucune consommation enregistrée ce mois-ci.
@@ -114,6 +116,7 @@ Regenerate,Régénérer
 Cover letter applied. Save the quotation to keep it.,Lettre appliquée. Enregistrez le devis pour la conserver.
 Actions,Actions
 Format,Format
+Letter,Lettre,AI Writer
 Letter,Lettre
 Structured,Structuré
 Cover Letter Format,Format de la lettre
@@ -127,7 +130,9 @@ Always,Toujours
 Never,Jamais
 Minimum Length for Preview,Longueur minimale pour l'aperçu
 Texts with at least this many characters are shown in the preview first.,Les textes d'au moins ce nombre de caractères sont d'abord affichés dans l'aperçu.
+Before,Avant,AI Writer
 Before,Avant
+After,Après,AI Writer
 After,Après
 "Removed text is struck through, added text is highlighted.","Le texte supprimé est barré, le texte ajouté est mis en évidence."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Selon les paramètres d'AI Writer, les résultats s'affichent d'abord dans un aperçu où vous pouvez les appliquer, les régénérer ou les ignorer."
@@ -152,7 +157,7 @@ House Style,Charte rédactionnelle
 Term,Terme
 Protected,Protégé
 Never changed or translated.,Jamais modifié ni traduit.
-Note,Remarque
+Note,Note
 Translations,Traductions
 "One line per language, e.g. en: quotation","Une ligne par langue, p. ex. en: quotation"
 AI Writer Glossary Term,Terme du glossaire AI Writer
@@ -184,3 +189,28 @@ AI Writer: open the menu of the focused field,AI Writer : ouvrir le menu du cham
 "Corrects the field that has the cursor, like a click on ✦.","Corrige le champ où se trouve le curseur, comme un clic sur ✦."
 Opens the menu of that field; choose a mode with the arrow keys and Enter.,Ouvre le menu de ce champ ; choisissez un mode avec les flèches et Entrée.
 Keyboard Shortcuts,Raccourcis clavier
+Summarize Conversation,Résumer la conversation
+Conversation Summary,Résumé de la conversation
+Summary added as a comment.,Résumé ajouté en commentaire.
+Upper limit for the length of a summary (50 to 500).,Limite supérieure de la longueur d'un résumé (50 à 500).
+Maximum Words,Nombre maximal de mots
+Summaries are not enabled for {0}.,Les résumés ne sont pas activés pour {0}.
+Summary Format,Format du résumé
+Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.,Basé sur {0} des {1} e-mails et commentaires. Rien n'est enregistré tant que vous ne l'ajoutez pas en commentaire.
+Copy,Copier
+Document Types,Types de documents
+Document Type,Type de Document
+AI Writer Summary DocType,Type de document pour les résumés AI Writer
+Add as Comment,Ajouter en commentaire
+Prose,Texte suivi
+Bullet List,Liste à puces
+{0} has no timeline to summarize.,{0} n'a pas de chronologie à résumer.
+"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service.","Dans les documents activés, comme les tickets ou les opportunités, Actions → Résumer la conversation résume les e-mails et commentaires de la chronologie pour une passation : la demande, ce qui a été fait et ce qui reste ouvert. Ajouter en commentaire le publie dans la chronologie. Tous les messages inclus sont envoyés au service d'IA."
+Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.,Les formulaires de ces types de document proposent Actions → Résumer la conversation. Laisser vide pour le masquer.
+Summarizing conversation…,Résumé de la conversation en cours…
+Summary Prompt,Prompt de résumé
+Only the last {0} of {1} messages were considered.,Seuls les {0} derniers des {1} messages ont été pris en compte.
+There are no emails or comments to summarize yet.,Il n'y a pas encore d'e-mails ni de commentaires à résumer.
+Maximum Words must be between {0} and {1}.,Le nombre maximal de mots doit être compris entre {0} et {1}.
+Instructions for summaries of emails and comments. Leave empty to restore the default.,Instructions pour les résumés d'e-mails et de commentaires. Laisser vide pour rétablir la valeur par défaut.
+AI summary · {0} · {1},Résumé IA · {0} · {1}

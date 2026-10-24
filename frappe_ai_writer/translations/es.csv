@@ -17,7 +17,7 @@ Correct,Corregir
 More formal,Más formal
 More casual,Más informal
 AI Writer Settings,Ajustes de AI Writer
-Enabled,Activado
+Enabled,Habilitado
 Connection,Conexión
 Model,Modelo
 Effort,Esfuerzo
@@ -26,10 +26,11 @@ Prompt,Prompt
 System Prompt,Prompt del sistema
 Instructions sent to the model with every request. Leave empty to restore the default.,Instrucciones que se envían al modelo en cada solicitud. Déjelo vacío para restaurar el valor predeterminado.
 AI Writer,AI Writer
-Settings,Ajustes
+Settings,Configuración
 Frappe AI Writer,Frappe AI Writer
 Write out,Redactar
 Text updated,Texto actualizado
+Help,Ayuda,AI Writer
 Help,Ayuda
 How AI Writer works,Cómo funciona AI Writer
 "Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Haga clic en ✦ para corregir el texto al instante, o abra el menú de la flecha para elegir un modo. Sin selección se usa todo el campo; con selección, solo la parte seleccionada."
@@ -67,9 +68,10 @@ Usage could not be loaded.,No se pudo cargar el consumo.
 Requests,Solicitudes
 Input Tokens,Tokens de entrada
 Output Tokens,Tokens de salida
-Estimated Cost,Coste estimado
+Estimated Cost,Costo estimado
 Today,Hoy
 This Month,Este mes
+Total,Total,AI Writer
 Total,Total
 User,Usuario
 No usage recorded this month.,No se ha registrado consumo este mes.
@@ -92,7 +94,7 @@ The text is processed by the AI service set in AI Writer Settings; AI Writer doe
 Provider,Proveedor
 "AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.","Servicio de IA que procesa los textos. «Compatible con OpenAI» cubre la mayoría de las demás plataformas, como Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio o vLLM."
 OpenAI-compatible,Compatible con OpenAI
-Base URL,URL base
+Base URL,URL Base
 "Address of the chat completions API without /chat/completions, e.g. http://localhost:11434/v1 for Ollama. Leave empty for the provider's default.","Dirección de la API de chat completions sin /chat/completions, p. ej. http://localhost:11434/v1 para Ollama. Déjelo vacío para usar el valor predeterminado del proveedor."
 Not needed for Ollama and many local servers.,No es necesaria para Ollama ni para muchos servidores locales.
 Invalid base URL: {0},URL base no válida: {0}
@@ -108,12 +110,13 @@ Cover letters can only be written for draft quotations.,Las cartas solo se puede
 Write Cover Letter,Redactar carta
 Writing cover letter…,Redactando la carta…
 Cover Letter,Carta de presentación
-Preview,Vista previa
+Preview,Vista Previa
 Apply,Aplicar
 Regenerate,Volver a generar
 Cover letter applied. Save the quotation to keep it.,Carta aplicada. Guarde el presupuesto para conservarla.
 Actions,Acciones
 Format,Formato
+Letter,Carta,AI Writer
 Letter,Carta
 Structured,Estructurado
 Cover Letter Format,Formato de la carta
@@ -127,7 +130,9 @@ Always,Siempre
 Never,Nunca
 Minimum Length for Preview,Longitud mínima para la vista previa
 Texts with at least this many characters are shown in the preview first.,Los textos con al menos esta cantidad de caracteres se muestran primero en la vista previa.
+Before,Antes,AI Writer
 Before,Antes
+After,Después,AI Writer
 After,Después
 "Removed text is struck through, added text is highlighted.","El texto eliminado aparece tachado y el añadido, resaltado."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Según los ajustes de AI Writer, los resultados se muestran primero en una vista previa, donde puede aplicarlos, volver a generarlos o descartarlos."
@@ -184,3 +189,28 @@ AI Writer: open the menu of the focused field,AI Writer: abrir el menú del camp
 "Corrects the field that has the cursor, like a click on ✦.","Corrige el campo en el que está el cursor, como un clic en ✦."
 Opens the menu of that field; choose a mode with the arrow keys and Enter.,Abre el menú de ese campo; elija un modo con las flechas y Intro.
 Keyboard Shortcuts,Atajos de teclado
+Summarize Conversation,Resumir conversación
+Conversation Summary,Resumen de la conversación
+Summary added as a comment.,Resumen añadido como comentario.
+Upper limit for the length of a summary (50 to 500).,Límite superior de la longitud de un resumen (50 a 500).
+Maximum Words,Máximo de palabras
+Summaries are not enabled for {0}.,Los resúmenes no están activados para {0}.
+Summary Format,Formato del resumen
+Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.,Basado en {0} de {1} correos y comentarios. No se guarda nada hasta que lo añada como comentario.
+Copy,Copiar
+Document Types,Tipos de documentos
+Document Type,Tipo de Documento
+AI Writer Summary DocType,Tipo de documento para resúmenes de AI Writer
+Add as Comment,Añadir como comentario
+Prose,Texto continuo
+Bullet List,Lista de puntos
+{0} has no timeline to summarize.,{0} no tiene una cronología que resumir.
+"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service.","En documentos habilitados, como incidencias u oportunidades, Acciones → Resumir conversación resume los correos y comentarios de la cronología para un traspaso: la solicitud, lo hecho y lo pendiente. Añadir como comentario lo publica en la cronología. Todos los mensajes incluidos se envían al servicio de IA."
+Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.,Los formularios de estos tipos de documento ofrecen Acciones → Resumir conversación. Déjelo vacío para ocultarlo.
+Summarizing conversation…,Resumiendo la conversación…
+Summary Prompt,Prompt de resumen
+Only the last {0} of {1} messages were considered.,Solo se tuvieron en cuenta los últimos {0} de {1} mensajes.
+There are no emails or comments to summarize yet.,Todavía no hay correos ni comentarios que resumir.
+Maximum Words must be between {0} and {1}.,El máximo de palabras debe estar entre {0} y {1}.
+Instructions for summaries of emails and comments. Leave empty to restore the default.,Instrucciones para resumir correos y comentarios. Déjelo vacío para restaurar el valor predeterminado.
+AI summary · {0} · {1},Resumen de IA · {0} · {1}

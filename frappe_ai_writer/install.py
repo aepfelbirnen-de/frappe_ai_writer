@@ -16,6 +16,8 @@ def after_install() -> None:
     settings = frappe.get_single("AI Writer Settings")
     if not settings.translation_languages:
         settings.set_default_translation_languages()
+    if not settings.summary_doctypes:
+        settings.set_default_summary_doctypes()
     settings.save()
 
 

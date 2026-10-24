@@ -9,6 +9,7 @@ from frappe.utils import cint
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
     get_cover_letter_field,
     get_preview_settings,
+    get_summary_doctypes,
     get_translation_languages,
 )
 from frappe_ai_writer.permissions import has_ai_writer_access
@@ -28,6 +29,9 @@ def boot_session(bootinfo: frappe._dict) -> None:
             "cover_letter_style": frappe.db.get_single_value("AI Writer Settings", "cover_letter_style", cache=True)
             or "Letter",
             "preview": get_preview_settings(),
+            "summary_doctypes": get_summary_doctypes(),
+            "summary_style": frappe.db.get_single_value("AI Writer Settings", "summary_style", cache=True)
+            or "Bullet List",
         }
 
     # Frappe never translates change logs, so the client swaps in these versions before the update

@@ -74,6 +74,20 @@ DEFAULT_REPLY_PROMPT = """You write a reply to an email on behalf of the user.
 - Start with a suitable salutation. Do not add a sign-off with a name; the signature is added separately.
 - If notes are given, follow them; they take priority over everything else.
 Answer only with the reply text."""
+DEFAULT_SUMMARY_PROMPT = """You summarize the emails and comments of a business document for a colleague who takes it over.
+
+Cover, as far as the conversation says anything about it:
+- what the request is about
+- what has been done or agreed so far
+- what is still open, and who is waiting for whom
+
+Use only facts from the conversation. Do not invent names, dates, amounts or commitments, and list open points only if the conversation shows them. If something is unclear or contradictory, say so briefly.
+Refer to people by the names used in the messages. No greeting, no sign-off and no introduction such as "Here is the summary".
+Answer only with the summary."""
+DEFAULT_SUMMARY_DOCTYPES = ("Issue", "Opportunity", "Lead", "Quotation")
+SUMMARY_STYLES = ("Bullet List", "Prose")
+DEFAULT_SUMMARY_MAX_WORDS = 200
+SUMMARY_WORD_RANGE = (50, 500)
 DEFAULT_EXPANSION_FACTORS = (4, 10)
 COVER_LETTER_FIELD_TYPES = ("Text Editor", "Small Text", "Text", "Long Text", "HTML Editor")
 MAX_EXPANSION_FACTOR = 50
@@ -82,8 +96,8 @@ DEFAULT_TRANSLATION_LANGUAGES = ("de", "en")
 DEFAULT_PRICES = (0.10, 0.50)
 DEFAULT_BUDGET_WARNING_THRESHOLD = 80
 
-# Also covers Ollama tags such as "llama3.2:3b" and router names such as "mistralai/mistral-small".
 GLOSSARY_TRANSLATION_LINE = re.compile(r"^[a-z]{2,3}(-[A-Za-z0-9]{2,8})?\s*:\s*\S")
+# Also covers Ollama tags such as "llama3.2:3b" and router names such as "mistralai/mistral-small".
 MODEL_NAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/\-]*$")
 
 
@@ -98,6 +112,9 @@ class AIWriterSettings(Document):
 
         from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_glossary_term.ai_writer_glossary_term import (
             AIWriterGlossaryTerm,
+        )
+        from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_summary_doctype.ai_writer_summary_doctype import (
+            AIWriterSummaryDocType,
         )
         from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_translation_language.ai_writer_translation_language import (
             AIWriterTranslationLanguage,
@@ -126,6 +143,10 @@ class AIWriterSettings(Document):
         reply_prompt: DF.SmallText | None
         model: DF.Data | None
         monthly_budget: DF.Float
+        summary_doctypes: DF.TableMultiSelect[AIWriterSummaryDocType]
+        summary_max_words: DF.Int
+        summary_prompt: DF.SmallText | None
+        summary_style: DF.Literal["Bullet List", "Prose"]
         system_prompt: DF.SmallText | None
         track_usage_per_user: DF.Check
         user_monthly_budget: DF.Float
@@ -188,6 +209,7 @@ class AIWriterSettings(Document):
         self.budget_notice = frappe.db.get_single_value(self.doctype, "budget_notice")
 
         self.validate_glossary()
+        self.validate_summary()
 
         seen = set()
         for row in list(self.translation_languages):
@@ -208,6 +230,30 @@ class AIWriterSettings(Document):
                     frappe.throw(
                         _("Row {0}: write translations as one line per language, e.g. en: quotation.").format(row.idx)
                     )
+
+    def validate_summary(self) -> None:
+        if not (self.summary_prompt or "").strip():
+            self.summary_prompt = DEFAULT_SUMMARY_PROMPT
+        if self.summary_style not in SUMMARY_STYLES:
+            self.summary_style = SUMMARY_STYLES[0]
+        self.summary_max_words = cint(self.summary_max_words) or DEFAULT_SUMMARY_MAX_WORDS
+        if not SUMMARY_WORD_RANGE[0] <= self.summary_max_words <= SUMMARY_WORD_RANGE[1]:
+            frappe.throw(_("Maximum Words must be between {0} and {1}.").format(*SUMMARY_WORD_RANGE))
+        seen = set()
+        for row in list(self.summary_doctypes):
+            if row.document_type in seen:
+                self.remove(row)
+                continue
+            seen.add(row.document_type)
+            # Summaries need a form with a timeline.
+            if frappe.get_meta(row.document_type).issingle or frappe.get_meta(row.document_type).istable:
+                frappe.throw(_("{0} has no timeline to summarize.").format(_(row.document_type)))
+
+    def set_default_summary_doctypes(self) -> None:
+        """Fill the summary document types with Issue, Opportunity, Lead and Quotation where they exist."""
+        for doctype in DEFAULT_SUMMARY_DOCTYPES:
+            if frappe.db.exists("DocType", doctype):
+                self.append("summary_doctypes", {"document_type": doctype})
 
     def validate_cover_letter_field(self) -> None:
         self.cover_letter_field = (self.cover_letter_field or "").strip()
@@ -230,6 +276,11 @@ class AIWriterSettings(Document):
         for code in DEFAULT_TRANSLATION_LANGUAGES:
             if frappe.db.exists("Language", code):
                 self.append("translation_languages", {"language": code})
+
+
+def get_summary_doctypes() -> list[str]:
+    """Return the document types whose forms offer a conversation summary."""
+    return [row.document_type for row in frappe.get_cached_doc("AI Writer Settings").summary_doctypes]
 
 
 def get_translation_languages() -> list[dict[str, str]]:

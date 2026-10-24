@@ -30,6 +30,7 @@ Settings,Indstillinger
 Frappe AI Writer,Frappe AI Writer
 Write out,Formulér
 Text updated,Tekst opdateret
+Help,Hjælp,AI Writer
 Help,Hjælp
 How AI Writer works,Sådan virker AI Writer
 "Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Klik på ✦ for at rette teksten med det samme, eller åbn menuen med pilen for at vælge en tilstand. Uden markering bruges hele feltet; med markering kun den markerede del."
@@ -70,7 +71,8 @@ Output Tokens,Output-tokens
 Estimated Cost,Anslåede omkostninger
 Today,I dag
 This Month,Denne måned
-Total,I alt
+Total,I alt,AI Writer
+Total,Samlet antal
 User,Bruger
 No usage recorded this month.,Der er ikke registreret noget forbrug i denne måned.
 Open Usage Log,Åbn forbrugslog
@@ -83,7 +85,7 @@ Usage Key,Forbrugsnøgle
 Track Usage per User,Registrér forbrug pr. bruger
 "Records token usage per user, not only in total. Before enabling it, check the law that applies in your country, for example on data protection and on co-determination by employee representatives.","Registrerer tokenforbruget pr. bruger og ikke kun samlet. Før du aktiverer det, skal du undersøge den lovgivning, der gælder i dit land, f.eks. om databeskyttelse og medarbejderrepræsentanters medbestemmelse."
 Usage per user is not recorded. Enable Track Usage per User above to record it.,Forbrug pr. bruger registreres ikke. Aktivér »Registrér forbrug pr. bruger« ovenfor for at registrere det.
-API Key,API-nøgle
+API Key,API Nøgle
 The API key of the AI service is invalid or lacks permission.,API-nøglen til AI-tjenesten er ugyldig eller mangler tilladelser.
 No API key configured. Please set one in AI Writer Settings.,Der er ikke konfigureret nogen API-nøgle. Angiv en under AI Writer-indstillinger.
 Enter an API key to use AI correction.,Angiv en API-nøgle for at bruge AI-korrektur.
@@ -114,7 +116,8 @@ Regenerate,Generér igen
 Cover letter applied. Save the quotation to keep it.,Følgebrevet er anvendt. Gem tilbuddet for at beholde det.
 Actions,Handlinger
 Format,Format
-Letter,Brev
+Letter,Brev,AI Writer
+Letter,Bogstav
 Structured,Struktureret
 Cover Letter Format,Format for følgebrev
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat for nye følgebreve; det kan skiftes i forhåndsvisningen. Brev: hilsen og afsnit. Struktureret: titel som emne og korte afsnit om udgangspunkt, ydelser og fordele."
@@ -127,7 +130,9 @@ Always,Altid
 Never,Aldrig
 Minimum Length for Preview,Minimumslængde for forhåndsvisning
 Texts with at least this many characters are shown in the preview first.,Tekster med mindst så mange tegn vises først i forhåndsvisningen.
+Before,Før,AI Writer
 Before,Før
+After,Efter,AI Writer
 After,Efter
 "Removed text is struck through, added text is highlighted.","Fjernet tekst er gennemstreget, tilføjet tekst er fremhævet."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Afhængigt af AI Writer-indstillingerne vises resultaterne først i en forhåndsvisning, hvor du kan anvende, generere dem igen eller kassere dem."
@@ -152,7 +157,7 @@ House Style,Husstil
 Term,Begreb
 Protected,Beskyttet
 Never changed or translated.,Ændres eller oversættes aldrig.
-Note,Bemærkning
+Note,Note
 Translations,Oversættelser
 "One line per language, e.g. en: quotation","Én linje pr. sprog, f.eks. en: quotation"
 AI Writer Glossary Term,AI Writer-ordlistebegreb
@@ -184,3 +189,28 @@ AI Writer: open the menu of the focused field,AI Writer: åbn menuen for det akt
 "Corrects the field that has the cursor, like a click on ✦.","Retter feltet, hvor markøren står, ligesom et klik på ✦."
 Opens the menu of that field; choose a mode with the arrow keys and Enter.,Åbner menuen for feltet; vælg en tilstand med piletasterne og Enter.
 Keyboard Shortcuts,Tastaturgenveje
+Summarize Conversation,Opsummér samtale
+Conversation Summary,Samtaleopsummering
+Summary added as a comment.,Opsummering tilføjet som kommentar.
+Upper limit for the length of a summary (50 to 500).,Øvre grænse for en opsummerings længde (50 til 500).
+Maximum Words,Maksimalt antal ord
+Summaries are not enabled for {0}.,Opsummeringer er ikke aktiveret for {0}.
+Summary Format,Opsummeringsformat
+Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.,"Baseret på {0} af {1} e-mails og kommentarer. Intet gemmes, før du tilføjer det som kommentar."
+Copy,Kopiér
+Document Types,Dokument Typer
+Document Type,Dokument Type
+AI Writer Summary DocType,AI Writer-dokumenttype til opsummeringer
+Add as Comment,Tilføj som kommentar
+Prose,Løbende tekst
+Bullet List,Punktopstilling
+{0} has no timeline to summarize.,{0} har ingen tidslinje at opsummere.
+"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service.","I aktiverede dokumenter som sager eller salgsmuligheder opsummerer Handlinger → Opsummér samtale tidslinjens e-mails og kommentarer til en overdragelse: henvendelsen, hvad der er gjort, og hvad der er åbent. Tilføj som kommentar lægger den på tidslinjen. Alle medtagne beskeder sendes til AI-tjenesten."
+Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.,Formularer for disse dokumenttyper tilbyder Handlinger → Opsummér samtale. Lad feltet stå tomt for at skjule det.
+Summarizing conversation…,Opsummerer samtalen…
+Summary Prompt,Opsummeringsprompt
+Only the last {0} of {1} messages were considered.,Kun de seneste {0} af {1} beskeder blev medtaget.
+There are no emails or comments to summarize yet.,Der er endnu ingen e-mails eller kommentarer at opsummere.
+Maximum Words must be between {0} and {1}.,Maksimalt antal ord skal være mellem {0} og {1}.
+Instructions for summaries of emails and comments. Leave empty to restore the default.,Instruktioner til opsummeringer af e-mails og kommentarer. Lad feltet stå tomt for at gendanne standarden.
+AI summary · {0} · {1},AI-opsummering · {0} · {1}

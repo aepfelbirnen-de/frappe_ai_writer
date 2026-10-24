@@ -30,6 +30,7 @@ Settings,Settings
 Frappe AI Writer,Frappe AI Writer
 Write out,Write out
 Text updated,Text updated
+Help,Help,AI Writer
 Help,Help
 How AI Writer works,How AI Writer works
 "Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part."
@@ -70,6 +71,7 @@ Output Tokens,Output Tokens
 Estimated Cost,Estimated Cost
 Today,Today
 This Month,This Month
+Total,Total,AI Writer
 Total,Total
 User,User
 No usage recorded this month.,No usage recorded this month.
@@ -114,6 +116,7 @@ Regenerate,Regenerate
 Cover letter applied. Save the quotation to keep it.,Cover letter applied. Save the quotation to keep it.
 Actions,Actions
 Format,Format
+Letter,Letter,AI Writer
 Letter,Letter
 Structured,Structured
 Cover Letter Format,Cover Letter Format
@@ -127,7 +130,9 @@ Always,Always
 Never,Never
 Minimum Length for Preview,Minimum Length for Preview
 Texts with at least this many characters are shown in the preview first.,Texts with at least this many characters are shown in the preview first.
+Before,Before,AI Writer
 Before,Before
+After,After,AI Writer
 After,After
 "Removed text is struck through, added text is highlighted.","Removed text is struck through, added text is highlighted."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them."
@@ -184,3 +189,28 @@ AI Writer: open the menu of the focused field,AI Writer: open the menu of the fo
 "Corrects the field that has the cursor, like a click on ✦.","Corrects the field that has the cursor, like a click on ✦."
 Opens the menu of that field; choose a mode with the arrow keys and Enter.,Opens the menu of that field; choose a mode with the arrow keys and Enter.
 Keyboard Shortcuts,Keyboard Shortcuts
+Summarize Conversation,Summarize Conversation
+Conversation Summary,Conversation Summary
+Summary added as a comment.,Summary added as a comment.
+Upper limit for the length of a summary (50 to 500).,Upper limit for the length of a summary (50 to 500).
+Maximum Words,Maximum Words
+Summaries are not enabled for {0}.,Summaries are not enabled for {0}.
+Summary Format,Summary Format
+Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.,Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.
+Copy,Copy
+Document Types,Document Types
+Document Type,Document Type
+AI Writer Summary DocType,AI Writer Summary DocType
+Add as Comment,Add as Comment
+Prose,Prose
+Bullet List,Bullet List
+{0} has no timeline to summarize.,{0} has no timeline to summarize.
+"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service.","In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service."
+Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.,Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.
+Summarizing conversation…,Summarizing conversation…
+Summary Prompt,Summary Prompt
+Only the last {0} of {1} messages were considered.,Only the last {0} of {1} messages were considered.
+There are no emails or comments to summarize yet.,There are no emails or comments to summarize yet.
+Maximum Words must be between {0} and {1}.,Maximum Words must be between {0} and {1}.
+Instructions for summaries of emails and comments. Leave empty to restore the default.,Instructions for summaries of emails and comments. Leave empty to restore the default.
+AI summary · {0} · {1},AI summary · {0} · {1}

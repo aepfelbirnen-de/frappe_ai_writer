@@ -30,6 +30,7 @@ Settings,Einstellungen
 Frappe AI Writer,Frappe AI Writer
 Write out,Ausformulieren
 Text updated,Text aktualisiert
+Help,Hilfe,AI Writer
 Help,Hilfe
 How AI Writer works,So funktioniert AI Writer
 "Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Klicken Sie auf ✦, um den Text sofort zu korrigieren, oder öffnen Sie über den Pfeil das Menü, um einen Modus zu wählen. Ohne Markierung wird das ganze Feld verwendet, mit Markierung nur der markierte Teil."
@@ -70,8 +71,9 @@ Output Tokens,Ausgabe-Token
 Estimated Cost,Geschätzte Kosten
 Today,Heute
 This Month,Dieser Monat
-Total,Gesamt
-User,Benutzer
+Total,Gesamt,AI Writer
+Total,Summe
+User,Nutzer
 No usage recorded this month.,In diesem Monat wurde noch kein Verbrauch erfasst.
 Open Usage Log,Verbrauchsprotokoll öffnen
 Per User This Month,Pro Benutzer in diesem Monat
@@ -109,11 +111,12 @@ Write Cover Letter,Anschreiben erstellen
 Writing cover letter…,Anschreiben wird erstellt …
 Cover Letter,Anschreiben
 Preview,Vorschau
-Apply,Übernehmen
+Apply,Anwenden
 Regenerate,Neu erzeugen
 Cover letter applied. Save the quotation to keep it.,"Anschreiben übernommen. Speichern Sie das Angebot, um es zu behalten."
 Actions,Aktionen
-Format,Format
+Format,Formatierung
+Letter,Brief,AI Writer
 Letter,Brief
 Structured,Gegliedert
 Cover Letter Format,Anschreiben-Format
@@ -127,8 +130,10 @@ Always,Immer
 Never,Nie
 Minimum Length for Preview,Mindestlänge für die Vorschau
 Texts with at least this many characters are shown in the preview first.,Texte mit mindestens so vielen Zeichen werden zuerst in der Vorschau gezeigt.
-Before,Vorher
-After,Nachher
+Before,Vorher,AI Writer
+Before,Vor
+After,Nachher,AI Writer
+After,Nach
 "Removed text is struck through, added text is highlighted.","Entfernter Text ist durchgestrichen, neuer Text hervorgehoben."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Je nach AI-Writer-Einstellungen erscheinen Ergebnisse zuerst in einer Vorschau, in der Sie sie übernehmen, neu erzeugen oder verwerfen können."
 Shorten,Kürzen
@@ -152,7 +157,7 @@ House Style,Hausstil
 Term,Begriff
 Protected,Geschützt
 Never changed or translated.,Wird nie verändert oder übersetzt.
-Note,Hinweis
+Note,Anmerkung
 Translations,Übersetzungen
 "One line per language, e.g. en: quotation","Eine Zeile pro Sprache, z. B. en: quotation"
 AI Writer Glossary Term,AI-Writer-Glossarbegriff
@@ -183,4 +188,29 @@ AI Writer: correct the focused field,AI Writer: Feld mit dem Cursor korrigieren
 AI Writer: open the menu of the focused field,AI Writer: Menü des Felds mit dem Cursor öffnen
 "Corrects the field that has the cursor, like a click on ✦.","Korrigiert das Feld, in dem der Cursor steht – wie ein Klick auf ✦."
 Opens the menu of that field; choose a mode with the arrow keys and Enter.,Öffnet das Menü dieses Felds; einen Modus mit den Pfeiltasten und Enter wählen.
-Keyboard Shortcuts,Tastenkürzel
+Keyboard Shortcuts,Tastaturkürzel
+Summarize Conversation,Unterhaltung zusammenfassen
+Conversation Summary,Zusammenfassung der Unterhaltung
+Summary added as a comment.,Zusammenfassung als Kommentar hinzugefügt.
+Upper limit for the length of a summary (50 to 500).,Obergrenze für die Länge einer Zusammenfassung (50 bis 500).
+Maximum Words,Maximale Wortzahl
+Summaries are not enabled for {0}.,Zusammenfassungen sind für {0} nicht aktiviert.
+Summary Format,Format der Zusammenfassung
+Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.,"Grundlage: {0} von {1} E-Mails und Kommentaren. Gespeichert wird erst, wenn Sie die Zusammenfassung als Kommentar hinzufügen."
+Copy,Kopieren
+Document Types,Dokumententypen
+Document Type,Dokumententyp
+AI Writer Summary DocType,AI-Writer-Dokumenttyp für Zusammenfassungen
+Add as Comment,Als Kommentar hinzufügen
+Prose,Fließtext
+Bullet List,Stichpunkte
+{0} has no timeline to summarize.,"{0} hat keine Timeline, die sich zusammenfassen lässt."
+"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service.","In freigeschalteten Dokumenten wie Issues oder Opportunities fasst Aktionen → Unterhaltung zusammenfassen die E-Mails und Kommentare der Timeline für eine Übergabe zusammen: das Anliegen, was erledigt ist und was offen ist. Als Kommentar hinzufügen stellt sie in die Timeline. Alle einbezogenen Nachrichten werden an den KI-Dienst gesendet."
+Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.,Formulare dieser Dokumenttypen bieten Aktionen → Unterhaltung zusammenfassen an. Leer lassen blendet die Funktion aus.
+Summarizing conversation…,Unterhaltung wird zusammengefasst…
+Summary Prompt,Zusammenfassungs-Prompt
+Only the last {0} of {1} messages were considered.,Berücksichtigt wurden nur die letzten {0} von {1} Nachrichten.
+There are no emails or comments to summarize yet.,Es gibt noch keine E-Mails oder Kommentare zum Zusammenfassen.
+Maximum Words must be between {0} and {1}.,Die maximale Wortzahl muss zwischen {0} und {1} liegen.
+Instructions for summaries of emails and comments. Leave empty to restore the default.,Anweisungen für Zusammenfassungen von E-Mails und Kommentaren. Leer lassen stellt den Standard wieder her.
+AI summary · {0} · {1},KI-Zusammenfassung · {0} · {1}

@@ -30,6 +30,7 @@ Settings,Налаштування
 Frappe AI Writer,Frappe AI Writer
 Write out,Сформулювати повністю
 Text updated,Текст оновлено
+Help,Довідка,AI Writer
 Help,Довідка
 How AI Writer works,Як працює AI Writer
 "Click ✦ to correct the text right away, or open the arrow menu to choose a mode. Without a selection the whole field is used; with a selection only the selected part.","Натисніть ✦, щоб одразу виправити текст, або відкрийте меню стрілкою, щоб вибрати режим. Без виділення обробляється все поле, з виділенням — лише виділена частина."
@@ -70,7 +71,8 @@ Output Tokens,Токени виводу
 Estimated Cost,Орієнтовна вартість
 Today,Сьогодні
 This Month,Цього місяця
-Total,Усього
+Total,Усього,AI Writer
+Total,Разом
 User,Користувач
 No usage recorded this month.,Цього місяця використання ще не зафіксовано.
 Open Usage Log,Відкрити журнал використання
@@ -89,7 +91,7 @@ No API key configured. Please set one in AI Writer Settings.,Ключ API не �
 Enter an API key to use AI correction.,"Введіть ключ API, щоб користуватися виправленням ШІ."
 The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it.,"Текст обробляє сервіс ШІ, вибраний у налаштуваннях AI Writer; AI Writer його не зберігає."
 "Model name of the provider, e.g. claude-haiku-5-5 for Anthropic or llama3.2 for Ollama.","Назва моделі в постачальника, напр. claude-haiku-5-5 для Anthropic або llama3.2 для Ollama."
-Provider,Постачальник
+Provider,Провайдер
 "AI service that processes the texts. OpenAI-compatible covers most other platforms, such as Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio or vLLM.","Сервіс ШІ, який обробляє тексти. «Сумісний з OpenAI» охоплює більшість інших платформ, як-от Mistral, Google Gemini, OpenRouter, Groq, DeepSeek, LM Studio або vLLM."
 OpenAI-compatible,Сумісний з OpenAI
 Base URL,Базова URL-адреса
@@ -114,7 +116,8 @@ Regenerate,Згенерувати знову
 Cover letter applied. Save the quotation to keep it.,"Супровідний лист застосовано. Збережіть пропозицію, щоб його зберегти."
 Actions,Дії
 Format,Формат
-Letter,Лист
+Letter,Лист,AI Writer
+Letter,Letter
 Structured,Структурований
 Cover Letter Format,Формат супровідного листа
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Типовий формат нових листів; його можна змінити в попередньому перегляді. Лист: звертання й абзаци. Структурований: заголовок як тема та короткі розділи про вихідну ситуацію, послуги й переваги."
@@ -127,7 +130,9 @@ Always,Завжди
 Never,Ніколи
 Minimum Length for Preview,Мінімальна довжина для попереднього перегляду
 Texts with at least this many characters are shown in the preview first.,Тексти щонайменше з такою кількістю символів спочатку показуються в попередньому перегляді.
+Before,До,AI Writer
 Before,До
+After,Після,AI Writer
 After,Після
 "Removed text is struck through, added text is highlighted.","Видалений текст закреслено, доданий — виділено."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Залежно від налаштувань AI Writer результати спочатку показуються в попередньому перегляді, де їх можна застосувати, згенерувати знову або відхилити."
@@ -183,4 +188,29 @@ AI Writer: correct the focused field,AI Writer: виправити активн�
 AI Writer: open the menu of the focused field,AI Writer: відкрити меню активного поля
 "Corrects the field that has the cursor, like a click on ✦.","Виправляє поле, де стоїть курсор, як натискання на ✦."
 Opens the menu of that field; choose a mode with the arrow keys and Enter.,Відкриває меню цього поля; оберіть режим стрілками та Enter.
-Keyboard Shortcuts,Клавіатурні скорочення
+Keyboard Shortcuts,Гарячі клавіші
+Summarize Conversation,Підсумувати розмову
+Conversation Summary,Підсумок розмови
+Summary added as a comment.,Підсумок додано як коментар.
+Upper limit for the length of a summary (50 to 500).,Верхня межа довжини підсумку (від 50 до 500).
+Maximum Words,Максимум слів
+Summaries are not enabled for {0}.,Підсумки не ввімкнено для {0}.
+Summary Format,Формат підсумку
+Based on {0} of {1} emails and comments. Nothing is saved until you add it as a comment.,"На основі {0} з {1} листів і коментарів. Нічого не зберігається, доки ви не додасте підсумок як коментар."
+Copy,Копіювати
+Document Types,Типи документів
+Document Type,Тип документа
+AI Writer Summary DocType,Тип документа для підсумків AI Writer
+Add as Comment,Додати як коментар
+Prose,Суцільний текст
+Bullet List,Маркований список
+{0} has no timeline to summarize.,{0} не має хронології для підсумку.
+"In enabled documents such as Issues or Opportunities, Actions → Summarize Conversation summarizes the emails and comments of the timeline for a handover: the request, what has been done and what is open. Add as Comment posts it to the timeline. All included messages are sent to the AI service.","У ввімкнених документах, як-от звернення чи можливості, Дії → Підсумувати розмову підсумовує листи й коментарі хронології для передачі справи: запит, що зроблено і що лишається відкритим. Додати як коментар публікує підсумок у хронології. Усі включені повідомлення надсилаються до сервісу ШІ."
+Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.,"Форми цих типів документів пропонують Дії → Підсумувати розмову. Залиште порожнім, щоб приховати."
+Summarizing conversation…,Підсумовуємо розмову…
+Summary Prompt,Промпт підсумку
+Only the last {0} of {1} messages were considered.,Враховано лише останні {0} з {1} повідомлень.
+There are no emails or comments to summarize yet.,Ще немає листів чи коментарів для підсумку.
+Maximum Words must be between {0} and {1}.,Максимум слів має бути від {0} до {1}.
+Instructions for summaries of emails and comments. Leave empty to restore the default.,"Інструкції для підсумків листів і коментарів. Залиште порожнім, щоб відновити типові."
+AI summary · {0} · {1},Підсумок ШІ · {0} · {1}

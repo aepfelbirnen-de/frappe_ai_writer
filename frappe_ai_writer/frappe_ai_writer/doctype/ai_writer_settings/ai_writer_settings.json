@@ -32,6 +32,11 @@
   "cover_letter_field",
   "cover_letter_style",
   "cover_letter_prompt",
+  "summary_section",
+  "summary_doctypes",
+  "summary_style",
+  "summary_max_words",
+  "summary_prompt",
   "translation_section",
   "translation_languages",
   "usage_section",
@@ -217,6 +222,39 @@
    "label": "Cover Letter Prompt"
   },
   {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Conversation Summary"
+  },
+  {
+   "description": "Forms of these document types offer Actions → Summarize Conversation. Leave empty to hide it.",
+   "fieldname": "summary_doctypes",
+   "fieldtype": "Table MultiSelect",
+   "label": "Document Types",
+   "options": "AI Writer Summary DocType"
+  },
+  {
+   "default": "Bullet List",
+   "fieldname": "summary_style",
+   "fieldtype": "Select",
+   "label": "Summary Format",
+   "options": "Bullet List\nProse"
+  },
+  {
+   "default": "200",
+   "description": "Upper limit for the length of a summary (50 to 500).",
+   "fieldname": "summary_max_words",
+   "fieldtype": "Int",
+   "label": "Maximum Words",
+   "non_negative": 1
+  },
+  {
+   "description": "Instructions for summaries of emails and comments. Leave empty to restore the default.",
+   "fieldname": "summary_prompt",
+   "fieldtype": "Small Text",
+   "label": "Summary Prompt"
+  },
+  {
    "fieldname": "translation_section",
    "fieldtype": "Section Break",
    "label": "Translation"
@@ -320,7 +358,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 12:00:00.000000",
+ "modified": "2026-10-24 14:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

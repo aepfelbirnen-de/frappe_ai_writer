@@ -17,6 +17,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Text between `/"` and `"/` is never corrected or translated, e.g. `/"Müller & Söhne GmbH"/`; it does not reach the AI service
 - **Glossary and house style**: protected terms (product names, company names) are never changed or translated and, when correcting or translating, never reach the AI service; other terms come with a preferred spelling, notes and translations; short house rules apply to all texts
 - **Reply drafts** in the email composer: writes a reply from the incoming message (without quoted history) and its document, steered by optional notes
+- **Conversation summaries**: Actions → Summarize Conversation condenses the emails and comments of an Issue, Opportunity, Lead or Quotation for a handover (request, what has been done, what is open) and adds it as a timeline comment on request
 - **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices, as a letter or structured with headings
 - **Keyboard shortcuts** for the field that has the cursor: Ctrl+Shift+K (⇧⌘K on macOS) corrects it, Ctrl+Shift+L (⇧⌘L) opens its menu; both are listed in Frappe's shortcut dialog (Shift+/)
 - A **Help** entry in the menu explains all functions
@@ -66,6 +67,7 @@ bench --site your-site migrate
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
    - **Cover Letter Field** (ERPNext): the Quotation text field that holds the cover letter in your print format, e.g. a custom field; leave empty to hide the button. **Cover Letter Format** sets the default (Letter or Structured), **Cover Letter Prompt** the shared rules
    - **Preview Before Replacing**: for long texts (default, from 300 characters), always or never
+   - **Conversation Summary**: the document types that offer Summarize Conversation (default Issue, Opportunity, Lead, Quotation), the format (bullet list or prose), the maximum length and the prompt
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
    - **Usage**: token usage today, this month and in total, with estimated costs based on the configured prices; **Track Usage per User** (off by default) adds a per-user table
    - **Monthly Budget**: estimated costs per calendar month with a progress bar in the usage summary; at the **Warning Threshold** (default 80 %) and when the budget is used up, AI Writer managers (or System Managers if there are none) get one notification and email per month. **Block When Exceeded** refuses requests until the next month or until the budget is raised; **Monthly Limit per User** (only with per-user tracking) does the same per user
@@ -79,7 +81,7 @@ bench --site your-site migrate
 
 ## Privacy
 
-The text being corrected is sent to the AI service you configure: Anthropic, OpenAI, another OpenAI-compatible provider, or your own Ollama server, where it never leaves your network. The app does not store the text or the response. It records token counts per day and mode (no text) so managers can see usage and costs. Per-user counts are only recorded when **Track Usage per User** is enabled; check the law that applies in your country before enabling it, for example on data protection and employee co-determination. Review the provider's data processing and retention terms before using the app with personal or confidential data.
+The text being corrected is sent to the AI service you configure: Anthropic, OpenAI, another OpenAI-compatible provider, or your own Ollama server, where it never leaves your network. For summaries, all included emails and comments of the document are sent. The app does not store the text or the response. It records token counts per day and mode (no text) so managers can see usage and costs. Per-user counts are only recorded when **Track Usage per User** is enabled; check the law that applies in your country before enabling it, for example on data protection and employee co-determination. Review the provider's data processing and retention terms before using the app with personal or confidential data.
 
 ## Security
 
@@ -123,6 +125,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - Text zwischen `/"` und `"/` wird nie korrigiert oder übersetzt, z. B. `/"Müller & Söhne GmbH"/`; er gelangt nicht zum KI-Dienst
 - **Glossar und Hausstil**: geschützte Begriffe (Produkt- und Firmennamen) werden nie verändert oder übersetzt und erreichen den KI-Dienst beim Korrigieren und Übersetzen nicht; übrige Begriffe bekommen eine bevorzugte Schreibweise, Hinweise und Übersetzungen; kurze Hausregeln gelten für alle Texte
 - **Antwortentwürfe** im E-Mail-Dialog: schreibt eine Antwort aus der eingegangenen Nachricht (ohne zitierten Verlauf) und ihrem Dokument, gesteuert durch optionale Stichpunkte
+- **Zusammenfassungen von Unterhaltungen**: Aktionen → Unterhaltung zusammenfassen fasst die E-Mails und Kommentare eines Issues, einer Opportunity, eines Leads oder Angebots für eine Übergabe zusammen (Anliegen, Erledigtes, Offenes) und fügt sie auf Wunsch als Kommentar in die Timeline ein
 - **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen, als Brief oder gegliedert mit Überschriften
 - **Tastenkürzel** für das Feld mit dem Cursor: Strg+Umschalt+K (⇧⌘K unter macOS) korrigiert es, Strg+Umschalt+L (⇧⌘L) öffnet sein Menü; beide stehen in Frappes Tastenkürzel-Übersicht (Umschalt+/)
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
@@ -172,6 +175,7 @@ bench --site ihre-site migrate
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
    - **Anschreiben-Feld** (ERPNext): das Textfeld im Angebot, das im Druckformat das Anschreiben enthält, z. B. ein eigenes Feld; leer lassen blendet den Button aus. **Anschreiben-Format** legt den Standard fest (Brief oder Gegliedert), **Anschreiben-Prompt** die gemeinsamen Regeln
    - **Vorschau vor dem Ersetzen**: bei langen Texten (Standard, ab 300 Zeichen), immer oder nie
+   - **Zusammenfassung der Unterhaltung**: die Dokumenttypen, die Unterhaltung zusammenfassen anbieten (Standard: Issue, Opportunity, Lead, Angebot), das Format (Stichpunkte oder Fließtext), die maximale Länge und der Prompt
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
    - **Verbrauch**: Token-Verbrauch heute, im laufenden Monat und gesamt, mit geschätzten Kosten anhand der eingestellten Preise; **Verbrauch pro Benutzer erfassen** (standardmäßig aus) ergänzt eine Tabelle pro Benutzer
    - **Monatsbudget**: geschätzte Kosten pro Kalendermonat mit Fortschrittsbalken in der Verbrauchsübersicht; bei der **Warnschwelle** (Standard 80 %) und wenn das Budget verbraucht ist, erhalten AI-Writer-Manager (oder System-Manager, falls es keine gibt) einmal pro Monat eine Benachrichtigung und eine E-Mail. **Bei Überschreitung sperren** lehnt Anfragen bis zum nächsten Monat oder bis zur Erhöhung des Budgets ab; **Monatslimit pro Benutzer** (nur mit Erfassung pro Benutzer) tut dasselbe pro Benutzer
@@ -185,7 +189,7 @@ bench --site ihre-site migrate
 
 ## Datenschutz
 
-Der zu korrigierende Text wird an den KI-Dienst gesendet, den Sie einstellen: Anthropic, OpenAI, einen anderen OpenAI-kompatiblen Anbieter oder Ihren eigenen Ollama-Server, bei dem er Ihr Netzwerk nicht verlässt. Die App speichert weder den Text noch die Antwort. Sie erfasst die Token-Anzahl pro Tag und Modus (ohne Text), damit Manager Verbrauch und Kosten sehen. Pro Benutzer wird nur gezählt, wenn **Verbrauch pro Benutzer erfassen** aktiviert ist; prüfen Sie vor dem Einschalten das in Ihrem Land geltende Recht, etwa zu Datenschutz und Mitbestimmung. Prüfen Sie die Bedingungen des Anbieters zu Datenverarbeitung und -aufbewahrung, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
+Der zu korrigierende Text wird an den KI-Dienst gesendet, den Sie einstellen: Anthropic, OpenAI, einen anderen OpenAI-kompatiblen Anbieter oder Ihren eigenen Ollama-Server, bei dem er Ihr Netzwerk nicht verlässt. Für Zusammenfassungen gehen alle einbezogenen E-Mails und Kommentare des Dokuments an den Dienst. Die App speichert weder den Text noch die Antwort. Sie erfasst die Token-Anzahl pro Tag und Modus (ohne Text), damit Manager Verbrauch und Kosten sehen. Pro Benutzer wird nur gezählt, wenn **Verbrauch pro Benutzer erfassen** aktiviert ist; prüfen Sie vor dem Einschalten das in Ihrem Land geltende Recht, etwa zu Datenschutz und Mitbestimmung. Prüfen Sie die Bedingungen des Anbieters zu Datenverarbeitung und -aufbewahrung, bevor Sie die App mit personenbezogenen oder vertraulichen Daten nutzen.
 
 ## Sicherheit
 
