@@ -24,6 +24,17 @@
 			help: () => __("Turns notes and bullet points into complete, detailed text and explains terms and background, without inventing specific facts."),
 		},
 		{
+			mode: "shorten",
+			label: () => __("Shorten"),
+			help: () => __("Says the same with clearly fewer words and keeps every name, number and date."),
+		},
+		{
+			mode: "plain",
+			label: () => __("Plain language"),
+			help: () =>
+				__("Rewrites the text in short, simple sentences and explains technical terms, without changing the facts."),
+		},
+		{
 			mode: "formal",
 			label: () => __("More formal"),
 			help: () => __("Corrects the text and makes the tone more formal and business-like."),

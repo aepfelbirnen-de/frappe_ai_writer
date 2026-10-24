@@ -29,7 +29,7 @@ MAX_CONTEXT_CHARS = 200
 REQUEST_TIMEOUT_SECONDS = 50
 MAX_RETRIES = 1
 
-MODES = ("correct", "expand", "formal", "casual", "translate")
+MODES = ("correct", "expand", "formal", "casual", "translate", "shorten", "plain")
 TONE_INSTRUCTIONS = {
     "formal": "Also make the tone more formal and business-like.",
     "casual": "Also make the tone friendlier and less formal.",
@@ -40,6 +40,29 @@ LENGTH_INSTRUCTION = (
     "Length: the notes contain about {words} words. Write roughly {low} to {high} words in total. "
     "Treat this as a guideline rather than an exact limit, and do not pad the text to reach it."
 )
+
+SHORTEN_SYSTEM_PROMPT = """You shorten texts. Rewrite the text so that it says the same with clearly fewer words:
+
+- Keep the meaning and every specific detail: names, numbers, dates, product names, decisions and requests.
+- Remove repetition, filler words and unnecessary phrases; merge sentences where it helps.
+- Keep the language, the tone and the form of address of the text.
+
+Answer only with the shortened text, without any explanation."""
+
+PLAIN_SYSTEM_PROMPT = """You rewrite texts in plain language. Rewrite the text so that readers without specialist knowledge understand it easily:
+
+- Short sentences with one statement each, active voice, everyday words.
+- Explain or replace technical terms and abbreviations.
+- Keep every fact, name, number and date; do not add new information.
+- Keep the language and the form of address of the text.
+
+Answer only with the rewritten text, without any explanation."""
+
+SHORTEN_LENGTH_INSTRUCTION = (
+    "Length: the text contains about {words} words. Write roughly {low} to {high} words in total."
+)
+# Shortened texts should end up at roughly 40 to 60 percent of the original length.
+SHORTEN_RANGE = (0.4, 0.6)
 
 TRANSLATE_SYSTEM_PROMPT = """You are a professional translator. Translate the text into {language}.
 
@@ -70,6 +93,10 @@ CONTEXT_INSTRUCTION = (
 HTML_INSTRUCTION = (
     "The text is HTML from a rich-text editor. Keep every tag and attribute unchanged and edit only "
     "the visible text. Answer with the HTML only."
+)
+REWRITE_HTML_INSTRUCTION = (
+    "The text is HTML from a rich-text editor. Keep its structure (headings, lists, paragraphs) where it still "
+    "applies and use only tags that already occur in the text. Answer with the HTML only."
 )
 EXPAND_HTML_INSTRUCTION = (
     "The notes are HTML from a rich-text editor. Answer with HTML: one <p> element per paragraph, "
@@ -155,9 +182,7 @@ def correct_text(
             has_context=bool(field_context),
             language=language,
             has_placeholders=bool(protected),
-            length_instruction=_length_instruction(masked, as_html, *get_expansion_factors(settings))
-            if mode == "expand"
-            else None,
+            length_instruction=_length_instruction_for(mode, masked, as_html, settings),
         ),
         user_message=_build_user_message(masked, field_context),
     )
@@ -236,6 +261,17 @@ def _html_to_text(html: str) -> str:
     return unescape(TAG_PATTERN.sub(" ", html)).strip()
 
 
+def _length_instruction_for(mode: str, masked: str, as_html: bool, settings: frappe._dict) -> str | None:
+    if mode == "expand":
+        return _length_instruction(masked, as_html, *get_expansion_factors(settings))
+    if mode == "shorten":
+        visible = _html_to_text(masked) if as_html else masked
+        words = max(1, len(WORD_PATTERN.findall(visible)))
+        low, high = (max(1, round(words * factor)) for factor in SHORTEN_RANGE)
+        return SHORTEN_LENGTH_INSTRUCTION.format(words=words, low=low, high=high)
+    return None
+
+
 def _length_instruction(masked: str, as_html: bool, low: int, high: int) -> str:
     visible = _html_to_text(masked) if as_html else masked
     words = max(1, len(WORD_PATTERN.findall(visible)))
@@ -263,6 +299,10 @@ def _build_system_prompt(
             TRANSLATE_SYSTEM_PROMPT.format(language=f"{language['name']} ({language['code']})"),
             TEXT_TAG_INSTRUCTION,
         ]
+    elif mode in ("shorten", "plain"):
+        parts = [SHORTEN_SYSTEM_PROMPT if mode == "shorten" else PLAIN_SYSTEM_PROMPT, TEXT_TAG_INSTRUCTION]
+        if length_instruction:
+            parts.append(length_instruction)
     elif mode == "expand":
         parts = [(settings.expand_prompt or "").strip() or DEFAULT_EXPAND_PROMPT, TEXT_TAG_INSTRUCTION]
         if length_instruction:
@@ -274,7 +314,12 @@ def _build_system_prompt(
     if has_placeholders:
         parts.append(PLACEHOLDER_INSTRUCTION)
     if as_html:
-        parts.append(EXPAND_HTML_INSTRUCTION if mode == "expand" else HTML_INSTRUCTION)
+        html_instructions = {
+            "expand": EXPAND_HTML_INSTRUCTION,
+            "shorten": REWRITE_HTML_INSTRUCTION,
+            "plain": REWRITE_HTML_INSTRUCTION,
+        }
+        parts.append(html_instructions.get(mode, HTML_INSTRUCTION))
     if mode in TONE_INSTRUCTIONS:
         parts.append(TONE_INSTRUCTIONS[mode])
     return "\n\n".join(parts)

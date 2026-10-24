@@ -131,3 +131,7 @@ Before,Vorher
 After,Nachher
 "Removed text is struck through, added text is highlighted.","Entfernter Text ist durchgestrichen, neuer Text hervorgehoben."
 "Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Je nach AI-Writer-Einstellungen erscheinen Ergebnisse zuerst in einer Vorschau, in der Sie sie übernehmen, neu erzeugen oder verwerfen können."
+Shorten,Kürzen
+Plain language,Einfache Sprache
+"Says the same with clearly fewer words and keeps every name, number and date.","Sagt dasselbe mit deutlich weniger Worten und behält jeden Namen, jede Zahl und jedes Datum."
+"Rewrites the text in short, simple sentences and explains technical terms, without changing the facts.","Schreibt den Text in kurzen, einfachen Sätzen neu und erklärt Fachbegriffe, ohne die Fakten zu ändern."
