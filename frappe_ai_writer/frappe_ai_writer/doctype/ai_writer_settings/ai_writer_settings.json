@@ -29,9 +29,10 @@
   "reply_section",
   "reply_prompt",
   "cover_letter_section",
-  "cover_letter_field",
+  "cover_letter_doctypes",
   "cover_letter_style",
   "cover_letter_prompt",
+  "cover_letter_field",
   "summary_section",
   "summary_doctypes",
   "summary_style",
@@ -199,27 +200,36 @@
   {
    "fieldname": "cover_letter_section",
    "fieldtype": "Section Break",
-   "label": "Cover Letter (Quotation)"
+   "label": "Cover Letters"
   },
   {
-   "description": "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.",
-   "fieldname": "cover_letter_field",
-   "fieldtype": "Data",
-   "label": "Cover Letter Field"
+   "description": "Document types whose drafts offer Actions → Write Cover Letter, with the field that holds the letter. Needs ERPNext. Prices and amounts are only sent where Send Amounts is checked.",
+   "fieldname": "cover_letter_doctypes",
+   "fieldtype": "Table",
+   "label": "Cover Letter Document Types",
+   "options": "AI Writer Cover Letter DocType"
   },
   {
    "default": "Letter",
-   "description": "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.",
+   "description": "Default format of new letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections. Payment reminders use the tones Friendly and Firm instead.",
    "fieldname": "cover_letter_style",
    "fieldtype": "Select",
    "label": "Cover Letter Format",
    "options": "Letter\nStructured"
   },
   {
-   "description": "Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.",
+   "description": "Shared rules for all document types and formats. Leave empty to restore the default.",
    "fieldname": "cover_letter_prompt",
    "fieldtype": "Small Text",
    "label": "Cover Letter Prompt"
+  },
+  {
+   "description": "Replaced by Cover Letter Document Types; kept so the v0_19 patch can move its value.",
+   "fieldname": "cover_letter_field",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Cover Letter Field",
+   "read_only": 1
   },
   {
    "fieldname": "summary_section",
@@ -358,7 +368,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 14:00:00.000000",
+ "modified": "2026-10-24 16:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

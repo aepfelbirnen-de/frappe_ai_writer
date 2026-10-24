@@ -7,7 +7,7 @@ import frappe
 from frappe.utils import cint
 
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
-    get_cover_letter_field,
+    get_cover_letters,
     get_preview_settings,
     get_summary_doctypes,
     get_translation_languages,
@@ -25,9 +25,7 @@ def boot_session(bootinfo: frappe._dict) -> None:
         bootinfo.ai_writer = {
             "enabled": bool(cint(frappe.db.get_single_value("AI Writer Settings", "enabled", cache=True))),
             "languages": get_translation_languages(),
-            "cover_letter_field": get_cover_letter_field(),
-            "cover_letter_style": frappe.db.get_single_value("AI Writer Settings", "cover_letter_style", cache=True)
-            or "Letter",
+            "cover_letters": get_cover_letters(),
             "preview": get_preview_settings(),
             "summary_doctypes": get_summary_doctypes(),
             "summary_style": frappe.db.get_single_value("AI Writer Settings", "summary_style", cache=True)

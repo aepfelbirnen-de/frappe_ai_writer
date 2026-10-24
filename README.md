@@ -18,7 +18,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - **Glossary and house style**: protected terms (product names, company names) are never changed or translated and, when correcting or translating, never reach the AI service; other terms come with a preferred spelling, notes and translations; short house rules apply to all texts
 - **Reply drafts** in the email composer: writes a reply from the incoming message (without quoted history) and its document, steered by optional notes
 - **Conversation summaries**: Actions → Summarize Conversation condenses the emails and comments of an Issue, Opportunity, Lead or Quotation for a handover (request, what has been done, what is open) and adds it as a timeline comment on request
-- **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices, as a letter or structured with headings
+- **Cover letters for sales documents** (ERPNext): writes the letter text of a draft quotation, sales order, delivery note or sales invoice from customer, contact and line items, as a letter or structured with headings, and reminder texts for dunnings in a friendly or firm tone; prices and amounts are only sent where a manager allows it
 - **Keyboard shortcuts** for the field that has the cursor: Ctrl+Shift+K (⇧⌘K on macOS) corrects it, Ctrl+Shift+L (⇧⌘L) opens its menu; both are listed in Frappe's shortcut dialog (Shift+/)
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
@@ -65,7 +65,7 @@ bench --site your-site migrate
    - **House Style**: short rules for all texts, e.g. "Address customers formally. No exclamation marks."
    - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
-   - **Cover Letter Field** (ERPNext): the Quotation text field that holds the cover letter in your print format, e.g. a custom field; leave empty to hide the button. **Cover Letter Format** sets the default (Letter or Structured), **Cover Letter Prompt** the shared rules
+   - **Cover Letter Document Types** (ERPNext): one row per document type with the **Target Field** that holds the letter in your print format (e.g. a custom field, or `body_text` for Dunning), **Send Amounts** (off by default) and an optional **Purpose** that replaces the default instructions of that document type. **Cover Letter Format** sets the default (Letter or Structured), **Cover Letter Prompt** the shared rules
    - **Preview Before Replacing**: for long texts (default, from 300 characters), always or never
    - **Conversation Summary**: the document types that offer Summarize Conversation (default Issue, Opportunity, Lead, Quotation), the format (bullet list or prose), the maximum length and the prompt
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
@@ -126,7 +126,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - **Glossar und Hausstil**: geschützte Begriffe (Produkt- und Firmennamen) werden nie verändert oder übersetzt und erreichen den KI-Dienst beim Korrigieren und Übersetzen nicht; übrige Begriffe bekommen eine bevorzugte Schreibweise, Hinweise und Übersetzungen; kurze Hausregeln gelten für alle Texte
 - **Antwortentwürfe** im E-Mail-Dialog: schreibt eine Antwort aus der eingegangenen Nachricht (ohne zitierten Verlauf) und ihrem Dokument, gesteuert durch optionale Stichpunkte
 - **Zusammenfassungen von Unterhaltungen**: Aktionen → Unterhaltung zusammenfassen fasst die E-Mails und Kommentare eines Issues, einer Opportunity, eines Leads oder Angebots für eine Übergabe zusammen (Anliegen, Erledigtes, Offenes) und fügt sie auf Wunsch als Kommentar in die Timeline ein
-- **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen, als Brief oder gegliedert mit Überschriften
+- **Anschreiben für Verkaufsbelege** (ERPNext): schreibt den Text eines Entwurfs von Angebot, Auftrag, Lieferschein oder Ausgangsrechnung aus Kunde, Ansprechpartner und Positionen, als Brief oder gegliedert mit Überschriften, sowie Mahntexte in freundlichem oder bestimmtem Ton; Preise und Beträge gehen nur mit, wo ein Manager es erlaubt
 - **Tastenkürzel** für das Feld mit dem Cursor: Strg+Umschalt+K (⇧⌘K unter macOS) korrigiert es, Strg+Umschalt+L (⇧⌘L) öffnet sein Menü; beide stehen in Frappes Tastenkürzel-Übersicht (Umschalt+/)
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
@@ -173,7 +173,7 @@ bench --site ihre-site migrate
    - **Hausstil**: kurze Regeln für alle Texte, z. B. „Kunden siezen. Keine Ausrufezeichen.“
    - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
-   - **Anschreiben-Feld** (ERPNext): das Textfeld im Angebot, das im Druckformat das Anschreiben enthält, z. B. ein eigenes Feld; leer lassen blendet den Button aus. **Anschreiben-Format** legt den Standard fest (Brief oder Gegliedert), **Anschreiben-Prompt** die gemeinsamen Regeln
+   - **Belegarten für Anschreiben** (ERPNext): eine Zeile pro Belegart mit dem **Zielfeld**, das im Druckformat den Text enthält (z. B. ein eigenes Feld oder `body_text` bei Mahnungen), **Beträge senden** (standardmäßig aus) und einem optionalen **Zweck**, der die Standardanweisung der Belegart ersetzt. **Anschreiben-Format** legt den Standard fest (Brief oder Gegliedert), **Anschreiben-Prompt** die gemeinsamen Regeln
    - **Vorschau vor dem Ersetzen**: bei langen Texten (Standard, ab 300 Zeichen), immer oder nie
    - **Zusammenfassung der Unterhaltung**: die Dokumenttypen, die Unterhaltung zusammenfassen anbieten (Standard: Issue, Opportunity, Lead, Angebot), das Format (Stichpunkte oder Fließtext), die maximale Länge und der Prompt
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus

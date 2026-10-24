@@ -99,30 +99,21 @@ Base URL,Basis-URL
 Not needed for Ollama and many local servers.,Ikke nødvendig for Ollama og mange lokale servere.
 Invalid base URL: {0},Ugyldig basis-URL: {0}
 Enter the name of a model offered by {0}.,"Angiv navnet på en model, som {0} tilbyder."
-Cover Letter (Quotation),Følgebrev (tilbud)
 Cover Letter Field,Felt til følgebrev
-"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Feltnavn på tilbuddets tekstfelt med følgebrevet, der vises i PDF'en, f.eks. et brugerdefineret felt som custom_letter_quotation. Kræver ERPNext. Lad feltet være tomt for at skjule knappen."
 Cover Letter Prompt,Prompt til følgebrev
 Cover letters need ERPNext.,Følgebreve kræver ERPNext.
-Field {0} does not exist on Quotation or is not a text field.,Feltet {0} findes ikke i tilbuddet eller er ikke et tekstfelt.
-No cover letter field is configured in AI Writer Settings.,Der er ikke angivet noget felt til følgebrev under AI Writer-indstillinger.
-Cover letters can only be written for draft quotations.,Følgebreve kan kun skrives til tilbud i kladde.
 Write Cover Letter,Skriv følgebrev
 Writing cover letter…,Skriver følgebrev…
 Cover Letter,Følgebrev
 Preview,Forhåndsvisning
 Apply,Anvend
 Regenerate,Generér igen
-Cover letter applied. Save the quotation to keep it.,Følgebrevet er anvendt. Gem tilbuddet for at beholde det.
 Actions,Handlinger
 Format,Format
 Letter,Brev,AI Writer
 Letter,Bogstav
 Structured,Struktureret
 Cover Letter Format,Format for følgebrev
-"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat for nye følgebreve; det kan skiftes i forhåndsvisningen. Brev: hilsen og afsnit. Struktureret: titel som emne og korte afsnit om udgangspunkt, ydelser og fordele."
-Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Fælles regler for begge formater. Lad feltet være tomt for at gendanne standarden. Priser og totaler sendes aldrig.
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","I et tilbud i kladde skriver Handlinger → Skriv følgebrev teksten ud fra kunde, kontaktperson og linjer, som brev eller med overskrifter (Format i forhåndsvisningen). Priser og totaler sendes aldrig. Noter, der allerede står i feltet, indarbejdes i brevet."
 Preview Before Replacing,Forhåndsvisning før erstatning
 "Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Viser resultatet med ændringerne fremhævet, før det erstatter teksten, med Anvend, Generér igen og Kassér."
 Long texts,Lange tekster
@@ -214,3 +205,27 @@ There are no emails or comments to summarize yet.,Der er endnu ingen e-mails ell
 Maximum Words must be between {0} and {1}.,Maksimalt antal ord skal være mellem {0} og {1}.
 Instructions for summaries of emails and comments. Leave empty to restore the default.,Instruktioner til opsummeringer af e-mails og kommentarer. Lad feltet stå tomt for at gendanne standarden.
 AI summary · {0} · {1},AI-opsummering · {0} · {1}
+Reminder Text,Rykkertekst
+Write Reminder Text,Skriv rykkertekst
+Tone,Tone
+Friendly,Venlig
+Firm,Bestemt
+Purpose,Formål
+What the letter is for. Leave empty for the default of the document type.,Hvad brevet er til. Lad feltet stå tomt for at bruge standarden for dokumenttypen.
+Cover letters can only be written for drafts.,Følgebreve kan kun skrives til kladder.
+"In drafts of the enabled sales documents, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Payment reminders get a reminder text in a friendly or firm tone. Prices and amounts are only sent where a manager allowed it. Notes already in the field are worked into the letter.","I kladder af de aktiverede salgsdokumenter skriver Handlinger → Skriv følgebrev teksten ud fra kunde, kontaktperson og linjer, som brev eller struktureret (Format i forhåndsvisningen). Betalingspåmindelser får en rykkertekst i en venlig eller bestemt tone. Priser og beløb sendes kun, hvor en manager har tilladt det. Noter, der allerede står i feltet, indarbejdes."
+AI Writer Cover Letter DocType,AI Writer-dokumenttype til følgebreve
+Cover Letters,Følgebreve
+Cover Letter Document Types,Dokumenttyper til følgebreve
+Target Field,Målfelt
+Send Amounts,Send beløb
+Shared rules for all document types and formats. Leave empty to restore the default.,Fælles regler for alle dokumenttyper og formater. Lad feltet stå tomt for at gendanne standarden.
+Replaced by Cover Letter Document Types; kept so the v0_19 patch can move its value.,"Erstattet af Dokumenttyper til følgebreve; bevaret, så patch v0_19 kan flytte værdien."
+"Document types whose drafts offer Actions → Write Cover Letter, with the field that holds the letter. Needs ERPNext. Prices and amounts are only sent where Send Amounts is checked.","Dokumenttyper, hvis kladder tilbyder Handlinger → Skriv følgebrev, med feltet, der rummer teksten. Kræver ERPNext. Priser og beløb sendes kun, hvor »Send beløb« er markeret."
+No cover letter field is configured for {0} in AI Writer Settings.,Der er ikke angivet noget følgebrevsfelt for {0} i AI Writer-indstillingerne.
+Cover letters are not available for {0}.,Følgebreve er ikke tilgængelige for {0}.
+Text applied. Save the document to keep it.,Tekst indsat. Gem dokumentet for at beholde den.
+"Fieldname of the text field that holds the letter in the print format, e.g. a custom field; for Dunning e.g. body_text.","Feltnavn på tekstfeltet, der rummer brevet i udskriftsformatet, f.eks. et brugerdefineret felt; for rykkere f.eks. body_text."
+Field {0} does not exist on {1} or is not a text field.,Feltet {0} findes ikke i {1} eller er ikke et tekstfelt.
+Default format of new letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections. Payment reminders use the tones Friendly and Firm instead.,Standardformat for nye breve; kan skiftes i forhåndsvisningen. Brev: hilsen og afsnit. Struktureret: titel som emne og korte afsnit. Betalingspåmindelser bruger i stedet tonerne Venlig og Bestemt.
+"Also send prices, totals and outstanding amounts to the AI service.","Send også priser, totaler og udestående beløb til AI-tjenesten."

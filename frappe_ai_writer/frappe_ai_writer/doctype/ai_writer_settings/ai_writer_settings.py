@@ -42,8 +42,17 @@ Example notes:
 
 Example answer:
 The existing mailboxes will be migrated to Microsoft 365, so that email, calendars and contacts are available in the cloud and no longer depend on the local mail server. In addition, multi-factor authentication (MFA) will be enabled for all users: besides their password, they confirm each sign-in with a second factor such as an authenticator app, which considerably reduces the risk of compromised accounts."""
-# The format (letter or structured) is added by api/cover_letter.py, so this prompt only holds the shared rules.
-DEFAULT_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It appears in the PDF above the line items and is addressed to the customer.
+# Purpose and format are added by api/cover_letter.py per document type, so this prompt only holds the shared rules.
+DEFAULT_COVER_LETTER_PROMPT = """You write the letter text of a sales document. It appears in the PDF and is addressed to the customer.
+
+- Use only the facts in the document data and the notes. Do not invent dates, deadlines, names, services, amounts or commitments.
+- Group related items instead of listing every item, and do not repeat quantities or item codes unless they matter.
+- Mention prices, totals or amounts only if they are part of the document data.
+- If notes are given, follow them and work their points into the letter.
+- Do not add a sign-off with a name; the print format adds it.
+Answer only with the letter text."""
+# Default prompt of versions 0.11 to 0.18 (quotations only); the v0_19 patch replaces it if it was never edited.
+QUOTATION_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It appears in the PDF above the line items and is addressed to the customer.
 
 - Base the content on the line items: summarize what the quotation covers and what the customer gains from it. Group related items instead of listing every item, and do not repeat quantities or item codes unless they matter.
 - Never mention prices, totals, discounts or payment amounts.
@@ -63,6 +72,22 @@ PREVIOUS_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It 
 - Keep it to roughly 80 to 180 words.
 Answer only with the letter text."""
 COVER_LETTER_STYLES = ("Letter", "Structured")
+DUNNING_STYLES = ("Friendly", "Firm")
+COVER_LETTER_DOCTYPES = ("Quotation", "Sales Order", "Delivery Note", "Sales Invoice", "Dunning")
+DEFAULT_COVER_LETTER_PURPOSES = {
+    "Quotation": "The document is a quotation. Summarize what the quotation covers and what the customer gains from "
+    "it, based on the line items.",
+    "Sales Order": "The document is an order confirmation. Thank the customer for the order and confirm what was "
+    "ordered, based on the line items; mention the customer's purchase order and the planned delivery date if given.",
+    "Delivery Note": "The document is a delivery note. Tell the customer what is being delivered, based on the line "
+    "items; mention the customer's purchase order and the carrier if given, and ask the customer to check the "
+    "delivery and report any problems.",
+    "Sales Invoice": "The document is an invoice. Thank the customer and say what the invoice covers, based on the "
+    "line items; mention the due date if given.",
+    "Dunning": "The document is a payment reminder for overdue invoices. Name the overdue invoices with their due "
+    "dates and ask the customer to pay them, or to get in touch if the payment has already been made or something "
+    "is unclear.",
+}
 PREVIEW_MODES = ("Long texts", "Always", "Never")
 DEFAULT_PREVIEW_MIN_CHARS = 300
 DEFAULT_REPLY_PROMPT = """You write a reply to an email on behalf of the user.
@@ -110,6 +135,9 @@ class AIWriterSettings(Document):
     if TYPE_CHECKING:
         from frappe.types import DF
 
+        from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_cover_letter_doctype.ai_writer_cover_letter_doctype import (
+            AIWriterCoverLetterDocType,
+        )
         from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_glossary_term.ai_writer_glossary_term import (
             AIWriterGlossaryTerm,
         )
@@ -124,6 +152,7 @@ class AIWriterSettings(Document):
         block_when_exceeded: DF.Check
         budget_notice: DF.SmallText | None
         budget_warning_threshold: DF.Percent
+        cover_letter_doctypes: DF.Table[AIWriterCoverLetterDocType]
         cover_letter_field: DF.Data | None
         cover_letter_prompt: DF.SmallText | None
         cover_letter_style: DF.Literal["Letter", "Structured"]
@@ -180,7 +209,7 @@ class AIWriterSettings(Document):
             self.cover_letter_prompt = DEFAULT_COVER_LETTER_PROMPT
         if self.cover_letter_style not in COVER_LETTER_STYLES:
             self.cover_letter_style = COVER_LETTER_STYLES[0]
-        self.validate_cover_letter_field()
+        self.validate_cover_letter_doctypes()
         if self.preview_mode not in PREVIEW_MODES:
             self.preview_mode = PREVIEW_MODES[0]
         if self.preview_min_chars is None:
@@ -255,17 +284,25 @@ class AIWriterSettings(Document):
             if frappe.db.exists("DocType", doctype):
                 self.append("summary_doctypes", {"document_type": doctype})
 
-    def validate_cover_letter_field(self) -> None:
-        self.cover_letter_field = (self.cover_letter_field or "").strip()
-        if not self.cover_letter_field:
-            return
-        if not frappe.db.exists("DocType", "Quotation"):
-            frappe.throw(_("Cover letters need ERPNext."))
-        field = frappe.get_meta("Quotation").get_field(self.cover_letter_field)
-        if not field or field.fieldtype not in COVER_LETTER_FIELD_TYPES:
-            frappe.throw(
-                _("Field {0} does not exist on Quotation or is not a text field.").format(self.cover_letter_field)
-            )
+    def validate_cover_letter_doctypes(self) -> None:
+        seen = set()
+        for row in list(self.cover_letter_doctypes):
+            if row.document_type in seen:
+                self.remove(row)
+                continue
+            seen.add(row.document_type)
+            if row.document_type not in COVER_LETTER_DOCTYPES:
+                frappe.throw(_("Cover letters are not available for {0}.").format(row.document_type))
+            if not frappe.db.exists("DocType", row.document_type):
+                frappe.throw(_("Cover letters need ERPNext."))
+            row.target_field = (row.target_field or "").strip()
+            field = frappe.get_meta(row.document_type).get_field(row.target_field)
+            if not field or field.fieldtype not in COVER_LETTER_FIELD_TYPES:
+                frappe.throw(
+                    _("Field {0} does not exist on {1} or is not a text field.").format(
+                        row.target_field, _(row.document_type)
+                    )
+                )
 
     def on_update(self) -> None:
         # The enabled flag and the translation languages are part of every user's cached boot info.
@@ -302,10 +339,29 @@ def get_expansion_factors(settings: Document) -> tuple[int, int]:
     return low, max(low, high)
 
 
-def get_cover_letter_field() -> str | None:
-    """Return the configured Quotation cover letter field, or None when unset or ERPNext is missing."""
-    fieldname = frappe.get_cached_doc("AI Writer Settings").cover_letter_field
-    return fieldname if fieldname and frappe.db.exists("DocType", "Quotation") else None
+def get_cover_letter_config(doctype: str) -> Document | None:
+    """Return the cover letter row of a document type, or None when it is not configured or ERPNext is missing."""
+    for row in frappe.get_cached_doc("AI Writer Settings").cover_letter_doctypes:
+        if row.document_type == doctype and row.target_field and frappe.db.exists("DocType", doctype):
+            return row
+    return None
+
+
+def get_cover_letter_styles(doctype: str) -> tuple[str, ...]:
+    return DUNNING_STYLES if doctype == "Dunning" else COVER_LETTER_STYLES
+
+
+def get_cover_letters() -> list[dict]:
+    """Return the configured cover letters for the desk client: document type, field and formats."""
+    settings = frappe.get_cached_doc("AI Writer Settings")
+    result = []
+    for row in settings.cover_letter_doctypes:
+        if not get_cover_letter_config(row.document_type):
+            continue
+        styles = get_cover_letter_styles(row.document_type)
+        default = settings.cover_letter_style if settings.cover_letter_style in styles else styles[0]
+        result.append({"doctype": row.document_type, "field": row.target_field, "styles": styles, "default": default})
+    return result
 
 
 def get_preview_settings() -> dict:

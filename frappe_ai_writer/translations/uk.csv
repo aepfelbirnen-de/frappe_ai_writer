@@ -99,30 +99,21 @@ Base URL,Базова URL-адреса
 Not needed for Ollama and many local servers.,Не потрібен для Ollama та багатьох локальних серверів.
 Invalid base URL: {0},Недійсна базова URL-адреса: {0}
 Enter the name of a model offered by {0}.,"Введіть назву моделі, яку пропонує {0}."
-Cover Letter (Quotation),Супровідний лист (пропозиція)
 Cover Letter Field,Поле супровідного листа
-"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Назва текстового поля пропозиції, що містить супровідний лист у PDF, напр. власне поле на зразок custom_letter_quotation. Потребує ERPNext. Залиште порожнім, щоб приховати кнопку."
 Cover Letter Prompt,Промпт супровідного листа
 Cover letters need ERPNext.,Супровідні листи потребують ERPNext.
-Field {0} does not exist on Quotation or is not a text field.,Поле {0} не існує в пропозиції або не є текстовим полем.
-No cover letter field is configured in AI Writer Settings.,У налаштуваннях AI Writer не вказано поле супровідного листа.
-Cover letters can only be written for draft quotations.,Супровідні листи можна писати лише для чернеток пропозицій.
 Write Cover Letter,Написати супровідний лист
 Writing cover letter…,Пишемо супровідний лист…
 Cover Letter,Супровідний лист
 Preview,Попередній перегляд
 Apply,Застосувати
 Regenerate,Згенерувати знову
-Cover letter applied. Save the quotation to keep it.,"Супровідний лист застосовано. Збережіть пропозицію, щоб його зберегти."
 Actions,Дії
 Format,Формат
 Letter,Лист,AI Writer
 Letter,Letter
 Structured,Структурований
 Cover Letter Format,Формат супровідного листа
-"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Типовий формат нових листів; його можна змінити в попередньому перегляді. Лист: звертання й абзаци. Структурований: заголовок як тема та короткі розділи про вихідну ситуацію, послуги й переваги."
-Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,"Спільні правила для обох форматів. Залиште порожнім, щоб відновити типові. Ціни та суми ніколи не надсилаються."
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","У чернетці пропозиції Дії → Написати супровідний лист створює текст на основі клієнта, контактної особи та позицій — як лист або із заголовками (Формат у попередньому перегляді). Ціни й суми ніколи не надсилаються. Нотатки, що вже є в полі, враховуються в листі."
 Preview Before Replacing,Попередній перегляд перед заміною
 "Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Показує результат із виділеними змінами, перш ніж він замінить текст, з кнопками Застосувати, Згенерувати знову та Відхилити."
 Long texts,Довгі тексти
@@ -214,3 +205,27 @@ There are no emails or comments to summarize yet.,Ще немає листів �
 Maximum Words must be between {0} and {1}.,Максимум слів має бути від {0} до {1}.
 Instructions for summaries of emails and comments. Leave empty to restore the default.,"Інструкції для підсумків листів і коментарів. Залиште порожнім, щоб відновити типові."
 AI summary · {0} · {1},Підсумок ШІ · {0} · {1}
+Reminder Text,Текст нагадування
+Write Reminder Text,Написати текст нагадування
+Tone,Тон
+Friendly,Дружній
+Firm,Наполегливий
+Purpose,Мета
+What the letter is for. Leave empty for the default of the document type.,"Для чого лист. Залиште порожнім, щоб використати типове значення для типу документа."
+Cover letters can only be written for drafts.,Супровідні листи можна писати лише для чернеток.
+"In drafts of the enabled sales documents, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Payment reminders get a reminder text in a friendly or firm tone. Prices and amounts are only sent where a manager allowed it. Notes already in the field are worked into the letter.","У чернетках увімкнених документів продажу Дії → Написати супровідний лист складає текст на основі клієнта, контактної особи та позицій — як лист або структуровано (Формат у попередньому перегляді). Нагадування про оплату отримують текст у дружньому чи наполегливому тоні. Ціни та суми надсилаються лише там, де це дозволив менеджер. Нотатки, що вже є в полі, буде враховано."
+AI Writer Cover Letter DocType,Тип документа для листів AI Writer
+Cover Letters,Супровідні листи
+Cover Letter Document Types,Типи документів для листів
+Target Field,Цільове поле
+Send Amounts,Надсилати суми
+Shared rules for all document types and formats. Leave empty to restore the default.,"Спільні правила для всіх типів документів і форматів. Залиште порожнім, щоб відновити типові."
+Replaced by Cover Letter Document Types; kept so the v0_19 patch can move its value.,"Замінено типами документів для листів; залишено, щоб патч v0_19 міг перенести значення."
+"Document types whose drafts offer Actions → Write Cover Letter, with the field that holds the letter. Needs ERPNext. Prices and amounts are only sent where Send Amounts is checked.","Типи документів, чернетки яких пропонують Дії → Написати супровідний лист, і поле для тексту. Потрібен ERPNext. Ціни та суми надсилаються лише там, де позначено «Надсилати суми»."
+No cover letter field is configured for {0} in AI Writer Settings.,Для {0} у налаштуваннях AI Writer не задано поле для листа.
+Cover letters are not available for {0}.,Супровідні листи недоступні для {0}.
+Text applied. Save the document to keep it.,"Текст застосовано. Збережіть документ, щоб його зберегти."
+"Fieldname of the text field that holds the letter in the print format, e.g. a custom field; for Dunning e.g. body_text.","Ім'я текстового поля, що містить лист у формі друку, напр. власне поле; для нагадувань напр. body_text."
+Field {0} does not exist on {1} or is not a text field.,"Поля {0} немає в {1}, або це не текстове поле."
+Default format of new letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections. Payment reminders use the tones Friendly and Firm instead.,Типовий формат нових листів; його можна змінити в попередньому перегляді. Лист: звертання й абзаци. Структурований: заголовок як тема й короткі розділи. Нагадування про оплату натомість використовують тони Дружній і Наполегливий.
+"Also send prices, totals and outstanding amounts to the AI service.","Також надсилати ціни, підсумки та заборгованості до сервісу ШІ."

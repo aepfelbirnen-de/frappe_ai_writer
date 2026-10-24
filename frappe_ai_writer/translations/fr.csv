@@ -99,30 +99,21 @@ Base URL,URL de base
 Not needed for Ollama and many local servers.,Inutile pour Ollama et de nombreux serveurs locaux.
 Invalid base URL: {0},URL de base non valide : {0}
 Enter the name of a model offered by {0}.,Saisissez le nom d'un modèle proposé par {0}.
-Cover Letter (Quotation),Lettre d'accompagnement (devis)
 Cover Letter Field,Champ de la lettre
-"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Nom du champ texte du devis qui contient la lettre affichée dans le PDF, p. ex. un champ personnalisé comme custom_letter_quotation. Nécessite ERPNext. Laisser vide pour masquer le bouton."
 Cover Letter Prompt,Prompt de la lettre
 Cover letters need ERPNext.,Les lettres d'accompagnement nécessitent ERPNext.
-Field {0} does not exist on Quotation or is not a text field.,Le champ {0} n'existe pas dans le devis ou n'est pas un champ texte.
-No cover letter field is configured in AI Writer Settings.,Aucun champ de lettre n'est configuré dans les paramètres d'AI Writer.
-Cover letters can only be written for draft quotations.,Les lettres ne peuvent être rédigées que pour des devis brouillons.
 Write Cover Letter,Rédiger la lettre
 Writing cover letter…,Rédaction de la lettre…
 Cover Letter,Lettre d'accompagnement
 Preview,Aperçu
 Apply,Appliquer
 Regenerate,Régénérer
-Cover letter applied. Save the quotation to keep it.,Lettre appliquée. Enregistrez le devis pour la conserver.
 Actions,Actions
 Format,Format
 Letter,Lettre,AI Writer
 Letter,Lettre
 Structured,Structuré
 Cover Letter Format,Format de la lettre
-"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Format par défaut des nouvelles lettres ; il peut être changé dans l'aperçu. Lettre : formule d'appel et paragraphes. Structuré : titre comme objet et courtes sections sur la situation, les prestations et les avantages."
-Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Règles communes aux deux formats. Laisser vide pour rétablir la valeur par défaut. Les prix et totaux ne sont jamais envoyés.
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","Dans un devis brouillon, Actions → Rédiger la lettre écrit le texte à partir du client, du contact et des lignes, sous forme de lettre ou avec des titres (Format dans l'aperçu). Les prix et totaux ne sont jamais envoyés. Les notes déjà présentes dans le champ sont intégrées à la lettre."
 Preview Before Replacing,Aperçu avant remplacement
 "Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Affiche le résultat avec les modifications mises en évidence avant qu'il ne remplace le texte, avec Appliquer, Régénérer et Ignorer."
 Long texts,Textes longs
@@ -214,3 +205,27 @@ There are no emails or comments to summarize yet.,Il n'y a pas encore d'e-mails 
 Maximum Words must be between {0} and {1}.,Le nombre maximal de mots doit être compris entre {0} et {1}.
 Instructions for summaries of emails and comments. Leave empty to restore the default.,Instructions pour les résumés d'e-mails et de commentaires. Laisser vide pour rétablir la valeur par défaut.
 AI summary · {0} · {1},Résumé IA · {0} · {1}
+Reminder Text,Texte de relance
+Write Reminder Text,Rédiger le texte de relance
+Tone,Ton
+Friendly,Aimable
+Firm,Ferme
+Purpose,Objet
+What the letter is for. Leave empty for the default of the document type.,À quoi sert la lettre. Laisser vide pour utiliser la valeur par défaut du type de document.
+Cover letters can only be written for drafts.,Les lettres ne peuvent être rédigées que pour des brouillons.
+"In drafts of the enabled sales documents, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Payment reminders get a reminder text in a friendly or firm tone. Prices and amounts are only sent where a manager allowed it. Notes already in the field are worked into the letter.","Dans les brouillons des documents de vente activés, Actions → Rédiger la lettre rédige le texte à partir du client, du contact et des lignes, sous forme de lettre ou structuré (Format dans l'aperçu). Les relances reçoivent un texte au ton aimable ou ferme. Les prix et montants ne sont envoyés que là où un responsable l'a autorisé. Les notes déjà présentes dans le champ sont intégrées."
+AI Writer Cover Letter DocType,Type de document pour lettres AI Writer
+Cover Letters,Lettres
+Cover Letter Document Types,Types de document pour lettres
+Target Field,Champ cible
+Send Amounts,Envoyer les montants
+Shared rules for all document types and formats. Leave empty to restore the default.,Règles communes à tous les types de document et formats. Laisser vide pour rétablir la valeur par défaut.
+Replaced by Cover Letter Document Types; kept so the v0_19 patch can move its value.,Remplacé par Types de document pour lettres ; conservé pour que le correctif v0_19 puisse reprendre sa valeur.
+"Document types whose drafts offer Actions → Write Cover Letter, with the field that holds the letter. Needs ERPNext. Prices and amounts are only sent where Send Amounts is checked.","Types de document dont les brouillons proposent Actions → Rédiger la lettre, avec le champ qui contient le texte. Nécessite ERPNext. Les prix et montants ne sont envoyés que si « Envoyer les montants » est coché."
+No cover letter field is configured for {0} in AI Writer Settings.,Aucun champ de lettre n'est configuré pour {0} dans les Paramètres d'AI Writer.
+Cover letters are not available for {0}.,Les lettres ne sont pas disponibles pour {0}.
+Text applied. Save the document to keep it.,Texte appliqué. Enregistrez le document pour le conserver.
+"Fieldname of the text field that holds the letter in the print format, e.g. a custom field; for Dunning e.g. body_text.","Nom du champ texte qui contient la lettre dans le format d'impression, p. ex. un champ personnalisé ; pour les relances, p. ex. body_text."
+Field {0} does not exist on {1} or is not a text field.,Le champ {0} n'existe pas dans {1} ou n'est pas un champ texte.
+Default format of new letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections. Payment reminders use the tones Friendly and Firm instead.,Format par défaut des nouvelles lettres ; modifiable dans l'aperçu. Lettre : formule d'appel et paragraphes. Structuré : titre comme objet et sections courtes. Les relances utilisent à la place les tons Aimable et Ferme.
+"Also send prices, totals and outstanding amounts to the AI service.","Envoyer aussi les prix, totaux et montants dus au service d'IA."

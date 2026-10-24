@@ -103,33 +103,45 @@
 		}
 	}
 
-	// Quotation cover letters: the server reads the quotation itself (without prices); the current field
-	// content is sent along as notes for the letter.
+	// Cover letters for sales documents: the server reads the document itself (amounts only where a manager
+	// allowed them); the current field content is sent along as notes for the letter.
 	function setup_cover_letter() {
-		const fieldname = frappe.boot.ai_writer?.cover_letter_field;
-		if (!fieldname) return;
-		frappe.ui.form.on("Quotation", {
-			refresh(frm) {
-				const field = frm.fields_dict[fieldname];
-				field?.$wrapper[0].querySelector(".ai-writer-field-btn")?.remove();
-				if (!is_enabled() || frm.doc.docstatus !== 0 || !field) return;
-				frm.add_custom_button(__("Write Cover Letter"), () => write_cover_letter(frm, fieldname), __("Actions"));
+		for (const config of frappe.boot.ai_writer?.cover_letters || []) {
+			frappe.ui.form.on(config.doctype, {
+				refresh(frm) {
+					const field = frm.fields_dict[config.field];
+					field?.$wrapper[0].querySelector(".ai-writer-field-btn")?.remove();
+					if (!is_enabled() || frm.doc.docstatus !== 0 || !field || !frm.has_perm("write")) return;
+					const label = cover_letter_label(config.doctype);
+					frm.add_custom_button(label, () => write_cover_letter(frm, config), __("Actions"));
 
-				// A second button right at the field, where people look for it.
-				const label = field.$wrapper[0].querySelector(".control-label");
-				if (!label) return;
-				const content = document.createDocumentFragment();
-				content.append(sparkle_icon(), document.createTextNode(__("Write Cover Letter")));
-				const button = make_button("btn btn-xs btn-default ai-writer-field-btn", content);
-				button.addEventListener("click", () => write_cover_letter(frm, fieldname));
-				label.after(button);
-			},
-		});
+					// A second button right at the field, where people look for it.
+					const field_label = field.$wrapper[0].querySelector(".control-label");
+					if (!field_label) return;
+					const content = document.createDocumentFragment();
+					content.append(sparkle_icon(), document.createTextNode(label));
+					const button = make_button("btn btn-xs btn-default ai-writer-field-btn", content);
+					button.addEventListener("click", () => write_cover_letter(frm, config));
+					field_label.after(button);
+				},
+			});
+		}
 	}
 
-	async function write_cover_letter(frm, fieldname) {
+	function cover_letter_label(doctype) {
+		return doctype === "Dunning" ? __("Write Reminder Text") : __("Write Cover Letter");
+	}
+
+	const COVER_LETTER_STYLE_LABELS = {
+		Letter: () => __("Letter", null, "AI Writer"),
+		Structured: () => __("Structured"),
+		Friendly: () => __("Friendly"),
+		Firm: () => __("Firm"),
+	};
+
+	async function write_cover_letter(frm, config) {
 		try {
-			// The server reads the saved quotation, so unsaved items would be missing.
+			// The server reads the saved document, so unsaved items would be missing.
 			if (frm.is_dirty() || frm.is_new()) await frm.save();
 		} catch (error) {
 			// frm.save already shows the reason to the user.
@@ -137,26 +149,26 @@
 			return;
 		}
 
-		let style = frappe.boot.ai_writer?.cover_letter_style || "Letter";
-		const letter = await generate_cover_letter(frm, fieldname, style);
+		let style = config.default;
+		const letter = await generate_cover_letter(frm, config, style);
 		if (letter === null) return;
 
 		const regenerate = async () => {
-			const html = await generate_cover_letter(frm, fieldname, style);
+			const html = await generate_cover_letter(frm, config, style);
 			if (html !== null) dialog.set_value("letter", html);
 		};
 		const dialog = new frappe.ui.Dialog({
-			title: __("Cover Letter"),
+			title: config.doctype === "Dunning" ? __("Reminder Text") : __("Cover Letter"),
 			size: "large",
 			fields: [
 				{
 					fieldtype: "Select",
 					fieldname: "style",
-					label: __("Format"),
-					options: [
-						{ value: "Letter", label: __("Letter", null, "AI Writer") },
-						{ value: "Structured", label: __("Structured") },
-					],
+					label: config.doctype === "Dunning" ? __("Tone") : __("Format"),
+					options: config.styles.map((value) => ({
+						value,
+						label: COVER_LETTER_STYLE_LABELS[value]?.() || value,
+					})),
 					default: style,
 					onchange() {
 						const value = dialog.get_value("style");
@@ -169,9 +181,9 @@
 			],
 			primary_action_label: __("Apply"),
 			primary_action(values) {
-				frm.set_value(fieldname, values.letter);
+				frm.set_value(config.field, values.letter);
 				dialog.hide();
-				frappe.show_alert({ message: __("Cover letter applied. Save the quotation to keep it."), indicator: "green" });
+				frappe.show_alert({ message: __("Text applied. Save the document to keep it."), indicator: "green" });
 			},
 			secondary_action_label: __("Regenerate"),
 			secondary_action: regenerate,
@@ -180,12 +192,13 @@
 	}
 
 	// Returns the sanitized letter HTML, or null if the request failed (the server message is already shown).
-	async function generate_cover_letter(frm, fieldname, style) {
+	async function generate_cover_letter(frm, config, style) {
 		frappe.dom.freeze(__("Writing cover letter…"));
 		try {
 			return await frappe.xcall(COVER_LETTER_METHOD, {
-				quotation: frm.doc.name,
-				notes: frm.doc[fieldname] || "",
+				doctype: frm.doctype,
+				name: frm.doc.name,
+				notes: frm.doc[config.field] || "",
 				style,
 			});
 		} catch (error) {
@@ -702,14 +715,14 @@
 				)
 			);
 		}
-		if (frappe.boot.ai_writer?.cover_letter_field) {
+		if (frappe.boot.ai_writer?.cover_letters?.length) {
 			modes.append(
 				make_element("dt", null, __("Write Cover Letter")),
 				make_element(
 					"dd",
 					null,
 					__(
-						"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter."
+						"In drafts of the enabled sales documents, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Payment reminders get a reminder text in a friendly or firm tone. Prices and amounts are only sent where a manager allowed it. Notes already in the field are worked into the letter."
 					)
 				)
 			);

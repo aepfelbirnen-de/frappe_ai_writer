@@ -99,30 +99,21 @@ Base URL,URL Base
 Not needed for Ollama and many local servers.,No es necesaria para Ollama ni para muchos servidores locales.
 Invalid base URL: {0},URL base no válida: {0}
 Enter the name of a model offered by {0}.,Introduzca el nombre de un modelo que ofrezca {0}.
-Cover Letter (Quotation),Carta de presentación (presupuesto)
 Cover Letter Field,Campo de la carta
-"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Nombre del campo de texto del presupuesto que contiene la carta que aparece en el PDF, p. ej. un campo personalizado como custom_letter_quotation. Requiere ERPNext. Déjelo vacío para ocultar el botón."
 Cover Letter Prompt,Prompt de la carta
 Cover letters need ERPNext.,Las cartas de presentación requieren ERPNext.
-Field {0} does not exist on Quotation or is not a text field.,El campo {0} no existe en el presupuesto o no es un campo de texto.
-No cover letter field is configured in AI Writer Settings.,No hay ningún campo de carta configurado en los ajustes de AI Writer.
-Cover letters can only be written for draft quotations.,Las cartas solo se pueden redactar para presupuestos en borrador.
 Write Cover Letter,Redactar carta
 Writing cover letter…,Redactando la carta…
 Cover Letter,Carta de presentación
 Preview,Vista Previa
 Apply,Aplicar
 Regenerate,Volver a generar
-Cover letter applied. Save the quotation to keep it.,Carta aplicada. Guarde el presupuesto para conservarla.
 Actions,Acciones
 Format,Formato
 Letter,Carta,AI Writer
 Letter,Carta
 Structured,Estructurado
 Cover Letter Format,Formato de la carta
-"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Formato predeterminado de las cartas nuevas; se puede cambiar en la vista previa. Carta: saludo y párrafos. Estructurado: título como asunto y secciones breves sobre situación inicial, servicios y beneficios."
-Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Reglas comunes para ambos formatos. Déjelo vacío para restaurar el valor predeterminado. Los precios y totales nunca se envían.
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","En un presupuesto en borrador, Acciones → Redactar carta escribe el texto a partir del cliente, el contacto y las líneas, como carta o con títulos (Formato en la vista previa). Los precios y totales nunca se envían. Las notas que ya estén en el campo se incorporan a la carta."
 Preview Before Replacing,Vista previa antes de reemplazar
 "Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Muestra el resultado con los cambios resaltados antes de reemplazar el texto, con Aplicar, Volver a generar y Descartar."
 Long texts,Textos largos
@@ -214,3 +205,27 @@ There are no emails or comments to summarize yet.,Todavía no hay correos ni com
 Maximum Words must be between {0} and {1}.,El máximo de palabras debe estar entre {0} y {1}.
 Instructions for summaries of emails and comments. Leave empty to restore the default.,Instrucciones para resumir correos y comentarios. Déjelo vacío para restaurar el valor predeterminado.
 AI summary · {0} · {1},Resumen de IA · {0} · {1}
+Reminder Text,Texto de recordatorio
+Write Reminder Text,Redactar texto de recordatorio
+Tone,Tono
+Friendly,Amable
+Firm,Firme
+Purpose,Propósito
+What the letter is for. Leave empty for the default of the document type.,Para qué sirve la carta. Déjelo vacío para usar el valor predeterminado del tipo de documento.
+Cover letters can only be written for drafts.,Las cartas solo pueden redactarse para borradores.
+"In drafts of the enabled sales documents, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Payment reminders get a reminder text in a friendly or firm tone. Prices and amounts are only sent where a manager allowed it. Notes already in the field are worked into the letter.","En los borradores de los documentos de venta habilitados, Acciones → Redactar carta escribe el texto a partir del cliente, el contacto y las líneas, como carta o estructurado (Formato en la vista previa). Los recordatorios de pago reciben un texto en tono amable o firme. Los precios e importes solo se envían donde un responsable lo haya permitido. Las notas que ya estén en el campo se incorporan."
+AI Writer Cover Letter DocType,Tipo de documento para cartas de AI Writer
+Cover Letters,Cartas
+Cover Letter Document Types,Tipos de documento para cartas
+Target Field,Campo de destino
+Send Amounts,Enviar importes
+Shared rules for all document types and formats. Leave empty to restore the default.,Reglas comunes para todos los tipos de documento y formatos. Déjelo vacío para restaurar el valor predeterminado.
+Replaced by Cover Letter Document Types; kept so the v0_19 patch can move its value.,Sustituido por Tipos de documento para cartas; se conserva para que el parche v0_19 pueda trasladar su valor.
+"Document types whose drafts offer Actions → Write Cover Letter, with the field that holds the letter. Needs ERPNext. Prices and amounts are only sent where Send Amounts is checked.","Tipos de documento cuyos borradores ofrecen Acciones → Redactar carta, con el campo que contiene el texto. Requiere ERPNext. Los precios e importes solo se envían donde «Enviar importes» está marcado."
+No cover letter field is configured for {0} in AI Writer Settings.,No hay ningún campo de carta configurado para {0} en los Ajustes de AI Writer.
+Cover letters are not available for {0}.,Las cartas no están disponibles para {0}.
+Text applied. Save the document to keep it.,Texto aplicado. Guarde el documento para conservarlo.
+"Fieldname of the text field that holds the letter in the print format, e.g. a custom field; for Dunning e.g. body_text.","Nombre del campo de texto que contiene la carta en el formato de impresión, p. ej. un campo personalizado; para recordatorios, p. ej. body_text."
+Field {0} does not exist on {1} or is not a text field.,El campo {0} no existe en {1} o no es un campo de texto.
+Default format of new letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections. Payment reminders use the tones Friendly and Firm instead.,Formato predeterminado de las cartas nuevas; se puede cambiar en la vista previa. Carta: saludo y párrafos. Estructurado: título como asunto y secciones breves. Los recordatorios de pago usan en su lugar los tonos Amable y Firme.
+"Also send prices, totals and outstanding amounts to the AI service.","Enviar también precios, totales e importes pendientes al servicio de IA."

@@ -99,30 +99,21 @@ Base URL,Basis-URL
 Not needed for Ollama and many local servers.,Für Ollama und viele lokale Server nicht nötig.
 Invalid base URL: {0},Ungültige Basis-URL: {0}
 Enter the name of a model offered by {0}.,"Geben Sie den Namen eines Modells ein, das {0} anbietet."
-Cover Letter (Quotation),Anschreiben (Angebot)
 Cover Letter Field,Anschreiben-Feld
-"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Feldname des Textfelds im Angebot, das das Anschreiben im PDF enthält, z. B. ein eigenes Feld wie custom_letter_quotation. Benötigt ERPNext. Leer lassen, um den Button auszublenden."
 Cover Letter Prompt,Anschreiben-Prompt
 Cover letters need ERPNext.,Anschreiben benötigen ERPNext.
-Field {0} does not exist on Quotation or is not a text field.,"Das Feld {0} gibt es im Angebot nicht, oder es ist kein Textfeld."
-No cover letter field is configured in AI Writer Settings.,In den AI-Writer-Einstellungen ist kein Anschreiben-Feld eingetragen.
-Cover letters can only be written for draft quotations.,Anschreiben können nur für Angebotsentwürfe erstellt werden.
 Write Cover Letter,Anschreiben erstellen
 Writing cover letter…,Anschreiben wird erstellt …
 Cover Letter,Anschreiben
 Preview,Vorschau
 Apply,Anwenden
 Regenerate,Neu erzeugen
-Cover letter applied. Save the quotation to keep it.,"Anschreiben übernommen. Speichern Sie das Angebot, um es zu behalten."
 Actions,Aktionen
 Format,Formatierung
 Letter,Brief,AI Writer
 Letter,Brief
 Structured,Gegliedert
 Cover Letter Format,Anschreiben-Format
-"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat neuer Anschreiben; es lässt sich in der Vorschau umschalten. Brief: Anrede und Absätze. Gegliedert: Titel als Betreff und kurze Abschnitte zu Ausgangslage, Leistungen und Nutzen."
-Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,"Gemeinsame Regeln für beide Formate. Leer lassen, um den Standard wiederherzustellen. Preise und Summen werden nie mitgesendet."
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","Im Angebotsentwurf schreibt Aktionen → Anschreiben erstellen den Brieftext aus Kunde, Ansprechpartner und Positionen, als Brief oder mit Überschriften (Format in der Vorschau). Preise und Summen werden nie mitgesendet. Notizen, die schon im Feld stehen, fließen in das Anschreiben ein."
 Preview Before Replacing,Vorschau vor dem Ersetzen
 "Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Zeigt das Ergebnis mit hervorgehobenen Änderungen, bevor es den Text ersetzt, mit Übernehmen, Neu erzeugen und Verwerfen."
 Long texts,Lange Texte
@@ -214,3 +205,27 @@ There are no emails or comments to summarize yet.,Es gibt noch keine E-Mails ode
 Maximum Words must be between {0} and {1}.,Die maximale Wortzahl muss zwischen {0} und {1} liegen.
 Instructions for summaries of emails and comments. Leave empty to restore the default.,Anweisungen für Zusammenfassungen von E-Mails und Kommentaren. Leer lassen stellt den Standard wieder her.
 AI summary · {0} · {1},KI-Zusammenfassung · {0} · {1}
+Reminder Text,Mahntext
+Write Reminder Text,Mahntext erstellen
+Tone,Ton
+Friendly,Freundlich
+Firm,Bestimmt
+Purpose,Zweck
+What the letter is for. Leave empty for the default of the document type.,Wofür das Schreiben gedacht ist. Leer lassen verwendet den Standard der Belegart.
+Cover letters can only be written for drafts.,Anschreiben lassen sich nur für Entwürfe erstellen.
+"In drafts of the enabled sales documents, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Payment reminders get a reminder text in a friendly or firm tone. Prices and amounts are only sent where a manager allowed it. Notes already in the field are worked into the letter.","In Entwürfen der freigeschalteten Verkaufsbelege schreibt Aktionen → Anschreiben erstellen den Text aus Kunde, Ansprechpartner und Positionen, als Brief oder gegliedert (Format in der Vorschau). Mahnungen erhalten einen Mahntext in freundlichem oder bestimmtem Ton. Preise und Beträge werden nur gesendet, wo ein Manager es erlaubt hat. Notizen, die bereits im Feld stehen, werden eingearbeitet."
+AI Writer Cover Letter DocType,AI-Writer-Belegart für Anschreiben
+Cover Letters,Anschreiben
+Cover Letter Document Types,Belegarten für Anschreiben
+Target Field,Zielfeld
+Send Amounts,Beträge senden
+Shared rules for all document types and formats. Leave empty to restore the default.,Gemeinsame Regeln für alle Belegarten und Formate. Leer lassen stellt den Standard wieder her.
+Replaced by Cover Letter Document Types; kept so the v0_19 patch can move its value.,"Ersetzt durch Belegarten für Anschreiben; bleibt erhalten, damit der Patch v0_19 den Wert übernehmen kann."
+"Document types whose drafts offer Actions → Write Cover Letter, with the field that holds the letter. Needs ERPNext. Prices and amounts are only sent where Send Amounts is checked.","Belegarten, deren Entwürfe Aktionen → Anschreiben erstellen anbieten, mit dem Feld, das den Text aufnimmt. Benötigt ERPNext. Preise und Beträge werden nur gesendet, wo „Beträge senden“ angehakt ist."
+No cover letter field is configured for {0} in AI Writer Settings.,Für {0} ist in den AI-Writer-Einstellungen kein Anschreiben-Feld eingerichtet.
+Cover letters are not available for {0}.,Anschreiben sind für {0} nicht verfügbar.
+Text applied. Save the document to keep it.,"Text übernommen. Speichern Sie den Beleg, um ihn zu behalten."
+"Fieldname of the text field that holds the letter in the print format, e.g. a custom field; for Dunning e.g. body_text.","Feldname des Textfelds, das den Text im Druckformat enthält, z. B. ein eigenes Feld; bei Mahnungen z. B. body_text."
+Field {0} does not exist on {1} or is not a text field.,"Das Feld {0} gibt es in {1} nicht, oder es ist kein Textfeld."
+Default format of new letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections. Payment reminders use the tones Friendly and Firm instead.,Standardformat neuer Schreiben; in der Vorschau umschaltbar. Brief: Anrede und Absätze. Gegliedert: Titel als Betreff und kurze Abschnitte. Mahnungen verwenden stattdessen die Töne Freundlich und Bestimmt.
+"Also send prices, totals and outstanding amounts to the AI service.","Auch Preise, Summen und offene Beträge an den KI-Dienst senden."
