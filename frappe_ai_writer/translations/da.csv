@@ -179,3 +179,8 @@ The usage per month and user is shown in AI Writer Settings.,Forbruget pr. måne
 Monthly budget: {0} of {1} used ({2} %),Månedligt budget: {0} af {1} brugt ({2} %)
 New requests are refused until next month or until the budget is raised.,"Nye anmodninger afvises indtil næste måned, eller indtil budgettet hæves."
 Requests are still processed because Block When Exceeded is off.,"Anmodninger behandles stadig, fordi »Spær ved overskridelse« er slået fra."
+AI Writer: correct the focused field,AI Writer: ret det aktive felt
+AI Writer: open the menu of the focused field,AI Writer: åbn menuen for det aktive felt
+"Corrects the field that has the cursor, like a click on ✦.","Retter feltet, hvor markøren står, ligesom et klik på ✦."
+Opens the menu of that field; choose a mode with the arrow keys and Enter.,Åbner menuen for feltet; vælg en tilstand med piletasterne og Enter.
+Keyboard Shortcuts,Tastaturgenveje

@@ -179,3 +179,8 @@ The usage per month and user is shown in AI Writer Settings.,The usage per month
 Monthly budget: {0} of {1} used ({2} %),Monthly budget: {0} of {1} used ({2} %)
 New requests are refused until next month or until the budget is raised.,New requests are refused until next month or until the budget is raised.
 Requests are still processed because Block When Exceeded is off.,Requests are still processed because Block When Exceeded is off.
+AI Writer: correct the focused field,AI Writer: correct the focused field
+AI Writer: open the menu of the focused field,AI Writer: open the menu of the focused field
+"Corrects the field that has the cursor, like a click on ✦.","Corrects the field that has the cursor, like a click on ✦."
+Opens the menu of that field; choose a mode with the arrow keys and Enter.,Opens the menu of that field; choose a mode with the arrow keys and Enter.
+Keyboard Shortcuts,Keyboard Shortcuts

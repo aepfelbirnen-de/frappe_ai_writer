@@ -51,8 +51,14 @@
 
 	const is_enabled = () => Boolean(frappe.boot.ai_writer?.enabled);
 
+	// Editable element (Quill root or textarea) -> its button group, and group -> its actions,
+	// so keyboard shortcuts can find the field that has focus. Weak, so closed forms leave nothing behind.
+	const groups_by_element = new WeakMap();
+	const group_actions = new WeakMap();
+
 	localize_change_log();
 	setup_cover_letter();
+	setup_shortcuts();
 	$(document).one("app_ready", () => setTimeout(show_change_log_to_writers, 1000));
 
 	patch(frappe.ui.form.ControlTextEditor, "make_quill_editor", function () {
@@ -272,6 +278,34 @@
 		return roles.includes("System Manager") || (frappe_major >= 16 && roles.includes("Workspace Manager"));
 	}
 
+	// Registered with Frappe so they appear in its keyboard shortcut dialog (Shift+/). Frappe maps
+	// Cmd to Ctrl on macOS. Without a focused AI Writer field the browser keeps the key.
+	function setup_shortcuts() {
+		if (!frappe.ui.keys?.add_shortcut) return;
+		const shortcuts = [
+			["shift+ctrl+k", "correct", __("AI Writer: correct the focused field")],
+			["shift+ctrl+l", "open_menu", __("AI Writer: open the menu of the focused field")],
+		];
+		for (const [shortcut, action, description] of shortcuts) {
+			frappe.ui.keys.add_shortcut({
+				shortcut,
+				description,
+				ignore_inputs: true,
+				condition: is_enabled,
+				action: () => {
+					const group = groups_by_element.get(document.activeElement);
+					if (!group?.isConnected) return false;
+					group_actions.get(group)[action]();
+				},
+			});
+		}
+	}
+
+	function shortcut_label(key) {
+		// Same notation as Frappe's shortcut dialog.
+		return frappe.utils.is_mac() ? `⇧⌘${key}` : `Ctrl+Shift+${key}`;
+	}
+
 	function patch(Control, method, after) {
 		// Own-property check: ControlTextEditor inherits from ControlText, so an inherited flag
 		// would make the second patch skip itself.
@@ -293,15 +327,20 @@
 		if (!host || host.querySelector(".ai-writer-group")) return;
 
 		const class_name = inline ? "ai-writer-group ai-writer-inline" : "ql-formats ai-writer-group";
-		host.append(make_group(class_name, quill_adapter(quill, context)));
+		const group = make_group(class_name, quill_adapter(quill, context));
+		host.append(group);
+		groups_by_element.set(quill.root, group);
 		if (inline) quill.container.classList.add("ai-writer-has-inline");
 	}
 
 	function attach_to_textarea(textarea, host, context) {
 		if (!host || host.querySelector(".ai-writer-group")) return;
-		host.append(
-			make_group("ai-writer-group ai-writer-inline ai-writer-textarea", textarea_adapter(textarea, context))
+		const group = make_group(
+			"ai-writer-group ai-writer-inline ai-writer-textarea",
+			textarea_adapter(textarea, context)
 		);
+		host.append(group);
+		groups_by_element.set(textarea, group);
 		host.classList.add("ai-writer-has-textarea");
 	}
 
@@ -364,7 +403,16 @@
 			{ divider: true },
 			{ label: __("Help"), icon: help_icon(), class_name: "ai-writer-menu-help", action: show_help }
 		);
-		group.append(main_button, menu_button, make_menu(group, menu_button, mode_items));
+		const mode_menu = make_menu(group, menu_button, mode_items);
+		group.append(main_button, menu_button, mode_menu);
+		group_actions.set(group, {
+			correct: () => correct(adapter, group, "correct"),
+			open_menu: () => {
+				if (adapter.is_disabled() || group.classList.contains("ai-writer-busy")) return;
+				if (mode_menu.hidden) menu_button.click();
+				mode_menu.querySelector(".ai-writer-menu-item")?.focus();
+			},
+		});
 
 		const languages = frappe.boot.ai_writer?.languages || [];
 		if (languages.length) {
@@ -397,8 +445,19 @@
 			if (!menu.contains(event.target) && !trigger.contains(event.target)) close();
 		};
 		const on_escape = (event) => {
-			if (event.key === "Escape") close();
+			if (event.key !== "Escape") return;
+			const had_focus = menu.contains(document.activeElement);
+			close();
+			if (had_focus) trigger.focus();
 		};
+		menu.addEventListener("keydown", (event) => {
+			if (!["ArrowDown", "ArrowUp"].includes(event.key)) return;
+			event.preventDefault();
+			const buttons = [...menu.querySelectorAll(".ai-writer-menu-item")];
+			const step = event.key === "ArrowDown" ? 1 : -1;
+			const index = buttons.indexOf(document.activeElement);
+			buttons[(index + step + buttons.length) % buttons.length]?.focus();
+		});
 
 		for (const item of items) {
 			if (item.divider) {
@@ -529,6 +588,14 @@
 			);
 		}
 
+		const shortcuts = make_element("dl", "ai-writer-help-shortcuts");
+		shortcuts.append(
+			make_element("dt", null, shortcut_label("K")),
+			make_element("dd", null, __("Corrects the field that has the cursor, like a click on ✦.")),
+			make_element("dt", null, shortcut_label("L")),
+			make_element("dd", null, __("Opens the menu of that field; choose a mode with the arrow keys and Enter."))
+		);
+
 		const notes = make_element("ul", "ai-writer-help-notes");
 		for (const note of [
 			__('Text between /" and "/ is never corrected or translated, for example /"Müller & Söhne GmbH"/.'),
@@ -541,7 +608,7 @@
 			notes.append(make_element("li", null, note));
 		}
 
-		root.append(modes, notes);
+		root.append(modes, make_element("h6", null, __("Keyboard Shortcuts")), shortcuts, notes);
 		return root;
 	}
 

@@ -18,6 +18,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - **Glossary and house style**: protected terms (product names, company names) are never changed or translated and, when correcting or translating, never reach the AI service; other terms come with a preferred spelling, notes and translations; short house rules apply to all texts
 - **Reply drafts** in the email composer: writes a reply from the incoming message (without quoted history) and its document, steered by optional notes
 - **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices, as a letter or structured with headings
+- **Keyboard shortcuts** for the field that has the cursor: Ctrl+Shift+K (⇧⌘K on macOS) corrects it, Ctrl+Shift+L (⇧⌘L) opens its menu; both are listed in Frappe's shortcut dialog (Shift+/)
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
 - A preview highlights the changes before they replace the text (Apply, Regenerate, Discard); one undo step (Cmd+Z / Ctrl+Z) reverts an applied correction
@@ -123,6 +124,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - **Glossar und Hausstil**: geschützte Begriffe (Produkt- und Firmennamen) werden nie verändert oder übersetzt und erreichen den KI-Dienst beim Korrigieren und Übersetzen nicht; übrige Begriffe bekommen eine bevorzugte Schreibweise, Hinweise und Übersetzungen; kurze Hausregeln gelten für alle Texte
 - **Antwortentwürfe** im E-Mail-Dialog: schreibt eine Antwort aus der eingegangenen Nachricht (ohne zitierten Verlauf) und ihrem Dokument, gesteuert durch optionale Stichpunkte
 - **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen, als Brief oder gegliedert mit Überschriften
+- **Tastenkürzel** für das Feld mit dem Cursor: Strg+Umschalt+K (⇧⌘K unter macOS) korrigiert es, Strg+Umschalt+L (⇧⌘L) öffnet sein Menü; beide stehen in Frappes Tastenkürzel-Übersicht (Umschalt+/)
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
 - Eine Vorschau hebt die Änderungen hervor, bevor sie den Text ersetzen (Übernehmen, Neu erzeugen, Verwerfen); ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine übernommene Korrektur zurück

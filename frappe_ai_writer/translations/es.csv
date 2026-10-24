@@ -179,3 +179,8 @@ The usage per month and user is shown in AI Writer Settings.,El consumo por mes 
 Monthly budget: {0} of {1} used ({2} %),Presupuesto mensual: {0} de {1} consumido ({2} %)
 New requests are refused until next month or until the budget is raised.,Las nuevas solicitudes se rechazan hasta el mes siguiente o hasta que se aumente el presupuesto.
 Requests are still processed because Block When Exceeded is off.,Las solicitudes se siguen procesando porque «Bloquear al superarlo» está desactivado.
+AI Writer: correct the focused field,AI Writer: corregir el campo activo
+AI Writer: open the menu of the focused field,AI Writer: abrir el menú del campo activo
+"Corrects the field that has the cursor, like a click on ✦.","Corrige el campo en el que está el cursor, como un clic en ✦."
+Opens the menu of that field; choose a mode with the arrow keys and Enter.,Abre el menú de ese campo; elija un modo con las flechas y Intro.
+Keyboard Shortcuts,Atajos de teclado

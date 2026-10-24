@@ -179,3 +179,8 @@ The usage per month and user is shown in AI Writer Settings.,Використа�
 Monthly budget: {0} of {1} used ({2} %),Місячний бюджет: використано {0} з {1} ({2} %)
 New requests are refused until next month or until the budget is raised.,Нові запити відхилятимуться до наступного місяця або до збільшення бюджету.
 Requests are still processed because Block When Exceeded is off.,"Запити й далі обробляються, бо «Блокувати при перевищенні» вимкнено."
+AI Writer: correct the focused field,AI Writer: виправити активне поле
+AI Writer: open the menu of the focused field,AI Writer: відкрити меню активного поля
+"Corrects the field that has the cursor, like a click on ✦.","Виправляє поле, де стоїть курсор, як натискання на ✦."
+Opens the menu of that field; choose a mode with the arrow keys and Enter.,Відкриває меню цього поля; оберіть режим стрілками та Enter.
+Keyboard Shortcuts,Клавіатурні скорочення
