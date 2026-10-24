@@ -23,6 +23,8 @@
   "column_break_factors",
   "expansion_factor_min",
   "expansion_factor_max",
+  "reply_section",
+  "reply_prompt",
   "cover_letter_section",
   "cover_letter_field",
   "cover_letter_style",
@@ -151,6 +153,17 @@
    "non_negative": 1
   },
   {
+   "fieldname": "reply_section",
+   "fieldtype": "Section Break",
+   "label": "Reply Draft"
+  },
+  {
+   "description": "Instructions for drafting replies in the email composer. Leave empty to restore the default.",
+   "fieldname": "reply_prompt",
+   "fieldtype": "Small Text",
+   "label": "Reply Prompt"
+  },
+  {
    "fieldname": "cover_letter_section",
    "fieldtype": "Section Break",
    "label": "Cover Letter (Quotation)"
@@ -228,7 +241,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 12:00:00.000000",
+ "modified": "2026-10-24 14:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

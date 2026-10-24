@@ -65,6 +65,15 @@ Answer only with the letter text."""
 COVER_LETTER_STYLES = ("Letter", "Structured")
 PREVIEW_MODES = ("Long texts", "Always", "Never")
 DEFAULT_PREVIEW_MIN_CHARS = 300
+DEFAULT_REPLY_PROMPT = """You write a reply to an email on behalf of the user.
+
+- Answer the questions and requests of the incoming message in a friendly, professional tone.
+- Write in the language of the incoming message.
+- Use only facts from the incoming message, the document data and the notes. Do not promise dates, prices, deliveries or other commitments that are not in the notes.
+- If information is missing to answer a question, say that you will check it and get back, instead of guessing.
+- Start with a suitable salutation. Do not add a sign-off with a name; the signature is added separately.
+- If notes are given, follow them; they take priority over everything else.
+Answer only with the reply text."""
 DEFAULT_EXPANSION_FACTORS = (4, 10)
 COVER_LETTER_FIELD_TYPES = ("Text Editor", "Small Text", "Text", "Long Text", "HTML Editor")
 MAX_EXPANSION_FACTOR = 50
@@ -104,6 +113,7 @@ class AIWriterSettings(Document):
         preview_min_chars: DF.Int
         preview_mode: DF.Literal["Long texts", "Always", "Never"]
         provider: DF.Literal["Anthropic", "OpenAI", "Ollama", "OpenAI-compatible"]
+        reply_prompt: DF.SmallText | None
         model: DF.Data | None
         system_prompt: DF.SmallText | None
         track_usage_per_user: DF.Check
@@ -131,6 +141,8 @@ class AIWriterSettings(Document):
             self.system_prompt = DEFAULT_SYSTEM_PROMPT
         if not (self.expand_prompt or "").strip():
             self.expand_prompt = DEFAULT_EXPAND_PROMPT
+        if not (self.reply_prompt or "").strip():
+            self.reply_prompt = DEFAULT_REPLY_PROMPT
         if not (self.cover_letter_prompt or "").strip():
             self.cover_letter_prompt = DEFAULT_COVER_LETTER_PROMPT
         if self.cover_letter_style not in COVER_LETTER_STYLES:

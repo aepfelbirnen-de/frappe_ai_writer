@@ -201,8 +201,8 @@
 	text-decoration: none;
 }
 
-/* Cover letter button next to the label of the quotation's cover letter field. */
-.ai-writer-cover-letter-btn {
+/* Buttons next to a field label (quotation cover letter, reply draft in the email composer). */
+.ai-writer-field-btn {
 	float: right;
 	display: inline-flex;
 	align-items: center;
@@ -210,16 +210,16 @@
 	margin-bottom: var(--margin-xs, 4px);
 }
 
-.ai-writer-cover-letter-btn svg {
+.ai-writer-field-btn svg {
 	width: 14px;
 	height: 14px;
 }
 
-.ai-writer-cover-letter-btn svg .ql-fill {
+.ai-writer-field-btn svg .ql-fill {
 	fill: currentColor;
 }
 
-.ai-writer-cover-letter-btn .ai-writer-spark {
+.ai-writer-field-btn .ai-writer-spark {
 	opacity: 0;
 }
 

@@ -9,6 +9,7 @@
 	const PATCHED = Symbol.for("frappe_ai_writer.patched");
 	const METHOD = "frappe_ai_writer.api.correction.correct_text";
 	const COVER_LETTER_METHOD = "frappe_ai_writer.api.cover_letter.write_cover_letter";
+	const REPLY_METHOD = "frappe_ai_writer.api.reply.draft_reply";
 	const MODES = [
 		{
 			mode: "correct",
@@ -68,6 +69,11 @@
 		}
 	});
 
+	// Reply drafts: only offered when the composer answers a specific email.
+	patch(frappe.views.CommunicationComposer, "make", function () {
+		if (this.is_a_reply && this.last_email?.name) attach_reply_button(this);
+	});
+
 	// Tells the model what the text is for (e.g. "Description · Task"), so written-out notes fit the field.
 	function field_context(control) {
 		const label = control.df?.label || control.df?.fieldtype;
@@ -97,7 +103,7 @@
 		frappe.ui.form.on("Quotation", {
 			refresh(frm) {
 				const field = frm.fields_dict[fieldname];
-				field?.$wrapper[0].querySelector(".ai-writer-cover-letter-btn")?.remove();
+				field?.$wrapper[0].querySelector(".ai-writer-field-btn")?.remove();
 				if (!is_enabled() || frm.doc.docstatus !== 0 || !field) return;
 				frm.add_custom_button(__("Write Cover Letter"), () => write_cover_letter(frm, fieldname), __("Actions"));
 
@@ -106,7 +112,7 @@
 				if (!label) return;
 				const content = document.createDocumentFragment();
 				content.append(sparkle_icon(), document.createTextNode(__("Write Cover Letter")));
-				const button = make_button("btn btn-xs btn-default ai-writer-cover-letter-btn", content);
+				const button = make_button("btn btn-xs btn-default ai-writer-field-btn", content);
 				button.addEventListener("click", () => write_cover_letter(frm, fieldname));
 				label.after(button);
 			},
@@ -174,6 +180,62 @@
 				notes: frm.doc[fieldname] || "",
 				style,
 			});
+		} catch (error) {
+			console.error(error);
+			return null;
+		} finally {
+			frappe.dom.unfreeze();
+		}
+	}
+
+	function attach_reply_button(composer) {
+		const field = composer.dialog?.fields_dict?.content;
+		const label = field?.$wrapper[0].querySelector(".control-label");
+		if (!label || field.$wrapper[0].querySelector(".ai-writer-reply-btn")) return;
+		const content = document.createDocumentFragment();
+		content.append(sparkle_icon(), document.createTextNode(__("Draft Reply")));
+		const button = make_button("btn btn-xs btn-default ai-writer-field-btn ai-writer-reply-btn", content);
+		button.addEventListener("click", () => draft_reply(composer));
+		label.after(button);
+	}
+
+	async function draft_reply(composer) {
+		const communication = composer.last_email.name;
+		const reply = await request_reply(communication, "");
+		if (reply === null) return;
+
+		const dialog = new frappe.ui.Dialog({
+			title: __("Reply Draft"),
+			size: "large",
+			fields: [
+				{
+					fieldtype: "Small Text",
+					fieldname: "notes",
+					label: __("Notes for the Reply"),
+					description: __("Optional points the reply should cover, e.g. dates or decisions. Regenerate uses them."),
+				},
+				{ fieldtype: "Text Editor", fieldname: "reply", label: __("Preview"), default: reply },
+			],
+			primary_action_label: __("Insert"),
+			primary_action(values) {
+				// Inserted at the top, so the signature and the quoted message below stay untouched.
+				composer.dialog.fields_dict.content.quill?.clipboard.dangerouslyPasteHTML(0, values.reply || "", "user");
+				dialog.hide();
+			},
+			secondary_action_label: __("Regenerate"),
+			async secondary_action() {
+				const html = await request_reply(communication, dialog.get_value("notes") || "");
+				if (html !== null) dialog.set_value("reply", html);
+			},
+		});
+		dialog.show();
+	}
+
+	// Returns the sanitized reply HTML, or null if the request failed (the server message is already shown).
+	async function request_reply(communication, notes) {
+		frappe.dom.freeze(__("Drafting reply…"));
+		try {
+			return await frappe.xcall(REPLY_METHOD, { communication, notes });
 		} catch (error) {
 			console.error(error);
 			return null;
@@ -444,6 +506,16 @@
 			)
 		);
 
+		modes.append(
+			make_element("dt", null, __("Draft Reply")),
+			make_element(
+				"dd",
+				null,
+				__(
+					"When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message."
+				)
+			)
+		);
 		if (frappe.boot.ai_writer?.cover_letter_field) {
 			modes.append(
 				make_element("dt", null, __("Write Cover Letter")),

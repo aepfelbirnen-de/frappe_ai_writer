@@ -135,3 +135,12 @@ Shorten,Kürzen
 Plain language,Einfache Sprache
 "Says the same with clearly fewer words and keeps every name, number and date.","Sagt dasselbe mit deutlich weniger Worten und behält jeden Namen, jede Zahl und jedes Datum."
 "Rewrites the text in short, simple sentences and explains technical terms, without changing the facts.","Schreibt den Text in kurzen, einfachen Sätzen neu und erklärt Fachbegriffe, ohne die Fakten zu ändern."
+Draft Reply,Antwort entwerfen
+Reply Draft,Antwortentwurf
+Notes for the Reply,Stichpunkte für die Antwort
+"Optional points the reply should cover, e.g. dates or decisions. Regenerate uses them.","Optionale Punkte, auf die die Antwort eingehen soll, z. B. Termine oder Entscheidungen. Neu erzeugen berücksichtigt sie."
+Insert,Einfügen
+Drafting reply…,Antwort wird entworfen …
+"When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.",Beim Antworten auf eine E-Mail schreibt Antwort entwerfen eine Antwort aus der eingegangenen Nachricht und dem Dokument. Stichpunkte steuern den Inhalt; der Entwurf wird über der zitierten Nachricht eingefügt.
+Reply Prompt,Antwort-Prompt
+Instructions for drafting replies in the email composer. Leave empty to restore the default.,"Anweisungen für Antwortentwürfe im E-Mail-Dialog. Leer lassen, um den Standard wiederherzustellen."

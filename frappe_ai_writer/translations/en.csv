@@ -135,3 +135,12 @@ Shorten,Shorten
 Plain language,Plain language
 "Says the same with clearly fewer words and keeps every name, number and date.","Says the same with clearly fewer words and keeps every name, number and date."
 "Rewrites the text in short, simple sentences and explains technical terms, without changing the facts.","Rewrites the text in short, simple sentences and explains technical terms, without changing the facts."
+Draft Reply,Draft Reply
+Reply Draft,Reply Draft
+Notes for the Reply,Notes for the Reply
+"Optional points the reply should cover, e.g. dates or decisions. Regenerate uses them.","Optional points the reply should cover, e.g. dates or decisions. Regenerate uses them."
+Insert,Insert
+Drafting reply…,Drafting reply…
+"When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.","When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message."
+Reply Prompt,Reply Prompt
+Instructions for drafting replies in the email composer. Leave empty to restore the default.,Instructions for drafting replies in the email composer. Leave empty to restore the default.

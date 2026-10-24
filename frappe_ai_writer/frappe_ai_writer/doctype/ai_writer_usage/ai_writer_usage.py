@@ -28,7 +28,9 @@ class AIWriterUsage(Document):
 
         date: DF.Date
         input_tokens: DF.Int
-        mode: DF.Literal["correct", "expand", "formal", "casual", "translate", "cover_letter", "shorten", "plain"]
+        mode: DF.Literal[
+            "correct", "expand", "formal", "casual", "translate", "cover_letter", "shorten", "plain", "reply"
+        ]
         model: DF.Data | None
         output_tokens: DF.Int
         requests: DF.Int

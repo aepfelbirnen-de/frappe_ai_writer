@@ -135,3 +135,12 @@ Shorten,Raccourcir
 Plain language,Langage simple
 "Says the same with clearly fewer words and keeps every name, number and date.","Dit la même chose avec nettement moins de mots et conserve chaque nom, nombre et date."
 "Rewrites the text in short, simple sentences and explains technical terms, without changing the facts.","Réécrit le texte en phrases courtes et simples et explique les termes techniques, sans changer les faits."
+Draft Reply,Rédiger une réponse
+Reply Draft,Brouillon de réponse
+Notes for the Reply,Notes pour la réponse
+"Optional points the reply should cover, e.g. dates or decisions. Regenerate uses them.","Points facultatifs que la réponse doit aborder, p. ex. des dates ou des décisions. Régénérer en tient compte."
+Insert,Insérer
+Drafting reply…,Rédaction de la réponse…
+"When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.","Lors d'une réponse à un e-mail, Rédiger une réponse écrit une réponse à partir du message reçu et du document. Les notes orientent le contenu ; le brouillon est inséré au-dessus du message cité."
+Reply Prompt,Prompt de réponse
+Instructions for drafting replies in the email composer. Leave empty to restore the default.,Instructions pour rédiger des réponses dans l'éditeur d'e-mail. Laisser vide pour rétablir la valeur par défaut.

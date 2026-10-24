@@ -15,6 +15,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Turns bullet-point notes into detailed, complete text that explains terms and background, automatically or via **Write out**, without inventing specific facts
 - **Translate** button (文A) with target languages chosen by a manager in AI Writer Settings
 - Text between `/"` and `"/` is never corrected or translated, e.g. `/"Müller & Söhne GmbH"/`; it does not reach the AI service
+- **Reply drafts** in the email composer: writes a reply from the incoming message (without quoted history) and its document, steered by optional notes
 - **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices, as a letter or structured with headings
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
@@ -115,6 +116,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - Formuliert Stichpunkte zu ausführlichem, vollständigem Text aus und erklärt dabei Begriffe und Hintergründe, automatisch oder über **Ausformulieren**, ohne konkrete Fakten zu erfinden
 - **Übersetzen**-Button (文A) mit Zielsprachen, die ein Manager in den AI-Writer-Einstellungen festlegt
 - Text zwischen `/"` und `"/` wird nie korrigiert oder übersetzt, z. B. `/"Müller & Söhne GmbH"/`; er gelangt nicht zum KI-Dienst
+- **Antwortentwürfe** im E-Mail-Dialog: schreibt eine Antwort aus der eingegangenen Nachricht (ohne zitierten Verlauf) und ihrem Dokument, gesteuert durch optionale Stichpunkte
 - **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen, als Brief oder gegliedert mit Überschriften
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
