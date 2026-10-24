@@ -54,6 +54,19 @@ class TestAIWriterSettings(FrappeTestCase):
                 settings.update({"expansion_factor_min": low, "expansion_factor_max": high})
                 self.assertRaises(frappe.ValidationError, settings.save)
 
+    def test_preview_defaults_and_boot_values(self) -> None:
+        from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
+            get_preview_settings,
+        )
+
+        settings = frappe.get_single("AI Writer Settings")
+        settings.update({"preview_mode": "Bogus", "preview_min_chars": None})
+        settings.save()
+        self.assertEqual((settings.preview_mode, settings.preview_min_chars), ("Long texts", 300))
+        settings.update({"preview_mode": "Always", "preview_min_chars": 50})
+        settings.save()
+        self.assertEqual(get_preview_settings(), {"mode": "Always", "min_chars": 50})
+
     def test_invalid_model_name_is_rejected(self) -> None:
         settings = frappe.get_single("AI Writer Settings")
         settings.model = "../../etc/passwd"

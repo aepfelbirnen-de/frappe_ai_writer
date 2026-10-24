@@ -120,3 +120,14 @@ Cover Letter Format,Cover Letter Format
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits."
 Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.
 "In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter."
+Preview Before Replacing,Preview Before Replacing
+"Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard."
+Long texts,Long texts
+Always,Always
+Never,Never
+Minimum Length for Preview,Minimum Length for Preview
+Texts with at least this many characters are shown in the preview first.,Texts with at least this many characters are shown in the preview first.
+Before,Before
+After,After
+"Removed text is struck through, added text is highlighted.","Removed text is struck through, added text is highlighted."
+"Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them."

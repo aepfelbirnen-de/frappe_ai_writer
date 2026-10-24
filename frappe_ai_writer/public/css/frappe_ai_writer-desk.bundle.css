@@ -180,6 +180,27 @@
 	height: 14px;
 }
 
+/* Preview of changes before they replace the text. */
+.ai-writer-preview .ai-writer-preview-text {
+	max-height: 60vh;
+	overflow: auto;
+	white-space: pre-wrap;
+	line-height: 1.6;
+	color: var(--text-color);
+}
+
+.ai-writer-preview del {
+	color: var(--red-600, #dc2626);
+	background: rgba(220, 38, 38, 0.12);
+	text-decoration: line-through;
+}
+
+.ai-writer-preview ins {
+	color: var(--green-700, #15803d);
+	background: rgba(22, 163, 74, 0.16);
+	text-decoration: none;
+}
+
 /* Cover letter button next to the label of the quotation's cover letter field. */
 .ai-writer-cover-letter-btn {
 	float: right;

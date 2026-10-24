@@ -18,7 +18,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices, as a letter or structured with headings
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
-- One undo step (Cmd+Z / Ctrl+Z) reverts a correction
+- A preview highlights the changes before they replace the text (Apply, Regenerate, Discard); one undo step (Cmd+Z / Ctrl+Z) reverts an applied correction
 - Detects the language of the text and answers in the same language
 - Configurable model, effort and system prompt
 - Role-based access; translations for English, German, Spanish, French, Ukrainian and Danish
@@ -60,6 +60,7 @@ bench --site your-site migrate
    - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
    - **Cover Letter Field** (ERPNext): the Quotation text field that holds the cover letter in your print format, e.g. a custom field; leave empty to hide the button. **Cover Letter Format** sets the default (Letter or Structured), **Cover Letter Prompt** the shared rules
+   - **Preview Before Replacing**: for long texts (default, from 300 characters), always or never
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
    - **Usage**: token usage today, this month and in total, with estimated costs based on the configured prices; **Track Usage per User** (off by default) adds a per-user table
 4. Give users the **AI Writer User** role. Users without it do not see the button.
@@ -117,7 +118,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen, als Brief oder gegliedert mit Überschriften
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
-- Ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine Korrektur zurück
+- Eine Vorschau hebt die Änderungen hervor, bevor sie den Text ersetzen (Übernehmen, Neu erzeugen, Verwerfen); ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine übernommene Korrektur zurück
 - Erkennt die Sprache des Textes und antwortet in derselben Sprache
 - Modell, Denkaufwand und System-Prompt sind einstellbar
 - Zugriff über Rollen; Übersetzungen für Englisch, Deutsch, Spanisch, Französisch, Ukrainisch und Dänisch
@@ -159,6 +160,7 @@ bench --site ihre-site migrate
    - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
    - **Anschreiben-Feld** (ERPNext): das Textfeld im Angebot, das im Druckformat das Anschreiben enthält, z. B. ein eigenes Feld; leer lassen blendet den Button aus. **Anschreiben-Format** legt den Standard fest (Brief oder Gegliedert), **Anschreiben-Prompt** die gemeinsamen Regeln
+   - **Vorschau vor dem Ersetzen**: bei langen Texten (Standard, ab 300 Zeichen), immer oder nie
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
    - **Verbrauch**: Token-Verbrauch heute, im laufenden Monat und gesamt, mit geschätzten Kosten anhand der eingestellten Preise; **Verbrauch pro Benutzer erfassen** (standardmäßig aus) ergänzt eine Tabelle pro Benutzer
 4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.

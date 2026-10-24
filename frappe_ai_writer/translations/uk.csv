@@ -120,3 +120,14 @@ Cover Letter Format,Формат супровідного листа
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Типовий формат нових листів; його можна змінити в попередньому перегляді. Лист: звертання й абзаци. Структурований: заголовок як тема та короткі розділи про вихідну ситуацію, послуги й переваги."
 Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,"Спільні правила для обох форматів. Залиште порожнім, щоб відновити типові. Ціни та суми ніколи не надсилаються."
 "In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","У чернетці пропозиції Дії → Написати супровідний лист створює текст на основі клієнта, контактної особи та позицій — як лист або із заголовками (Формат у попередньому перегляді). Ціни й суми ніколи не надсилаються. Нотатки, що вже є в полі, враховуються в листі."
+Preview Before Replacing,Попередній перегляд перед заміною
+"Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Показує результат із виділеними змінами, перш ніж він замінить текст, з кнопками Застосувати, Згенерувати знову та Відхилити."
+Long texts,Довгі тексти
+Always,Завжди
+Never,Ніколи
+Minimum Length for Preview,Мінімальна довжина для попереднього перегляду
+Texts with at least this many characters are shown in the preview first.,Тексти щонайменше з такою кількістю символів спочатку показуються в попередньому перегляді.
+Before,До
+After,Після
+"Removed text is struck through, added text is highlighted.","Видалений текст закреслено, доданий — виділено."
+"Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Залежно від налаштувань AI Writer результати спочатку показуються в попередньому перегляді, де їх можна застосувати, згенерувати знову або відхилити."

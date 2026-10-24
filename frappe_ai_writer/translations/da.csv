@@ -120,3 +120,14 @@ Cover Letter Format,Format for følgebrev
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat for nye følgebreve; det kan skiftes i forhåndsvisningen. Brev: hilsen og afsnit. Struktureret: titel som emne og korte afsnit om udgangspunkt, ydelser og fordele."
 Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Fælles regler for begge formater. Lad feltet være tomt for at gendanne standarden. Priser og totaler sendes aldrig.
 "In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","I et tilbud i kladde skriver Handlinger → Skriv følgebrev teksten ud fra kunde, kontaktperson og linjer, som brev eller med overskrifter (Format i forhåndsvisningen). Priser og totaler sendes aldrig. Noter, der allerede står i feltet, indarbejdes i brevet."
+Preview Before Replacing,Forhåndsvisning før erstatning
+"Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Viser resultatet med ændringerne fremhævet, før det erstatter teksten, med Anvend, Generér igen og Kassér."
+Long texts,Lange tekster
+Always,Altid
+Never,Aldrig
+Minimum Length for Preview,Minimumslængde for forhåndsvisning
+Texts with at least this many characters are shown in the preview first.,Tekster med mindst så mange tegn vises først i forhåndsvisningen.
+Before,Før
+After,Efter
+"Removed text is struck through, added text is highlighted.","Fjernet tekst er gennemstreget, tilføjet tekst er fremhævet."
+"Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Afhængigt af AI Writer-indstillingerne vises resultaterne først i en forhåndsvisning, hvor du kan anvende, generere dem igen eller kassere dem."

@@ -120,3 +120,14 @@ Cover Letter Format,Format de la lettre
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Format par défaut des nouvelles lettres ; il peut être changé dans l'aperçu. Lettre : formule d'appel et paragraphes. Structuré : titre comme objet et courtes sections sur la situation, les prestations et les avantages."
 Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Règles communes aux deux formats. Laisser vide pour rétablir la valeur par défaut. Les prix et totaux ne sont jamais envoyés.
 "In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","Dans un devis brouillon, Actions → Rédiger la lettre écrit le texte à partir du client, du contact et des lignes, sous forme de lettre ou avec des titres (Format dans l'aperçu). Les prix et totaux ne sont jamais envoyés. Les notes déjà présentes dans le champ sont intégrées à la lettre."
+Preview Before Replacing,Aperçu avant remplacement
+"Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Affiche le résultat avec les modifications mises en évidence avant qu'il ne remplace le texte, avec Appliquer, Régénérer et Ignorer."
+Long texts,Textes longs
+Always,Toujours
+Never,Jamais
+Minimum Length for Preview,Longueur minimale pour l'aperçu
+Texts with at least this many characters are shown in the preview first.,Les textes d'au moins ce nombre de caractères sont d'abord affichés dans l'aperçu.
+Before,Avant
+After,Après
+"Removed text is struck through, added text is highlighted.","Le texte supprimé est barré, le texte ajouté est mis en évidence."
+"Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Selon les paramètres d'AI Writer, les résultats s'affichent d'abord dans un aperçu où vous pouvez les appliquer, les régénérer ou les ignorer."

@@ -120,3 +120,14 @@ Cover Letter Format,Anschreiben-Format
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat neuer Anschreiben; es lässt sich in der Vorschau umschalten. Brief: Anrede und Absätze. Gegliedert: Titel als Betreff und kurze Abschnitte zu Ausgangslage, Leistungen und Nutzen."
 Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,"Gemeinsame Regeln für beide Formate. Leer lassen, um den Standard wiederherzustellen. Preise und Summen werden nie mitgesendet."
 "In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","Im Angebotsentwurf schreibt Aktionen → Anschreiben erstellen den Brieftext aus Kunde, Ansprechpartner und Positionen, als Brief oder mit Überschriften (Format in der Vorschau). Preise und Summen werden nie mitgesendet. Notizen, die schon im Feld stehen, fließen in das Anschreiben ein."
+Preview Before Replacing,Vorschau vor dem Ersetzen
+"Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Zeigt das Ergebnis mit hervorgehobenen Änderungen, bevor es den Text ersetzt, mit Übernehmen, Neu erzeugen und Verwerfen."
+Long texts,Lange Texte
+Always,Immer
+Never,Nie
+Minimum Length for Preview,Mindestlänge für die Vorschau
+Texts with at least this many characters are shown in the preview first.,Texte mit mindestens so vielen Zeichen werden zuerst in der Vorschau gezeigt.
+Before,Vorher
+After,Nachher
+"Removed text is struck through, added text is highlighted.","Entfernter Text ist durchgestrichen, neuer Text hervorgehoben."
+"Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Je nach AI-Writer-Einstellungen erscheinen Ergebnisse zuerst in einer Vorschau, in der Sie sie übernehmen, neu erzeugen oder verwerfen können."

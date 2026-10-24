@@ -63,6 +63,8 @@ PREVIOUS_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It 
 - Keep it to roughly 80 to 180 words.
 Answer only with the letter text."""
 COVER_LETTER_STYLES = ("Letter", "Structured")
+PREVIEW_MODES = ("Long texts", "Always", "Never")
+DEFAULT_PREVIEW_MIN_CHARS = 300
 DEFAULT_EXPANSION_FACTORS = (4, 10)
 COVER_LETTER_FIELD_TYPES = ("Text Editor", "Small Text", "Text", "Long Text", "HTML Editor")
 MAX_EXPANSION_FACTOR = 50
@@ -99,6 +101,8 @@ class AIWriterSettings(Document):
         expansion_factor_min: DF.Int
         input_price_per_million: DF.Float
         output_price_per_million: DF.Float
+        preview_min_chars: DF.Int
+        preview_mode: DF.Literal["Long texts", "Always", "Never"]
         provider: DF.Literal["Anthropic", "OpenAI", "Ollama", "OpenAI-compatible"]
         model: DF.Data | None
         system_prompt: DF.SmallText | None
@@ -132,6 +136,10 @@ class AIWriterSettings(Document):
         if self.cover_letter_style not in COVER_LETTER_STYLES:
             self.cover_letter_style = COVER_LETTER_STYLES[0]
         self.validate_cover_letter_field()
+        if self.preview_mode not in PREVIEW_MODES:
+            self.preview_mode = PREVIEW_MODES[0]
+        if self.preview_min_chars is None:
+            self.preview_min_chars = DEFAULT_PREVIEW_MIN_CHARS
 
         self.expansion_factor_min = cint(self.expansion_factor_min) or DEFAULT_EXPANSION_FACTORS[0]
         self.expansion_factor_max = cint(self.expansion_factor_max) or DEFAULT_EXPANSION_FACTORS[1]
@@ -200,3 +208,11 @@ def get_cover_letter_field() -> str | None:
     """Return the configured Quotation cover letter field, or None when unset or ERPNext is missing."""
     fieldname = frappe.get_cached_doc("AI Writer Settings").cover_letter_field
     return fieldname if fieldname and frappe.db.exists("DocType", "Quotation") else None
+
+
+def get_preview_settings() -> dict:
+    """Return the preview mode and threshold for the desk client, with defaults for unset values."""
+    settings = frappe.get_cached_doc("AI Writer Settings")
+    mode = settings.preview_mode if settings.preview_mode in PREVIEW_MODES else PREVIEW_MODES[0]
+    min_chars = DEFAULT_PREVIEW_MIN_CHARS if settings.preview_min_chars is None else cint(settings.preview_min_chars)
+    return {"mode": mode, "min_chars": min_chars}

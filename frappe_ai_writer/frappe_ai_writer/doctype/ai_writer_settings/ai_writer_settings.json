@@ -15,6 +15,9 @@
   "effort",
   "prompt_section",
   "system_prompt",
+  "preview_section",
+  "preview_mode",
+  "preview_min_chars",
   "write_out_section",
   "expand_prompt",
   "column_break_factors",
@@ -93,6 +96,28 @@
    "fieldname": "system_prompt",
    "fieldtype": "Small Text",
    "label": "System Prompt"
+  },
+  {
+   "fieldname": "preview_section",
+   "fieldtype": "Section Break",
+   "label": "Preview"
+  },
+  {
+   "default": "Long texts",
+   "description": "Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.",
+   "fieldname": "preview_mode",
+   "fieldtype": "Select",
+   "label": "Preview Before Replacing",
+   "options": "Long texts\nAlways\nNever"
+  },
+  {
+   "default": "300",
+   "depends_on": "eval:doc.preview_mode === 'Long texts'",
+   "description": "Texts with at least this many characters are shown in the preview first.",
+   "fieldname": "preview_min_chars",
+   "fieldtype": "Int",
+   "label": "Minimum Length for Preview",
+   "non_negative": 1
   },
   {
    "fieldname": "write_out_section",
@@ -203,7 +228,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 11:00:00.000000",
+ "modified": "2026-10-24 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

@@ -449,6 +449,7 @@
 		const notes = make_element("ul", "ai-writer-help-notes");
 		for (const note of [
 			__('Text between /" and "/ is never corrected or translated, for example /"Müller & Söhne GmbH"/.'),
+			__("Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them."),
 			__("Cmd+Z / Ctrl+Z undoes a change."),
 			__("The answer is written in the language of the text."),
 			__("The text is processed by the AI service set in AI Writer Settings; AI Writer does not store it."),
@@ -505,15 +506,24 @@
 		}
 
 		let result;
+		// The field stays locked while the preview is open, so the range written back cannot shift.
 		set_busy(adapter, group, true);
 		try {
-			result = await frappe.xcall(METHOD, {
-				text: request.text,
-				mode,
-				as_html: request.as_html,
-				field_context: adapter.context,
-				target_language,
-			});
+			for (;;) {
+				result = await frappe.xcall(METHOD, {
+					text: request.text,
+					mode,
+					as_html: request.as_html,
+					field_context: adapter.context,
+					target_language,
+				});
+				if (!needs_preview(request, result)) break;
+				group.classList.remove("ai-writer-busy");
+				const decision = await show_preview(request, result);
+				if (decision === "discard") return;
+				if (decision === "apply") break;
+				group.classList.add("ai-writer-busy");
+			}
 		} catch (error) {
 			// frappe.xcall already shows the server message to the user.
 			console.error(error);
@@ -525,6 +535,110 @@
 
 		request.apply(result);
 		frappe.show_alert({ message: __("Text updated"), indicator: "green" });
+	}
+
+	function needs_preview(request, result) {
+		const { mode, min_chars } = frappe.boot.ai_writer?.preview || {};
+		if (mode === "Never") return false;
+		if (mode === "Always") return true;
+		const longest = Math.max(visible_text(request.text, request.as_html).length, visible_text(result, request.as_html).length);
+		return longest >= (min_chars ?? 300);
+	}
+
+	// Resolves to "apply", "regenerate" or "discard"; closing the dialog counts as discard.
+	function show_preview(request, result) {
+		return new Promise((resolve) => {
+			let decided = false;
+			const decide = (decision) => {
+				if (decided) return;
+				decided = true;
+				resolve(decision);
+				dialog.hide();
+			};
+			const dialog = new frappe.ui.Dialog({
+				title: __("Preview"),
+				size: "large",
+				fields: [{ fieldtype: "HTML", fieldname: "changes" }],
+				primary_action_label: __("Apply"),
+				primary_action: () => decide("apply"),
+				secondary_action_label: __("Regenerate"),
+				secondary_action: () => decide("regenerate"),
+			});
+			dialog.onhide = () => decide("discard");
+			dialog.fields_dict.changes.$wrapper[0].replaceChildren(
+				render_changes(visible_text(request.text, request.as_html), visible_text(result, request.as_html))
+			);
+			dialog.show();
+		});
+	}
+
+	// Visible text only: DOMParser builds an inert document, so nothing from the HTML is executed or inserted.
+	function visible_text(text, as_html) {
+		if (!as_html) return text;
+		const doc = new DOMParser().parseFromString(text, "text/html");
+		doc.querySelectorAll("p, li, h1, h2, h3, h4, h5, h6, br, div, tr").forEach((node) => node.after("\n"));
+		return doc.body.textContent.replace(/\n{3,}/g, "\n\n").trim();
+	}
+
+	function render_changes(before, after) {
+		const root = make_element("div", "ai-writer-preview");
+		const before_words = before.match(/\S+\s*/g) || [];
+		const after_words = after.match(/\S+\s*/g) || [];
+		// The word-level LCS needs len(before) x len(after) cells; very long texts are shown side by side instead.
+		if (before_words.length * after_words.length > 2_500_000) {
+			root.append(
+				make_element("h6", null, __("Before")),
+				make_element("div", "ai-writer-preview-text", before),
+				make_element("h6", "mt-3", __("After")),
+				make_element("div", "ai-writer-preview-text", after)
+			);
+			return root;
+		}
+		root.append(make_element("p", "text-muted small", __("Removed text is struck through, added text is highlighted.")));
+		const text = make_element("div", "ai-writer-preview-text");
+		for (const [type, words] of diff_words(before_words, after_words)) {
+			text.append(type === "same" ? document.createTextNode(words) : make_element(type === "added" ? "ins" : "del", null, words));
+		}
+		root.append(text);
+		return root;
+	}
+
+	// Returns [["same" | "added" | "removed", text], ...] from a longest-common-subsequence table over words.
+	function diff_words(before, after) {
+		const n = before.length;
+		const m = after.length;
+		const key = (word) => word.trim();
+		const table = new Uint32Array((n + 1) * (m + 1));
+		for (let i = n - 1; i >= 0; i--) {
+			for (let j = m - 1; j >= 0; j--) {
+				table[i * (m + 1) + j] =
+					key(before[i]) === key(after[j])
+						? table[(i + 1) * (m + 1) + j + 1] + 1
+						: Math.max(table[(i + 1) * (m + 1) + j], table[i * (m + 1) + j + 1]);
+			}
+		}
+		const parts = [];
+		const push = (type, word) => {
+			const last = parts[parts.length - 1];
+			if (last && last[0] === type) last[1] += word;
+			else parts.push([type, word]);
+		};
+		let i = 0;
+		let j = 0;
+		while (i < n && j < m) {
+			if (key(before[i]) === key(after[j])) {
+				push("same", after[j]);
+				i++;
+				j++;
+			} else if (table[(i + 1) * (m + 1) + j] >= table[i * (m + 1) + j + 1]) {
+				push("removed", before[i++]);
+			} else {
+				push("added", after[j++]);
+			}
+		}
+		while (i < n) push("removed", before[i++]);
+		while (j < m) push("added", after[j++]);
+		return parts;
 	}
 
 	function with_original_whitespace(original, result) {

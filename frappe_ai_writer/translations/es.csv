@@ -120,3 +120,14 @@ Cover Letter Format,Formato de la carta
 "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Formato predeterminado de las cartas nuevas; se puede cambiar en la vista previa. Carta: saludo y párrafos. Estructurado: título como asunto y secciones breves sobre situación inicial, servicios y beneficios."
 Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Reglas comunes para ambos formatos. Déjelo vacío para restaurar el valor predeterminado. Los precios y totales nunca se envían.
 "In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","En un presupuesto en borrador, Acciones → Redactar carta escribe el texto a partir del cliente, el contacto y las líneas, como carta o con títulos (Formato en la vista previa). Los precios y totales nunca se envían. Las notas que ya estén en el campo se incorporan a la carta."
+Preview Before Replacing,Vista previa antes de reemplazar
+"Shows the result with the changes highlighted before it replaces the text, with Apply, Regenerate and Discard.","Muestra el resultado con los cambios resaltados antes de reemplazar el texto, con Aplicar, Volver a generar y Descartar."
+Long texts,Textos largos
+Always,Siempre
+Never,Nunca
+Minimum Length for Preview,Longitud mínima para la vista previa
+Texts with at least this many characters are shown in the preview first.,Los textos con al menos esta cantidad de caracteres se muestran primero en la vista previa.
+Before,Antes
+After,Después
+"Removed text is struck through, added text is highlighted.","El texto eliminado aparece tachado y el añadido, resaltado."
+"Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them.","Según los ajustes de AI Writer, los resultados se muestran primero en una vista previa, donde puede aplicarlos, volver a generarlos o descartarlos."
