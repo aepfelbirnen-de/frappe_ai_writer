@@ -82,6 +82,7 @@ DEFAULT_TRANSLATION_LANGUAGES = ("de", "en")
 DEFAULT_PRICES = (0.10, 0.50)
 
 # Also covers Ollama tags such as "llama3.2:3b" and router names such as "mistralai/mistral-small".
+GLOSSARY_TRANSLATION_LINE = re.compile(r"^[a-z]{2,3}(-[A-Za-z0-9]{2,8})?\s*:\s*\S")
 MODEL_NAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/\-]*$")
 
 
@@ -94,6 +95,9 @@ class AIWriterSettings(Document):
     if TYPE_CHECKING:
         from frappe.types import DF
 
+        from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_glossary_term.ai_writer_glossary_term import (
+            AIWriterGlossaryTerm,
+        )
         from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_translation_language.ai_writer_translation_language import (
             AIWriterTranslationLanguage,
         )
@@ -106,6 +110,8 @@ class AIWriterSettings(Document):
         effort: DF.Literal["", "low", "medium", "high"]
         enabled: DF.Check
         expand_prompt: DF.SmallText | None
+        glossary: DF.Table[AIWriterGlossaryTerm]
+        house_style: DF.SmallText | None
         expansion_factor_max: DF.Int
         expansion_factor_min: DF.Int
         input_price_per_million: DF.Float
@@ -168,11 +174,27 @@ class AIWriterSettings(Document):
         if self.output_price_per_million is None:
             self.output_price_per_million = DEFAULT_PRICES[1]
 
+        self.validate_glossary()
+
         seen = set()
         for row in list(self.translation_languages):
             if row.language in seen:
                 self.remove(row)
             seen.add(row.language)
+
+    def validate_glossary(self) -> None:
+        seen = set()
+        for row in list(self.glossary):
+            row.term = (row.term or "").strip()
+            if not row.term or row.term in seen:
+                self.remove(row)
+                continue
+            seen.add(row.term)
+            for line in (row.translations or "").splitlines():
+                if line.strip() and not GLOSSARY_TRANSLATION_LINE.match(line.strip()):
+                    frappe.throw(
+                        _("Row {0}: write translations as one line per language, e.g. en: quotation.").format(row.idx)
+                    )
 
     def validate_cover_letter_field(self) -> None:
         self.cover_letter_field = (self.cover_letter_field or "").strip()

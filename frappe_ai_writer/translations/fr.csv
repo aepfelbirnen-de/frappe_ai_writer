@@ -144,3 +144,17 @@ Drafting reply…,Rédaction de la réponse…
 "When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.","Lors d'une réponse à un e-mail, Rédiger une réponse écrit une réponse à partir du message reçu et du document. Les notes orientent le contenu ; le brouillon est inséré au-dessus du message cité."
 Reply Prompt,Prompt de réponse
 Instructions for drafting replies in the email composer. Leave empty to restore the default.,Instructions pour rédiger des réponses dans l'éditeur d'e-mail. Laisser vide pour rétablir la valeur par défaut.
+Glossary and House Style,Glossaire et charte rédactionnelle
+Glossary,Glossaire
+"Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text.","Termes fixes. Les termes protégés ne sont jamais modifiés ni traduits ; pour les autres, AI Writer utilise l'orthographe et les traductions indiquées ici dès qu'un terme apparaît dans le texte."
+House Style,Charte rédactionnelle
+"Short rules for all texts, e.g. ""Address customers formally. No exclamation marks.""","Règles courtes pour tous les textes, p. ex. « Vouvoyer les clients. Pas de points d'exclamation. »"
+Term,Terme
+Protected,Protégé
+Never changed or translated.,Jamais modifié ni traduit.
+Note,Remarque
+Translations,Traductions
+"One line per language, e.g. en: quotation","Une ligne par langue, p. ex. en: quotation"
+AI Writer Glossary Term,Terme du glossaire AI Writer
+"Row {0}: write translations as one line per language, e.g. en: quotation.","Ligne {0} : saisissez les traductions sur une ligne par langue, p. ex. en: quotation."
+Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,Les termes qu'un responsable a protégés dans le glossaire des paramètres AI Writer restent également inchangés ; la charte rédactionnelle s'applique à tous les textes.

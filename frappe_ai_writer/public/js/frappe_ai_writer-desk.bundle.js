@@ -532,6 +532,7 @@
 		const notes = make_element("ul", "ai-writer-help-notes");
 		for (const note of [
 			__('Text between /" and "/ is never corrected or translated, for example /"Müller & Söhne GmbH"/.'),
+			__("Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts."),
 			__("Depending on AI Writer Settings, results are shown in a preview first, where you can apply, regenerate or discard them."),
 			__("Cmd+Z / Ctrl+Z undoes a change."),
 			__("The answer is written in the language of the text."),

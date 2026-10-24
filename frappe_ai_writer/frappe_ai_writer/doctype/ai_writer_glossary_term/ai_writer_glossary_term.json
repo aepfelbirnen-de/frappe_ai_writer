@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "creation": "2026-10-24 15:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "term",
+  "protected",
+  "note",
+  "translations"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "term",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Term",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "description": "Never changed or translated.",
+   "fieldname": "protected",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Protected"
+  },
+  {
+   "columns": 3,
+   "fieldname": "note",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Note"
+  },
+  {
+   "columns": 3,
+   "description": "One line per language, e.g. en: quotation",
+   "fieldname": "translations",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Translations"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-24 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Frappe AI Writer",
+ "name": "AI Writer Glossary Term",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

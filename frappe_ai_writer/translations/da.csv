@@ -144,3 +144,17 @@ Drafting reply…,Skriver svarudkast…
 "When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.","Når du svarer på en e-mail, skriver Skriv svarudkast et svar ud fra den modtagne besked og dokumentet. Noter styrer indholdet; udkastet indsættes over den citerede besked."
 Reply Prompt,Prompt til svar
 Instructions for drafting replies in the email composer. Leave empty to restore the default.,Instruktioner til svarudkast i e-mail-vinduet. Lad feltet være tomt for at gendanne standarden.
+Glossary and House Style,Ordliste og husstil
+Glossary,Ordliste
+"Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text.","Faste begreber. Beskyttede begreber ændres eller oversættes aldrig; for de øvrige bruger AI Writer stavemåden og oversættelserne angivet her, når et begreb forekommer i teksten."
+House Style,Husstil
+"Short rules for all texts, e.g. ""Address customers formally. No exclamation marks.""","Korte regler for alle tekster, f.eks. »Tiltal kunder formelt. Ingen udråbstegn.«"
+Term,Begreb
+Protected,Beskyttet
+Never changed or translated.,Ændres eller oversættes aldrig.
+Note,Bemærkning
+Translations,Oversættelser
+"One line per language, e.g. en: quotation","Én linje pr. sprog, f.eks. en: quotation"
+AI Writer Glossary Term,AI Writer-ordlistebegreb
+"Row {0}: write translations as one line per language, e.g. en: quotation.","Række {0}: skriv oversættelser som én linje pr. sprog, f.eks. en: quotation."
+Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,"Begreber, som en manager har beskyttet i ordlisten i AI Writer-indstillingerne, forbliver også uændrede; husstilen gælder for alle tekster."

@@ -144,3 +144,17 @@ Drafting reply…,Складаємо відповідь…
 "When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.",Під час відповіді на лист кнопка Скласти відповідь пише відповідь на основі вхідного повідомлення та документа. Нотатки визначають зміст; чернетка вставляється над цитованим повідомленням.
 Reply Prompt,Промпт відповіді
 Instructions for drafting replies in the email composer. Leave empty to restore the default.,"Інструкції для чернеток відповідей у вікні листа. Залиште порожнім, щоб відновити типові."
+Glossary and House Style,Глосарій і стиль компанії
+Glossary,Глосарій
+"Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text.","Сталі терміни. Захищені терміни ніколи не змінюються й не перекладаються; для інших AI Writer використовує вказане тут написання та переклади, щойно термін трапляється в тексті."
+House Style,Стиль компанії
+"Short rules for all texts, e.g. ""Address customers formally. No exclamation marks.""","Короткі правила для всіх текстів, напр. «Звертатися до клієнтів на „Ви“. Без знаків оклику.»"
+Term,Термін
+Protected,Захищений
+Never changed or translated.,Ніколи не змінюється й не перекладається.
+Note,Примітка
+Translations,Переклади
+"One line per language, e.g. en: quotation","Один рядок на мову, напр. en: quotation"
+AI Writer Glossary Term,Термін глосарія AI Writer
+"Row {0}: write translations as one line per language, e.g. en: quotation.","Рядок {0}: вкажіть переклади по одному рядку на мову, напр. en: quotation."
+Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,"Терміни, які менеджер захистив у глосарії налаштувань AI Writer, також лишаються без змін; стиль компанії діє для всіх текстів."

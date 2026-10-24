@@ -78,6 +78,19 @@ class TestAIWriterSettings(FrappeTestCase):
         settings.save()
         self.assertEqual([row.language for row in settings.translation_languages], ["de", "en"])
 
+    def test_glossary_is_trimmed_and_deduplicated(self) -> None:
+        settings = frappe.get_single("AI Writer Settings")
+        settings.set("glossary", [{"term": " Angebot "}, {"term": "Angebot", "protected": 1}, {"term": "  "}])
+        settings.save()
+        self.assertEqual([row.term for row in settings.glossary], ["Angebot"])
+        settings.set("glossary", [])
+        settings.save()
+
+    def test_malformed_glossary_translations_are_rejected(self) -> None:
+        settings = frappe.get_single("AI Writer Settings")
+        settings.set("glossary", [{"term": "Angebot", "translations": "en: quotation\nquotation in English"}])
+        self.assertRaises(frappe.ValidationError, settings.save)
+
     def test_translation_languages_come_with_native_names(self) -> None:
         settings = frappe.get_single("AI Writer Settings")
         settings.set("translation_languages", [{"language": "de"}])

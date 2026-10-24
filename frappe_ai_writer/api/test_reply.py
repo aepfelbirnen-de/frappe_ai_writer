@@ -35,6 +35,8 @@ class TestReplyDraft(FrappeTestCase):
                 "provider": "Anthropic",
                 "model": "claude-haiku-5-5",
                 "reply_prompt": "",
+                "glossary": [],
+                "house_style": "",
             }
         )
         settings.save()
@@ -67,3 +69,19 @@ class TestReplyDraft(FrappeTestCase):
         self.assertNotIn("KW 46", message)
         self.assertIn("Do not promise dates", request["system"])
         self.assertIn('/"KW 46"/', result)
+
+    def test_protected_terms_in_the_message_are_kept_by_instruction(self) -> None:
+        frappe.get_single("AI Writer Settings").update(
+            {"glossary": [{"term": "Server", "protected": 1}], "house_style": "No exclamation marks."}
+        ).save()
+        with (
+            patch("frappe_ai_writer.api.reply.frappe.get_doc", return_value=_message()),
+            patch("frappe_ai_writer.providers.anthropic.Anthropic") as client_cls,
+        ):
+            client_cls.return_value.messages.create.return_value = SimpleNamespace(
+                stop_reason="end_turn", content=[SimpleNamespace(type="text", text="<p>Hello</p>")], usage=None
+            )
+            draft_reply("COMM-TEST")
+            request = client_cls.return_value.messages.create.call_args.kwargs
+        self.assertIn('"Server": keep exactly as written', request["system"])
+        self.assertIn("No exclamation marks.", request["system"])

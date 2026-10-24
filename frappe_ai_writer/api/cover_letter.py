@@ -18,6 +18,7 @@ from frappe_ai_writer.api.correction import (
     protect_spans,
     request_completion,
     restore_spans,
+    writing_rules,
 )
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
     DEFAULT_COVER_LETTER_PROMPT,
@@ -90,6 +91,7 @@ def write_cover_letter(quotation: str, notes: str | None = None, style: str | No
         DATA_INSTRUCTION,
         f"Write the letter in {_letter_language(doc)}.",
     ]
+    parts.extend(writing_rules(settings, f"{masked_notes}\n{build_quotation_context(doc)}", doc.language))
     if protected:
         parts.append(PLACEHOLDER_INSTRUCTION)
     parts.append(STYLE_INSTRUCTIONS[style])

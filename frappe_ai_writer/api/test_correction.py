@@ -47,6 +47,8 @@ class TestCorrectText(FrappeTestCase):
             expansion_factor_min=4,
             expansion_factor_max=10,
             track_usage_per_user=0,
+            glossary=[],
+            house_style="",
         )
         frappe.get_doc("User", TEST_USER).remove_roles(*frappe.get_roles(TEST_USER))
 
@@ -195,6 +197,56 @@ class TestCorrectText(FrappeTestCase):
         self.assertEqual(protected, ['/"<b>FSLogix</b>"/'])
         self.assertIn('href="https://example.com/"', masked)
         self.assertEqual(restore_spans(masked, protected), html)
+
+    def test_protected_glossary_terms_never_reach_the_model(self) -> None:
+        self._update_settings(
+            glossary=[{"term": "Vaultwarden", "protected": 1}, {"term": "Server 2025", "protected": 1}]
+        )
+        result, request = self._correct(
+            text="wir richten Vaultwarden auf Server 2025 ein, Vaultwardens Daten bleiben",
+            response=_response("Wir richten \u27e6P2\u27e7 auf \u27e6P1\u27e7 ein, Vaultwardens Daten bleiben."),
+        )
+        message = request["messages"][0]["content"]
+        self.assertNotIn("Server 2025", message)
+        self.assertNotIn("Vaultwarden ", message)
+        # Only whole words are protected.
+        self.assertIn("Vaultwardens", message)
+        self.assertEqual(result, "Wir richten Vaultwarden auf Server 2025 ein, Vaultwardens Daten bleiben.")
+
+    def test_protected_glossary_terms_inside_html_tags_stay_untouched(self) -> None:
+        self._update_settings(glossary=[{"term": "Vaultwarden", "protected": 1}])
+        html = '<p><a href="https://example.com/Vaultwarden">Vaultwarden</a> nutzen</p>'
+        result, request = self._correct(
+            text=html,
+            as_html=1,
+            response=_response('<p><a href="https://example.com/Vaultwarden">\u27e6P1\u27e7</a> nutzen.</p>'),
+        )
+        self.assertIn('href="https://example.com/Vaultwarden"', request["messages"][0]["content"])
+        self.assertIn(">Vaultwarden</a> nutzen.", result)
+
+    def test_glossary_notes_and_house_style_reach_the_system_prompt(self) -> None:
+        self._update_settings(
+            glossary=[
+                {"term": "Angebot", "note": 'never "Offerte"', "translations": "en: quotation"},
+                {"term": "Lieferschein", "note": "unused"},
+                {"term": "Vaultwarden", "protected": 1},
+            ],
+            house_style="Address customers formally.",
+        )
+        _, request = self._correct(text="das angebot liegt bei")
+        self.assertIn('"Angebot": never "Offerte"', request["system"])
+        self.assertNotIn("Lieferschein", request["system"])
+        self.assertNotIn("Vaultwarden", request["system"])
+        self.assertIn("Address customers formally.", request["system"])
+
+    def test_glossary_translation_is_used_for_the_target_language(self) -> None:
+        self._update_settings(
+            translation_languages=[{"language": "en"}],
+            glossary=[{"term": "Angebot", "translations": "en: quotation\nfr: devis"}],
+        )
+        _, request = self._correct(text="Das Angebot liegt bei.", mode="translate", target_language="en")
+        self.assertIn('translation into en: "quotation"', request["system"])
+        self.assertNotIn("devis", request["system"])
 
     def test_shorten_asks_for_roughly_half_the_words(self) -> None:
         text = " ".join(["Wort"] * 40)

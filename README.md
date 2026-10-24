@@ -15,6 +15,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Turns bullet-point notes into detailed, complete text that explains terms and background, automatically or via **Write out**, without inventing specific facts
 - **Translate** button (文A) with target languages chosen by a manager in AI Writer Settings
 - Text between `/"` and `"/` is never corrected or translated, e.g. `/"Müller & Söhne GmbH"/`; it does not reach the AI service
+- **Glossary and house style**: protected terms (product names, company names) are never changed or translated and, when correcting or translating, never reach the AI service; other terms come with a preferred spelling, notes and translations; short house rules apply to all texts
 - **Reply drafts** in the email composer: writes a reply from the incoming message (without quoted history) and its document, steered by optional notes
 - **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices, as a letter or structured with headings
 - A **Help** entry in the menu explains all functions
@@ -58,6 +59,8 @@ bench --site your-site migrate
    - **Model**: the model name at the provider
    - **Effort** (Anthropic only): how much the model reasons before answering; `low` is fastest
    - **System Prompt**: the instructions sent with every request; leave empty to restore the default
+   - **Glossary**: fixed terms; **Protected** terms are never changed or translated (when correcting or translating they are replaced by placeholders before the request), the others are sent with their note and the translation for the target language (one line per language, e.g. `en: quotation`) whenever they occur in the text
+   - **House Style**: short rules for all texts, e.g. "Address customers formally. No exclamation marks."
    - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
    - **Cover Letter Field** (ERPNext): the Quotation text field that holds the cover letter in your print format, e.g. a custom field; leave empty to hide the button. **Cover Letter Format** sets the default (Letter or Structured), **Cover Letter Prompt** the shared rules
@@ -116,6 +119,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - Formuliert Stichpunkte zu ausführlichem, vollständigem Text aus und erklärt dabei Begriffe und Hintergründe, automatisch oder über **Ausformulieren**, ohne konkrete Fakten zu erfinden
 - **Übersetzen**-Button (文A) mit Zielsprachen, die ein Manager in den AI-Writer-Einstellungen festlegt
 - Text zwischen `/"` und `"/` wird nie korrigiert oder übersetzt, z. B. `/"Müller & Söhne GmbH"/`; er gelangt nicht zum KI-Dienst
+- **Glossar und Hausstil**: geschützte Begriffe (Produkt- und Firmennamen) werden nie verändert oder übersetzt und erreichen den KI-Dienst beim Korrigieren und Übersetzen nicht; übrige Begriffe bekommen eine bevorzugte Schreibweise, Hinweise und Übersetzungen; kurze Hausregeln gelten für alle Texte
 - **Antwortentwürfe** im E-Mail-Dialog: schreibt eine Antwort aus der eingegangenen Nachricht (ohne zitierten Verlauf) und ihrem Dokument, gesteuert durch optionale Stichpunkte
 - **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen, als Brief oder gegliedert mit Überschriften
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
@@ -159,6 +163,8 @@ bench --site ihre-site migrate
    - **Modell**: der Modellname beim Anbieter
    - **Denkaufwand** (nur Anthropic): wie gründlich das Modell vor der Antwort nachdenkt; `low` ist am schnellsten
    - **System-Prompt**: die Anweisungen, die bei jeder Anfrage mitgehen; leer lassen stellt den Standard wieder her
+   - **Glossar**: feste Begriffe; **geschützte** Begriffe werden nie verändert oder übersetzt (beim Korrigieren und Übersetzen ersetzt AI Writer sie vor der Anfrage durch Platzhalter), die übrigen gehen mit ihrem Hinweis und der Übersetzung in die Zielsprache mit (eine Zeile pro Sprache, z. B. `en: quotation`), sobald sie im Text vorkommen
+   - **Hausstil**: kurze Regeln für alle Texte, z. B. „Kunden siezen. Keine Ausrufezeichen.“
    - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
    - **Anschreiben-Feld** (ERPNext): das Textfeld im Angebot, das im Druckformat das Anschreiben enthält, z. B. ein eigenes Feld; leer lassen blendet den Button aus. **Anschreiben-Format** legt den Standard fest (Brief oder Gegliedert), **Anschreiben-Prompt** die gemeinsamen Regeln

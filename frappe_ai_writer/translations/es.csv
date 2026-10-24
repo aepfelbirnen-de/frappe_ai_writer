@@ -144,3 +144,17 @@ Drafting reply…,Redactando la respuesta…
 "When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.","Al responder a un correo, Redactar respuesta escribe una respuesta a partir del mensaje recibido y del documento. Las notas orientan el contenido; el borrador se inserta encima del mensaje citado."
 Reply Prompt,Prompt de respuesta
 Instructions for drafting replies in the email composer. Leave empty to restore the default.,Instrucciones para redactar respuestas en el editor de correo. Déjelo vacío para restaurar el valor predeterminado.
+Glossary and House Style,Glosario y estilo de la casa
+Glossary,Glosario
+"Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text.","Términos fijos. Los términos protegidos nunca se modifican ni se traducen; para los demás, AI Writer usa la grafía y las traducciones indicadas aquí cuando el término aparece en el texto."
+House Style,Estilo de la casa
+"Short rules for all texts, e.g. ""Address customers formally. No exclamation marks.""","Reglas breves para todos los textos, p. ej. «Tratar de usted a los clientes. Sin signos de exclamación.»"
+Term,Término
+Protected,Protegido
+Never changed or translated.,Nunca se modifica ni se traduce.
+Note,Nota
+Translations,Traducciones
+"One line per language, e.g. en: quotation","Una línea por idioma, p. ej. en: quotation"
+AI Writer Glossary Term,Término del glosario de AI Writer
+"Row {0}: write translations as one line per language, e.g. en: quotation.","Fila {0}: escriba las traducciones en una línea por idioma, p. ej. en: quotation."
+Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,Los términos que un responsable ha protegido en el glosario de la configuración de AI Writer tampoco se modifican; el estilo de la casa se aplica a todos los textos.

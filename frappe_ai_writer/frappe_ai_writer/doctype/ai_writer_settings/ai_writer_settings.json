@@ -15,6 +15,9 @@
   "effort",
   "prompt_section",
   "system_prompt",
+  "glossary_section",
+  "glossary",
+  "house_style",
   "preview_section",
   "preview_mode",
   "preview_min_chars",
@@ -98,6 +101,24 @@
    "fieldname": "system_prompt",
    "fieldtype": "Small Text",
    "label": "System Prompt"
+  },
+  {
+   "fieldname": "glossary_section",
+   "fieldtype": "Section Break",
+   "label": "Glossary and House Style"
+  },
+  {
+   "description": "Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text.",
+   "fieldname": "glossary",
+   "fieldtype": "Table",
+   "label": "Glossary",
+   "options": "AI Writer Glossary Term"
+  },
+  {
+   "description": "Short rules for all texts, e.g. \"Address customers formally. No exclamation marks.\"",
+   "fieldname": "house_style",
+   "fieldtype": "Small Text",
+   "label": "House Style"
   },
   {
    "fieldname": "preview_section",
@@ -241,7 +262,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 14:00:00.000000",
+ "modified": "2026-10-24 15:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

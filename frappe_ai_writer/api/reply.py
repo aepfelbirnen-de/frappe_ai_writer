@@ -18,6 +18,7 @@ from frappe_ai_writer.api.correction import (
     protect_spans,
     request_completion,
     restore_spans,
+    writing_rules,
 )
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
     DEFAULT_MODEL,
@@ -68,6 +69,7 @@ def draft_reply(communication: str, notes: str | None = None) -> str:
     masked_notes, protected = protect_spans(notes)
 
     parts = [(settings.reply_prompt or "").strip() or DEFAULT_REPLY_PROMPT, DATA_INSTRUCTION]
+    parts.extend(writing_rules(settings, f"{masked_notes}\n{build_message_context(message)}"))
     if protected:
         parts.append(PLACEHOLDER_INSTRUCTION)
     parts.append(HTML_ANSWER_INSTRUCTION)

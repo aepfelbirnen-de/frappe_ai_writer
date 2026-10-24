@@ -144,3 +144,17 @@ Drafting reply…,Drafting reply…
 "When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message.","When replying to an email, Draft Reply writes a reply from the incoming message and the document. Notes steer the content; the draft is inserted above the quoted message."
 Reply Prompt,Reply Prompt
 Instructions for drafting replies in the email composer. Leave empty to restore the default.,Instructions for drafting replies in the email composer. Leave empty to restore the default.
+Glossary and House Style,Glossary and House Style
+Glossary,Glossary
+"Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text.","Fixed terms. Protected terms are never changed or translated; for the others, AI Writer uses the spelling and translations given here whenever a term occurs in the text."
+House Style,House Style
+"Short rules for all texts, e.g. ""Address customers formally. No exclamation marks.""","Short rules for all texts, e.g. ""Address customers formally. No exclamation marks."""
+Term,Term
+Protected,Protected
+Never changed or translated.,Never changed or translated.
+Note,Note
+Translations,Translations
+"One line per language, e.g. en: quotation","One line per language, e.g. en: quotation"
+AI Writer Glossary Term,AI Writer Glossary Term
+"Row {0}: write translations as one line per language, e.g. en: quotation.","Row {0}: write translations as one line per language, e.g. en: quotation."
+Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.
