@@ -85,8 +85,19 @@
 		if (!fieldname) return;
 		frappe.ui.form.on("Quotation", {
 			refresh(frm) {
-				if (!is_enabled() || frm.doc.docstatus !== 0 || !frm.fields_dict[fieldname]) return;
+				const field = frm.fields_dict[fieldname];
+				field?.$wrapper[0].querySelector(".ai-writer-cover-letter-btn")?.remove();
+				if (!is_enabled() || frm.doc.docstatus !== 0 || !field) return;
 				frm.add_custom_button(__("Write Cover Letter"), () => write_cover_letter(frm, fieldname), __("Actions"));
+
+				// A second button right at the field, where people look for it.
+				const label = field.$wrapper[0].querySelector(".control-label");
+				if (!label) return;
+				const content = document.createDocumentFragment();
+				content.append(sparkle_icon(), document.createTextNode(__("Write Cover Letter")));
+				const button = make_button("btn btn-xs btn-default ai-writer-cover-letter-btn", content);
+				button.addEventListener("click", () => write_cover_letter(frm, fieldname));
+				label.after(button);
 			},
 		});
 	}

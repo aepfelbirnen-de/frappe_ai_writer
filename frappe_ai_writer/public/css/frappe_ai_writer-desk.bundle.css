@@ -180,6 +180,28 @@
 	height: 14px;
 }
 
+/* Cover letter button next to the label of the quotation's cover letter field. */
+.ai-writer-cover-letter-btn {
+	float: right;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: var(--margin-xs, 4px);
+}
+
+.ai-writer-cover-letter-btn svg {
+	width: 14px;
+	height: 14px;
+}
+
+.ai-writer-cover-letter-btn svg .ql-fill {
+	fill: currentColor;
+}
+
+.ai-writer-cover-letter-btn .ai-writer-spark {
+	opacity: 0;
+}
+
 .ai-writer-help-logo {
 	width: 24px;
 	height: 24px;
