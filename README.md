@@ -15,6 +15,7 @@ A sparkle button appears in every desk text field. One click corrects spelling, 
 - Turns bullet-point notes into detailed, complete text that explains terms and background, automatically or via **Write out**, without inventing specific facts
 - **Translate** button (文A) with target languages chosen by a manager in AI Writer Settings
 - Text between `/"` and `"/` is never corrected or translated, e.g. `/"Müller & Söhne GmbH"/`; it does not reach the AI service
+- **Cover letters for quotations** (ERPNext): writes the letter text of a draft quotation from customer, contact and line items, never from prices
 - A **Help** entry in the menu explains all functions
 - Corrects the selection or, without a selection, the whole field; rich-text formatting is preserved
 - One undo step (Cmd+Z / Ctrl+Z) reverts a correction
@@ -58,6 +59,7 @@ bench --site your-site migrate
    - **System Prompt**: the instructions sent with every request; leave empty to restore the default
    - **Write-out Prompt**: the instructions for writing out notes; leave empty to restore the default
    - **Minimum / Maximum Expansion Factor**: roughly how many times longer than the notes the written-out text gets (default 4 to 10)
+   - **Cover Letter Field** (ERPNext): the Quotation text field that holds the cover letter in your print format, e.g. a custom field; leave empty to hide the button. **Cover Letter Prompt** adjusts tone and structure
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
    - **Usage**: token usage today, this month and in total, with estimated costs based on the configured prices; **Track Usage per User** (off by default) adds a per-user table
 4. Give users the **AI Writer User** role. Users without it do not see the button.
@@ -112,6 +114,7 @@ In jedem Textfeld des Desks erscheint ein Funkel-Button. Ein Klick korrigiert Re
 - Formuliert Stichpunkte zu ausführlichem, vollständigem Text aus und erklärt dabei Begriffe und Hintergründe, automatisch oder über **Ausformulieren**, ohne konkrete Fakten zu erfinden
 - **Übersetzen**-Button (文A) mit Zielsprachen, die ein Manager in den AI-Writer-Einstellungen festlegt
 - Text zwischen `/"` und `"/` wird nie korrigiert oder übersetzt, z. B. `/"Müller & Söhne GmbH"/`; er gelangt nicht zum KI-Dienst
+- **Anschreiben für Angebote** (ERPNext): schreibt den Brieftext eines Angebotsentwurfs aus Kunde, Ansprechpartner und Positionen, nie aus Preisen
 - Ein Eintrag **Hilfe** im Menü erklärt alle Funktionen
 - Korrigiert die Markierung oder ohne Markierung das ganze Feld; Formatierungen bleiben erhalten
 - Ein Rückgängig-Schritt (Cmd+Z / Strg+Z) nimmt eine Korrektur zurück
@@ -155,6 +158,7 @@ bench --site ihre-site migrate
    - **System-Prompt**: die Anweisungen, die bei jeder Anfrage mitgehen; leer lassen stellt den Standard wieder her
    - **Ausformulier-Prompt**: die Anweisungen fürs Ausformulieren von Notizen; leer lassen stellt den Standard wieder her
    - **Minimaler / maximaler Erweiterungsfaktor**: wie viel länger als die Notizen der ausformulierte Text ungefähr wird (standardmäßig 4 bis 10)
+   - **Anschreiben-Feld** (ERPNext): das Textfeld im Angebot, das im Druckformat das Anschreiben enthält, z. B. ein eigenes Feld; leer lassen blendet den Button aus. **Anschreiben-Prompt** passt Ton und Aufbau an
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
    - **Verbrauch**: Token-Verbrauch heute, im laufenden Monat und gesamt, mit geschätzten Kosten anhand der eingestellten Preise; **Verbrauch pro Benutzer erfassen** (standardmäßig aus) ergänzt eine Tabelle pro Benutzer
 4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.

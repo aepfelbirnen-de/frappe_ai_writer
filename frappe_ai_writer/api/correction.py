@@ -126,9 +126,7 @@ def correct_text(
         frappe.throw(_("AI Writer is disabled."))
 
     provider = providers.normalize_provider(settings.provider)
-    api_key = settings.get_password("api_key", raise_exception=False)
-    if not api_key and provider in providers.KEY_REQUIRED:
-        frappe.throw(_("No API key configured. Please set one in AI Writer Settings."))
+    api_key = get_api_key(settings)
 
     # sbool() passes non-strings such as int 1 through unchanged, so bool() normalizes the result.
     as_html = bool(sbool(as_html))
@@ -141,7 +139,7 @@ def correct_text(
     if mode == "correct" and looks_like_notes(masked, as_html):
         mode = "expand"
     field_context = _clean_context(field_context)
-    corrected = _request_correction(
+    corrected = request_completion(
         settings=settings,
         api_key=api_key,
         mode=mode,
@@ -287,7 +285,15 @@ def _build_user_message(text: str, field_context: str) -> str:
     return f"<context>{field_context}</context>\n{message}" if field_context else message
 
 
-def _request_correction(
+def get_api_key(settings: frappe._dict) -> str | None:
+    """Return the stored API key; refuse when the configured provider needs one and none is set."""
+    api_key = settings.get_password("api_key", raise_exception=False)
+    if not api_key and providers.normalize_provider(settings.provider) in providers.KEY_REQUIRED:
+        frappe.throw(_("No API key configured. Please set one in AI Writer Settings."))
+    return api_key
+
+
+def request_completion(
     *,
     settings: frappe._dict,
     api_key: str | None,
@@ -298,6 +304,7 @@ def _request_correction(
     system_prompt: str,
     user_message: str,
 ) -> str:
+    """Call the configured AI service, record billed tokens and return the cleaned answer text."""
     completion = providers.complete(
         provider=settings.provider,
         api_key=api_key,

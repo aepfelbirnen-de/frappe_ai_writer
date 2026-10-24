@@ -20,6 +20,9 @@
   "column_break_factors",
   "expansion_factor_min",
   "expansion_factor_max",
+  "cover_letter_section",
+  "cover_letter_field",
+  "cover_letter_prompt",
   "translation_section",
   "translation_languages",
   "usage_section",
@@ -122,6 +125,23 @@
    "non_negative": 1
   },
   {
+   "fieldname": "cover_letter_section",
+   "fieldtype": "Section Break",
+   "label": "Cover Letter (Quotation)"
+  },
+  {
+   "description": "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.",
+   "fieldname": "cover_letter_field",
+   "fieldtype": "Data",
+   "label": "Cover Letter Field"
+  },
+  {
+   "description": "Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.",
+   "fieldname": "cover_letter_prompt",
+   "fieldtype": "Small Text",
+   "label": "Cover Letter Prompt"
+  },
+  {
    "fieldname": "translation_section",
    "fieldtype": "Section Break",
    "label": "Translation"
@@ -174,7 +194,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-23 20:00:00.000000",
+ "modified": "2026-10-24 09:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

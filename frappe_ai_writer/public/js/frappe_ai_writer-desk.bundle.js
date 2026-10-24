@@ -8,6 +8,7 @@
 (function () {
 	const PATCHED = Symbol.for("frappe_ai_writer.patched");
 	const METHOD = "frappe_ai_writer.api.correction.correct_text";
+	const COVER_LETTER_METHOD = "frappe_ai_writer.api.cover_letter.write_cover_letter";
 	const MODES = [
 		{
 			mode: "correct",
@@ -39,6 +40,7 @@
 	const is_enabled = () => Boolean(frappe.boot.ai_writer?.enabled);
 
 	localize_change_log();
+	setup_cover_letter();
 	$(document).one("app_ready", () => setTimeout(show_change_log_to_writers, 1000));
 
 	patch(frappe.ui.form.ControlTextEditor, "make_quill_editor", function () {
@@ -74,6 +76,53 @@
 				translated.versions[version] || markdown,
 			]);
 		}
+	}
+
+	// Quotation cover letters: the server reads the quotation itself (without prices); the current field
+	// content is sent along as notes for the letter.
+	function setup_cover_letter() {
+		const fieldname = frappe.boot.ai_writer?.cover_letter_field;
+		if (!fieldname) return;
+		frappe.ui.form.on("Quotation", {
+			refresh(frm) {
+				if (!is_enabled() || frm.doc.docstatus !== 0 || !frm.fields_dict[fieldname]) return;
+				frm.add_custom_button(__("Write Cover Letter"), () => write_cover_letter(frm, fieldname), __("Actions"));
+			},
+		});
+	}
+
+	async function write_cover_letter(frm, fieldname) {
+		let letter;
+		try {
+			// The server reads the saved quotation, so unsaved items would be missing.
+			if (frm.is_dirty() || frm.is_new()) await frm.save();
+			frappe.dom.freeze(__("Writing cover letter…"));
+			letter = await frappe.xcall(COVER_LETTER_METHOD, { quotation: frm.doc.name, notes: frm.doc[fieldname] || "" });
+		} catch (error) {
+			// frappe.xcall and frm.save already show the server message to the user.
+			console.error(error);
+			return;
+		} finally {
+			frappe.dom.unfreeze();
+		}
+
+		const dialog = new frappe.ui.Dialog({
+			title: __("Cover Letter"),
+			size: "large",
+			fields: [{ fieldtype: "Text Editor", fieldname: "letter", label: __("Preview"), default: letter }],
+			primary_action_label: __("Apply"),
+			primary_action(values) {
+				frm.set_value(fieldname, values.letter);
+				dialog.hide();
+				frappe.show_alert({ message: __("Cover letter applied. Save the quotation to keep it."), indicator: "green" });
+			},
+			secondary_action_label: __("Regenerate"),
+			secondary_action() {
+				dialog.hide();
+				write_cover_letter(frm, fieldname);
+			},
+		});
+		dialog.show();
 	}
 
 	// Frappe opens the update dialog only for System Managers (v16: also Workspace Managers). Other
@@ -337,6 +386,19 @@
 				)
 			)
 		);
+
+		if (frappe.boot.ai_writer?.cover_letter_field) {
+			modes.append(
+				make_element("dt", null, __("Write Cover Letter")),
+				make_element(
+					"dd",
+					null,
+					__(
+						"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter."
+					)
+				)
+			);
+		}
 
 		const notes = make_element("ul", "ai-writer-help-notes");
 		for (const note of [

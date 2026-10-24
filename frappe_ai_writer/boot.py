@@ -7,6 +7,7 @@ import frappe
 from frappe.utils import cint
 
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
+    get_cover_letter_field,
     get_translation_languages,
 )
 from frappe_ai_writer.permissions import has_ai_writer_access
@@ -22,6 +23,7 @@ def boot_session(bootinfo: frappe._dict) -> None:
         bootinfo.ai_writer = {
             "enabled": bool(cint(frappe.db.get_single_value("AI Writer Settings", "enabled", cache=True))),
             "languages": get_translation_languages(),
+            "cover_letter_field": get_cover_letter_field(),
         }
 
     # Frappe never translates change logs, so the client swaps in these versions before the update

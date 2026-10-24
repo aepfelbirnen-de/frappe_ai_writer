@@ -97,3 +97,21 @@ Base URL,URL base
 Not needed for Ollama and many local servers.,No es necesaria para Ollama ni para muchos servidores locales.
 Invalid base URL: {0},URL base no válida: {0}
 Enter the name of a model offered by {0}.,Introduzca el nombre de un modelo que ofrezca {0}.
+Cover Letter (Quotation),Carta de presentación (presupuesto)
+Cover Letter Field,Campo de la carta
+"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Nombre del campo de texto del presupuesto que contiene la carta que aparece en el PDF, p. ej. un campo personalizado como custom_letter_quotation. Requiere ERPNext. Déjelo vacío para ocultar el botón."
+Cover Letter Prompt,Prompt de la carta
+Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,Instrucciones para redactar cartas de presentación. Déjelo vacío para restaurar el valor predeterminado. Los precios y totales nunca se envían.
+Cover letters need ERPNext.,Las cartas de presentación requieren ERPNext.
+Field {0} does not exist on Quotation or is not a text field.,El campo {0} no existe en el presupuesto o no es un campo de texto.
+No cover letter field is configured in AI Writer Settings.,No hay ningún campo de carta configurado en los ajustes de AI Writer.
+Cover letters can only be written for draft quotations.,Las cartas solo se pueden redactar para presupuestos en borrador.
+Write Cover Letter,Redactar carta
+Writing cover letter…,Redactando la carta…
+Cover Letter,Carta de presentación
+Preview,Vista previa
+Apply,Aplicar
+Regenerate,Volver a generar
+Cover letter applied. Save the quotation to keep it.,Carta aplicada. Guarde el presupuesto para conservarla.
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","En un presupuesto en borrador, Acciones → Redactar carta escribe el texto a partir del cliente, el contacto y las líneas. Los precios y totales nunca se envían. Las notas que ya estén en el campo se incorporan a la carta."
+Actions,Acciones

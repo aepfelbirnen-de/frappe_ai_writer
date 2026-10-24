@@ -5,3 +5,4 @@
 frappe_ai_writer.patches.v0_6.set_default_translation_languages
 frappe_ai_writer.patches.v0_7.set_write_out_defaults
 frappe_ai_writer.patches.v0_8.set_price_defaults
+frappe_ai_writer.patches.v0_10.set_cover_letter_prompt

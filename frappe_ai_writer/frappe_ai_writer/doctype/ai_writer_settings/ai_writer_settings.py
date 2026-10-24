@@ -42,7 +42,18 @@ Example notes:
 
 Example answer:
 The existing mailboxes will be migrated to Microsoft 365, so that email, calendars and contacts are available in the cloud and no longer depend on the local mail server. In addition, multi-factor authentication (MFA) will be enabled for all users: besides their password, they confirm each sign-in with a second factor such as an authenticator app, which considerably reduces the risk of compromised accounts."""
+DEFAULT_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It appears in the PDF above the line items and is addressed to the customer.
+
+- Start with a salutation to the contact person if one is given (e.g. "Dear Ms Miller," or "Sehr geehrte Frau Müller,"), otherwise a neutral salutation.
+- Thank the customer briefly, then summarize in two to four sentences what the quotation covers and what the customer gains from it, based on the line items. Group related items instead of listing every item, and do not repeat quantities or item codes unless they matter.
+- End with one sentence offering to answer questions. Do not add a sign-off with a name; the print format adds it.
+- Never mention prices, totals, discounts or payment amounts.
+- Use only the facts in the quotation data and the notes. Do not invent dates, deadlines, names, services or commitments.
+- If notes are given, follow them and work their points into the letter.
+- Keep it to roughly 80 to 180 words.
+Answer only with the letter text."""
 DEFAULT_EXPANSION_FACTORS = (4, 10)
+COVER_LETTER_FIELD_TYPES = ("Text Editor", "Small Text", "Text", "Long Text", "HTML Editor")
 MAX_EXPANSION_FACTOR = 50
 DEFAULT_TRANSLATION_LANGUAGES = ("de", "en")
 # USD per million input and output tokens for the default model.
@@ -66,6 +77,8 @@ class AIWriterSettings(Document):
         )
 
         api_key: DF.Password | None
+        cover_letter_field: DF.Data | None
+        cover_letter_prompt: DF.SmallText | None
         base_url: DF.Data | None
         effort: DF.Literal["", "low", "medium", "high"]
         enabled: DF.Check
@@ -102,6 +115,9 @@ class AIWriterSettings(Document):
             self.system_prompt = DEFAULT_SYSTEM_PROMPT
         if not (self.expand_prompt or "").strip():
             self.expand_prompt = DEFAULT_EXPAND_PROMPT
+        if not (self.cover_letter_prompt or "").strip():
+            self.cover_letter_prompt = DEFAULT_COVER_LETTER_PROMPT
+        self.validate_cover_letter_field()
 
         self.expansion_factor_min = cint(self.expansion_factor_min) or DEFAULT_EXPANSION_FACTORS[0]
         self.expansion_factor_max = cint(self.expansion_factor_max) or DEFAULT_EXPANSION_FACTORS[1]
@@ -123,6 +139,18 @@ class AIWriterSettings(Document):
             if row.language in seen:
                 self.remove(row)
             seen.add(row.language)
+
+    def validate_cover_letter_field(self) -> None:
+        self.cover_letter_field = (self.cover_letter_field or "").strip()
+        if not self.cover_letter_field:
+            return
+        if not frappe.db.exists("DocType", "Quotation"):
+            frappe.throw(_("Cover letters need ERPNext."))
+        field = frappe.get_meta("Quotation").get_field(self.cover_letter_field)
+        if not field or field.fieldtype not in COVER_LETTER_FIELD_TYPES:
+            frappe.throw(
+                _("Field {0} does not exist on Quotation or is not a text field.").format(self.cover_letter_field)
+            )
 
     def on_update(self) -> None:
         # The enabled flag and the translation languages are part of every user's cached boot info.
@@ -152,3 +180,9 @@ def get_expansion_factors(settings: Document) -> tuple[int, int]:
     low = cint(settings.expansion_factor_min) or DEFAULT_EXPANSION_FACTORS[0]
     high = cint(settings.expansion_factor_max) or DEFAULT_EXPANSION_FACTORS[1]
     return low, max(low, high)
+
+
+def get_cover_letter_field() -> str | None:
+    """Return the configured Quotation cover letter field, or None when unset or ERPNext is missing."""
+    fieldname = frappe.get_cached_doc("AI Writer Settings").cover_letter_field
+    return fieldname if fieldname and frappe.db.exists("DocType", "Quotation") else None

@@ -97,3 +97,21 @@ Base URL,Базова URL-адреса
 Not needed for Ollama and many local servers.,Не потрібен для Ollama та багатьох локальних серверів.
 Invalid base URL: {0},Недійсна базова URL-адреса: {0}
 Enter the name of a model offered by {0}.,"Введіть назву моделі, яку пропонує {0}."
+Cover Letter (Quotation),Супровідний лист (пропозиція)
+Cover Letter Field,Поле супровідного листа
+"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Назва текстового поля пропозиції, що містить супровідний лист у PDF, напр. власне поле на зразок custom_letter_quotation. Потребує ERPNext. Залиште порожнім, щоб приховати кнопку."
+Cover Letter Prompt,Промпт супровідного листа
+Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,"Інструкції для написання супровідних листів. Залиште порожнім, щоб відновити типові. Ціни та суми ніколи не надсилаються."
+Cover letters need ERPNext.,Супровідні листи потребують ERPNext.
+Field {0} does not exist on Quotation or is not a text field.,Поле {0} не існує в пропозиції або не є текстовим полем.
+No cover letter field is configured in AI Writer Settings.,У налаштуваннях AI Writer не вказано поле супровідного листа.
+Cover letters can only be written for draft quotations.,Супровідні листи можна писати лише для чернеток пропозицій.
+Write Cover Letter,Написати супровідний лист
+Writing cover letter…,Пишемо супровідний лист…
+Cover Letter,Супровідний лист
+Preview,Попередній перегляд
+Apply,Застосувати
+Regenerate,Згенерувати знову
+Cover letter applied. Save the quotation to keep it.,"Супровідний лист застосовано. Збережіть пропозицію, щоб його зберегти."
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","У чернетці пропозиції Дії → Написати супровідний лист створює текст на основі клієнта, контактної особи та позицій. Ціни й суми ніколи не надсилаються. Нотатки, що вже є в полі, враховуються в листі."
+Actions,Дії

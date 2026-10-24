@@ -97,3 +97,21 @@ Base URL,Base URL
 Not needed for Ollama and many local servers.,Not needed for Ollama and many local servers.
 Invalid base URL: {0},Invalid base URL: {0}
 Enter the name of a model offered by {0}.,Enter the name of a model offered by {0}.
+Cover Letter (Quotation),Cover Letter (Quotation)
+Cover Letter Field,Cover Letter Field
+"Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button."
+Cover Letter Prompt,Cover Letter Prompt
+Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.
+Cover letters need ERPNext.,Cover letters need ERPNext.
+Field {0} does not exist on Quotation or is not a text field.,Field {0} does not exist on Quotation or is not a text field.
+No cover letter field is configured in AI Writer Settings.,No cover letter field is configured in AI Writer Settings.
+Cover letters can only be written for draft quotations.,Cover letters can only be written for draft quotations.
+Write Cover Letter,Write Cover Letter
+Writing cover letter…,Writing cover letter…
+Cover Letter,Cover Letter
+Preview,Preview
+Apply,Apply
+Regenerate,Regenerate
+Cover letter applied. Save the quotation to keep it.,Cover letter applied. Save the quotation to keep it.
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter."
+Actions,Actions
