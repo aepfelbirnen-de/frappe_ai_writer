@@ -11,6 +11,11 @@ from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_usage.ai_writer_usage i
     record_usage,
 )
 
+# The tests create the records they need. Without this, the test runner follows the links into other
+# apps' test records (e.g. ERPNext companies and cost centers), which fail or pollute non-test sites.
+IGNORE_TEST_RECORD_DEPENDENCIES = ["User"]
+test_ignore = IGNORE_TEST_RECORD_DEPENDENCIES  # name used by Frappe v15
+
 TEST_USER = "ai-writer-usage-test@example.com"
 
 
