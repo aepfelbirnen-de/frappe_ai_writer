@@ -158,3 +158,24 @@ Translations,Переклади
 AI Writer Glossary Term,Термін глосарія AI Writer
 "Row {0}: write translations as one line per language, e.g. en: quotation.","Рядок {0}: вкажіть переклади по одному рядку на мову, напр. en: quotation."
 Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,"Терміни, які менеджер захистив у глосарії налаштувань AI Writer, також лишаються без змін; стиль компанії діє для всіх текстів."
+Monthly Budget,Місячний бюджет
+Monthly Budget (USD),Місячний бюджет (USD)
+"Estimated costs per calendar month, based on the prices above. 0 means no budget.",Орієнтовні витрати за календарний місяць на основі цін вище. 0 означає без бюджету.
+Warning Threshold,Поріг попередження
+"When this share of the budget is used, AI Writer managers (or System Managers if there are none) get a notification and an email, once per month. 0 turns the warning off.","Коли використано цю частку бюджету, менеджери AI Writer (або System Manager, якщо їх немає) отримують сповіщення та лист — раз на місяць. 0 вимикає попередження."
+Block When Exceeded,Блокувати при перевищенні
+"Refuse requests when the budget is used up, until the next month or until the budget is raised.","Відхиляти запити, коли бюджет вичерпано, — до наступного місяця або до збільшення бюджету."
+Monthly Limit per User (USD),Місячний ліміт на користувача (USD)
+Requests of a user are refused once their estimated costs this month reach this amount. 0 means no limit.,"Запити користувача відхиляються, щойно його орієнтовні витрати цього місяця досягають цієї суми. 0 означає без ліміту."
+Budget Notice,Сповіщення про бюджет
+The warning threshold must be between 0 and 100 %.,Поріг попередження має бути від 0 до 100 %.
+The monthly AI budget is used up. Please contact your AI Writer manager.,Місячний бюджет на ШІ вичерпано. Зверніться до свого менеджера AI Writer.
+Your monthly AI budget is used up. Please contact your AI Writer manager.,Ваш місячний бюджет на ШІ вичерпано. Зверніться до свого менеджера AI Writer.
+The monthly AI Writer budget is used up: {0} of {1}.,Місячний бюджет AI Writer вичерпано: {0} з {1}.
+New requests are refused until next month or until the budget is raised in AI Writer Settings.,Нові запити відхилятимуться до наступного місяця або до збільшення бюджету в налаштуваннях AI Writer.
+Requests are still processed because Block When Exceeded is off in AI Writer Settings.,"Запити й далі обробляються, бо «Блокувати при перевищенні» вимкнено в налаштуваннях AI Writer."
+AI Writer has used {0} % of the monthly budget: {1} of {2}.,AI Writer використав {0} % місячного бюджету: {1} з {2}.
+The usage per month and user is shown in AI Writer Settings.,Використання за місяць і за користувачем показано в налаштуваннях AI Writer.
+Monthly budget: {0} of {1} used ({2} %),Місячний бюджет: використано {0} з {1} ({2} %)
+New requests are refused until next month or until the budget is raised.,Нові запити відхилятимуться до наступного місяця або до збільшення бюджету.
+Requests are still processed because Block When Exceeded is off.,"Запити й далі обробляються, бо «Блокувати при перевищенні» вимкнено."

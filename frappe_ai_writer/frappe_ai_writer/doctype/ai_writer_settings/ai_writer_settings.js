@@ -54,7 +54,9 @@
 		} else if (summary.per_user.length) {
 			per_user = table(
 				[__("User"), ...columns],
-				summary.per_user.map((row) => [row.full_name, ...values(row)])
+				summary.per_user.map((row) => [row.full_name, ...values(row)]),
+				// Users at their monthly limit are refused until next month.
+				(index) => summary.user_limit > 0 && summary.per_user[index].cost >= summary.user_limit
 			);
 		} else {
 			per_user = element("p", "text-muted", __("No usage recorded this month."));
@@ -64,6 +66,7 @@
 		open_log.addEventListener("click", () => frappe.set_route("List", "AI Writer Usage"));
 
 		wrapper.replaceChildren(
+			...(summary.budget ? [budget_bar(summary.budget, summary.currency)] : []),
 			periods,
 			element("h6", "mt-4", __("Per User This Month")),
 			per_user,
@@ -71,7 +74,47 @@
 		);
 	}
 
-	function table(headers, rows) {
+	function budget_bar(budget, currency) {
+		const result = element("div", "mb-4");
+		const label = element(
+			"div",
+			"mb-1",
+			__("Monthly budget: {0} of {1} used ({2} %)", [
+				format_currency(budget.used, currency, 2),
+				format_currency(budget.budget, currency, 2),
+				format_number(budget.percent, null, 1),
+			])
+		);
+		const progress = element("div", "progress");
+		const level =
+			budget.percent >= 100
+				? "bg-danger"
+				: budget.threshold && budget.percent >= budget.threshold
+				? "bg-warning"
+				: "bg-success";
+		const bar = element("div", `progress-bar ${level}`);
+		bar.setAttribute("role", "progressbar");
+		bar.setAttribute("aria-valuenow", String(budget.percent));
+		bar.setAttribute("aria-valuemin", "0");
+		bar.setAttribute("aria-valuemax", "100");
+		bar.style.width = `${Math.min(budget.percent, 100)}%`;
+		progress.append(bar);
+		result.append(label, progress);
+		if (budget.percent >= 100) {
+			result.append(
+				element(
+					"p",
+					"text-muted small mt-1",
+					budget.block
+						? __("New requests are refused until next month or until the budget is raised.")
+						: __("Requests are still processed because Block When Exceeded is off.")
+				)
+			);
+		}
+		return result;
+	}
+
+	function table(headers, rows, is_highlighted) {
 		const result = element("table", "table table-bordered table-sm");
 		const head = result.createTHead().insertRow();
 		headers.forEach((text, index) => {
@@ -79,10 +122,11 @@
 			head.append(cell);
 		});
 		const body = result.createTBody();
-		for (const row of rows) {
+		rows.forEach((row, row_index) => {
 			const line = body.insertRow();
+			if (is_highlighted?.(row_index)) line.className = "text-danger";
 			row.forEach((text, index) => line.append(element("td", index ? "text-right" : "", text)));
-		}
+		});
 		return result;
 	}
 

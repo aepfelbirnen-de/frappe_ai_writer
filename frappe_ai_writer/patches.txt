@@ -9,3 +9,4 @@ frappe_ai_writer.patches.v0_10.set_cover_letter_prompt
 frappe_ai_writer.patches.v0_11.split_cover_letter_prompt
 frappe_ai_writer.patches.v0_12.set_preview_defaults
 frappe_ai_writer.patches.v0_14.set_reply_prompt
+frappe_ai_writer.patches.v0_16.set_budget_defaults

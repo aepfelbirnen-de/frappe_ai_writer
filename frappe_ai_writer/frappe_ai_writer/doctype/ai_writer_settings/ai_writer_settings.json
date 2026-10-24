@@ -38,6 +38,13 @@
   "track_usage_per_user",
   "input_price_per_million",
   "output_price_per_million",
+  "budget_section",
+  "monthly_budget",
+  "budget_warning_threshold",
+  "column_break_budget",
+  "block_when_exceeded",
+  "user_monthly_budget",
+  "budget_notice",
   "usage_overview_section",
   "usage_summary"
  ],
@@ -250,6 +257,57 @@
    "non_negative": 1
   },
   {
+   "fieldname": "budget_section",
+   "fieldtype": "Section Break",
+   "label": "Monthly Budget"
+  },
+  {
+   "default": "0",
+   "description": "Estimated costs per calendar month, based on the prices above. 0 means no budget.",
+   "fieldname": "monthly_budget",
+   "fieldtype": "Float",
+   "label": "Monthly Budget (USD)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "default": "80",
+   "depends_on": "eval:doc.monthly_budget > 0",
+   "description": "When this share of the budget is used, AI Writer managers (or System Managers if there are none) get a notification and an email, once per month. 0 turns the warning off.",
+   "fieldname": "budget_warning_threshold",
+   "fieldtype": "Percent",
+   "label": "Warning Threshold"
+  },
+  {
+   "fieldname": "column_break_budget",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.monthly_budget > 0",
+   "description": "Refuse requests when the budget is used up, until the next month or until the budget is raised.",
+   "fieldname": "block_when_exceeded",
+   "fieldtype": "Check",
+   "label": "Block When Exceeded"
+  },
+  {
+   "default": "0",
+   "depends_on": "track_usage_per_user",
+   "description": "Requests of a user are refused once their estimated costs this month reach this amount. 0 means no limit.",
+   "fieldname": "user_monthly_budget",
+   "fieldtype": "Float",
+   "label": "Monthly Limit per User (USD)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "budget_notice",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Budget Notice",
+   "read_only": 1
+  },
+  {
    "fieldname": "usage_overview_section",
    "fieldtype": "Section Break"
   },
@@ -262,7 +320,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 15:00:00.000000",
+ "modified": "2026-10-24 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",

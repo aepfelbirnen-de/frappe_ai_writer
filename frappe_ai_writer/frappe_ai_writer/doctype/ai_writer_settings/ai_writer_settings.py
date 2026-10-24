@@ -8,7 +8,7 @@ import re
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import cint
+from frappe.utils import cint, flt
 
 from frappe_ai_writer import providers
 
@@ -80,6 +80,7 @@ MAX_EXPANSION_FACTOR = 50
 DEFAULT_TRANSLATION_LANGUAGES = ("de", "en")
 # USD per million input and output tokens for the default model.
 DEFAULT_PRICES = (0.10, 0.50)
+DEFAULT_BUDGET_WARNING_THRESHOLD = 80
 
 # Also covers Ollama tags such as "llama3.2:3b" and router names such as "mistralai/mistral-small".
 GLOSSARY_TRANSLATION_LINE = re.compile(r"^[a-z]{2,3}(-[A-Za-z0-9]{2,8})?\s*:\s*\S")
@@ -103,6 +104,9 @@ class AIWriterSettings(Document):
         )
 
         api_key: DF.Password | None
+        block_when_exceeded: DF.Check
+        budget_notice: DF.SmallText | None
+        budget_warning_threshold: DF.Percent
         cover_letter_field: DF.Data | None
         cover_letter_prompt: DF.SmallText | None
         cover_letter_style: DF.Literal["Letter", "Structured"]
@@ -121,8 +125,10 @@ class AIWriterSettings(Document):
         provider: DF.Literal["Anthropic", "OpenAI", "Ollama", "OpenAI-compatible"]
         reply_prompt: DF.SmallText | None
         model: DF.Data | None
+        monthly_budget: DF.Float
         system_prompt: DF.SmallText | None
         track_usage_per_user: DF.Check
+        user_monthly_budget: DF.Float
         translation_languages: DF.TableMultiSelect[AIWriterTranslationLanguage]
     # end: auto-generated types
 
@@ -173,6 +179,13 @@ class AIWriterSettings(Document):
             self.input_price_per_million = DEFAULT_PRICES[0]
         if self.output_price_per_million is None:
             self.output_price_per_million = DEFAULT_PRICES[1]
+
+        if self.budget_warning_threshold is None:
+            self.budget_warning_threshold = DEFAULT_BUDGET_WARNING_THRESHOLD
+        if not 0 <= flt(self.budget_warning_threshold) <= 100:
+            frappe.throw(_("The warning threshold must be between 0 and 100 %."))
+        # Written by the budget check only; a stale value from an open form must not reset it.
+        self.budget_notice = frappe.db.get_single_value(self.doctype, "budget_notice")
 
         self.validate_glossary()
 

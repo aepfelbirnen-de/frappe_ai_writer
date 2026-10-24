@@ -67,6 +67,7 @@ bench --site your-site migrate
    - **Preview Before Replacing**: for long texts (default, from 300 characters), always or never
    - **Translation Languages**: the target languages of the translate button; leave empty to hide it
    - **Usage**: token usage today, this month and in total, with estimated costs based on the configured prices; **Track Usage per User** (off by default) adds a per-user table
+   - **Monthly Budget**: estimated costs per calendar month with a progress bar in the usage summary; at the **Warning Threshold** (default 80 %) and when the budget is used up, AI Writer managers (or System Managers if there are none) get one notification and email per month. **Block When Exceeded** refuses requests until the next month or until the budget is raised; **Monthly Limit per User** (only with per-user tracking) does the same per user
 4. Give users the **AI Writer User** role. Users without it do not see the button.
 
 | Role | Can use the button | Can edit the settings |
@@ -171,6 +172,7 @@ bench --site ihre-site migrate
    - **Vorschau vor dem Ersetzen**: bei langen Texten (Standard, ab 300 Zeichen), immer oder nie
    - **Übersetzungssprachen**: die Zielsprachen des Übersetzen-Buttons; leer lassen blendet ihn aus
    - **Verbrauch**: Token-Verbrauch heute, im laufenden Monat und gesamt, mit geschätzten Kosten anhand der eingestellten Preise; **Verbrauch pro Benutzer erfassen** (standardmäßig aus) ergänzt eine Tabelle pro Benutzer
+   - **Monatsbudget**: geschätzte Kosten pro Kalendermonat mit Fortschrittsbalken in der Verbrauchsübersicht; bei der **Warnschwelle** (Standard 80 %) und wenn das Budget verbraucht ist, erhalten AI-Writer-Manager (oder System-Manager, falls es keine gibt) einmal pro Monat eine Benachrichtigung und eine E-Mail. **Bei Überschreitung sperren** lehnt Anfragen bis zum nächsten Monat oder bis zur Erhöhung des Budgets ab; **Monatslimit pro Benutzer** (nur mit Erfassung pro Benutzer) tut dasselbe pro Benutzer
 4. Benutzern die Rolle **AI Writer User** geben. Ohne diese Rolle ist der Button nicht sichtbar.
 
 | Rolle | Darf den Button nutzen | Darf die Einstellungen ändern |

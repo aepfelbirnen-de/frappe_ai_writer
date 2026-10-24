@@ -158,3 +158,24 @@ Translations,Oversættelser
 AI Writer Glossary Term,AI Writer-ordlistebegreb
 "Row {0}: write translations as one line per language, e.g. en: quotation.","Række {0}: skriv oversættelser som én linje pr. sprog, f.eks. en: quotation."
 Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,"Begreber, som en manager har beskyttet i ordlisten i AI Writer-indstillingerne, forbliver også uændrede; husstilen gælder for alle tekster."
+Monthly Budget,Månedligt budget
+Monthly Budget (USD),Månedligt budget (USD)
+"Estimated costs per calendar month, based on the prices above. 0 means no budget.",Anslåede omkostninger pr. kalendermåned ud fra priserne ovenfor. 0 betyder intet budget.
+Warning Threshold,Advarselsgrænse
+"When this share of the budget is used, AI Writer managers (or System Managers if there are none) get a notification and an email, once per month. 0 turns the warning off.","Når denne andel af budgettet er brugt, får AI Writer-managere (eller System Managers, hvis der ikke er nogen) en notifikation og en e-mail, én gang om måneden. 0 slår advarslen fra."
+Block When Exceeded,Spær ved overskridelse
+"Refuse requests when the budget is used up, until the next month or until the budget is raised.","Afvis anmodninger, når budgettet er brugt op, indtil næste måned eller indtil budgettet hæves."
+Monthly Limit per User (USD),Månedlig grænse pr. bruger (USD)
+Requests of a user are refused once their estimated costs this month reach this amount. 0 means no limit.,"En brugers anmodninger afvises, så snart brugerens anslåede omkostninger denne måned når dette beløb. 0 betyder ingen grænse."
+Budget Notice,Budgetmeddelelse
+The warning threshold must be between 0 and 100 %.,Advarselsgrænsen skal være mellem 0 og 100 %.
+The monthly AI budget is used up. Please contact your AI Writer manager.,Det månedlige AI-budget er brugt op. Kontakt din AI Writer-manager.
+Your monthly AI budget is used up. Please contact your AI Writer manager.,Dit månedlige AI-budget er brugt op. Kontakt din AI Writer-manager.
+The monthly AI Writer budget is used up: {0} of {1}.,Det månedlige AI Writer-budget er brugt op: {0} af {1}.
+New requests are refused until next month or until the budget is raised in AI Writer Settings.,"Nye anmodninger afvises indtil næste måned, eller indtil budgettet hæves i AI Writer-indstillingerne."
+Requests are still processed because Block When Exceeded is off in AI Writer Settings.,"Anmodninger behandles stadig, fordi »Spær ved overskridelse« er slået fra i AI Writer-indstillingerne."
+AI Writer has used {0} % of the monthly budget: {1} of {2}.,AI Writer har brugt {0} % af det månedlige budget: {1} af {2}.
+The usage per month and user is shown in AI Writer Settings.,Forbruget pr. måned og bruger vises i AI Writer-indstillingerne.
+Monthly budget: {0} of {1} used ({2} %),Månedligt budget: {0} af {1} brugt ({2} %)
+New requests are refused until next month or until the budget is raised.,"Nye anmodninger afvises indtil næste måned, eller indtil budgettet hæves."
+Requests are still processed because Block When Exceeded is off.,"Anmodninger behandles stadig, fordi »Spær ved overskridelse« er slået fra."

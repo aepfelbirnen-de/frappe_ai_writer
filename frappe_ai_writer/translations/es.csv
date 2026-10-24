@@ -158,3 +158,24 @@ Translations,Traducciones
 AI Writer Glossary Term,Término del glosario de AI Writer
 "Row {0}: write translations as one line per language, e.g. en: quotation.","Fila {0}: escriba las traducciones en una línea por idioma, p. ej. en: quotation."
 Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,Los términos que un responsable ha protegido en el glosario de la configuración de AI Writer tampoco se modifican; el estilo de la casa se aplica a todos los textos.
+Monthly Budget,Presupuesto mensual
+Monthly Budget (USD),Presupuesto mensual (USD)
+"Estimated costs per calendar month, based on the prices above. 0 means no budget.","Costes estimados por mes natural, según los precios indicados arriba. 0 significa sin presupuesto."
+Warning Threshold,Umbral de aviso
+"When this share of the budget is used, AI Writer managers (or System Managers if there are none) get a notification and an email, once per month. 0 turns the warning off.","Cuando se ha consumido esta parte del presupuesto, los responsables de AI Writer (o los System Managers si no hay ninguno) reciben una notificación y un correo, una vez al mes. 0 desactiva el aviso."
+Block When Exceeded,Bloquear al superarlo
+"Refuse requests when the budget is used up, until the next month or until the budget is raised.","Rechazar solicitudes cuando se agote el presupuesto, hasta el mes siguiente o hasta que se aumente."
+Monthly Limit per User (USD),Límite mensual por usuario (USD)
+Requests of a user are refused once their estimated costs this month reach this amount. 0 means no limit.,Las solicitudes de un usuario se rechazan en cuanto sus costes estimados de este mes alcanzan este importe. 0 significa sin límite.
+Budget Notice,Aviso de presupuesto
+The warning threshold must be between 0 and 100 %.,El umbral de aviso debe estar entre 0 y 100 %.
+The monthly AI budget is used up. Please contact your AI Writer manager.,El presupuesto mensual de IA se ha agotado. Póngase en contacto con su responsable de AI Writer.
+Your monthly AI budget is used up. Please contact your AI Writer manager.,Su presupuesto mensual de IA se ha agotado. Póngase en contacto con su responsable de AI Writer.
+The monthly AI Writer budget is used up: {0} of {1}.,El presupuesto mensual de AI Writer se ha agotado: {0} de {1}.
+New requests are refused until next month or until the budget is raised in AI Writer Settings.,Las nuevas solicitudes se rechazan hasta el mes siguiente o hasta que se aumente el presupuesto en los Ajustes de AI Writer.
+Requests are still processed because Block When Exceeded is off in AI Writer Settings.,Las solicitudes se siguen procesando porque «Bloquear al superarlo» está desactivado en los Ajustes de AI Writer.
+AI Writer has used {0} % of the monthly budget: {1} of {2}.,AI Writer ha consumido el {0} % del presupuesto mensual: {1} de {2}.
+The usage per month and user is shown in AI Writer Settings.,El consumo por mes y usuario se muestra en los Ajustes de AI Writer.
+Monthly budget: {0} of {1} used ({2} %),Presupuesto mensual: {0} de {1} consumido ({2} %)
+New requests are refused until next month or until the budget is raised.,Las nuevas solicitudes se rechazan hasta el mes siguiente o hasta que se aumente el presupuesto.
+Requests are still processed because Block When Exceeded is off.,Las solicitudes se siguen procesando porque «Bloquear al superarlo» está desactivado.

@@ -13,6 +13,7 @@ from frappe.utils import escape_html, sbool
 from frappe.utils.html_utils import sanitize_html
 
 from frappe_ai_writer import providers
+from frappe_ai_writer.budget import check_budget
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
     DEFAULT_EXPAND_PROMPT,
     DEFAULT_MODEL,
@@ -419,6 +420,7 @@ def request_completion(
     user_message: str,
 ) -> str:
     """Call the configured AI service, record billed tokens and return the cleaned answer text."""
+    check_budget(settings, usage_user)
     completion = providers.complete(
         provider=settings.provider,
         api_key=api_key,

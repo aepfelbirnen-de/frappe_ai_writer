@@ -12,6 +12,7 @@ from frappe.query_builder import Order
 from frappe.query_builder.functions import Sum
 from frappe.utils import add_months, flt, get_first_day, getdate, now_datetime, today
 
+from frappe_ai_writer.budget import budget_status, clear_month_cache, notify_budget
 from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import DEFAULT_PRICES
 
 MANAGER_ROLES = ("System Manager", "AI Writer Manager")
@@ -61,6 +62,7 @@ def record_usage(usage_user: str | None, mode: str, model: str, input_tokens: in
                     "output_tokens": output_tokens,
                 }
             ).insert(ignore_permissions=True)  # written by the system for the requesting user, never by hand
+            _after_usage(usage_user)
             return
         except frappe.DuplicateEntryError:
             pass  # a parallel request created the row first; add to it below
@@ -74,6 +76,16 @@ def record_usage(usage_user: str | None, mode: str, model: str, input_tokens: in
         .set(usage.modified, now_datetime())
         .where(usage.name == key)
     ).run()
+    _after_usage(usage_user)
+
+
+def _after_usage(usage_user: str) -> None:
+    clear_month_cache(usage_user)
+    try:
+        notify_budget()
+    except Exception:
+        # A failed notice must not roll back the recorded usage.
+        frappe.log_error(title="AI Writer: budget notice failed")
 
 
 @frappe.whitelist(methods=["GET"])
@@ -92,8 +104,9 @@ def get_usage_summary() -> dict:
         "total": _totals(prices),
     }
 
+    result = {"periods": periods, "budget": budget_status(settings), "currency": "USD"}
     if not settings.track_usage_per_user:
-        return {"periods": periods, "per_user": [], "per_user_enabled": False, "currency": "USD"}
+        return {**result, "per_user": [], "per_user_enabled": False, "user_limit": 0}
 
     usage = frappe.qb.DocType("AI Writer Usage")
     rows = (
@@ -121,7 +134,7 @@ def get_usage_summary() -> dict:
     per_user = [
         {**_with_cost(row, prices), "user": row.user, "full_name": names.get(row.user) or row.user} for row in rows
     ]
-    return {"periods": periods, "per_user": per_user, "per_user_enabled": True, "currency": "USD"}
+    return {**result, "per_user": per_user, "per_user_enabled": True, "user_limit": flt(settings.user_monthly_budget)}
 
 
 def _totals(prices: tuple[float, float], from_date=None) -> dict:

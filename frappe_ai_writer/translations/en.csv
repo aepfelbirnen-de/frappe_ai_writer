@@ -158,3 +158,24 @@ Translations,Translations
 AI Writer Glossary Term,AI Writer Glossary Term
 "Row {0}: write translations as one line per language, e.g. en: quotation.","Row {0}: write translations as one line per language, e.g. en: quotation."
 Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.,Terms a manager has protected in the glossary of AI Writer Settings stay unchanged as well; the house style applies to all texts.
+Monthly Budget,Monthly Budget
+Monthly Budget (USD),Monthly Budget (USD)
+"Estimated costs per calendar month, based on the prices above. 0 means no budget.","Estimated costs per calendar month, based on the prices above. 0 means no budget."
+Warning Threshold,Warning Threshold
+"When this share of the budget is used, AI Writer managers (or System Managers if there are none) get a notification and an email, once per month. 0 turns the warning off.","When this share of the budget is used, AI Writer managers (or System Managers if there are none) get a notification and an email, once per month. 0 turns the warning off."
+Block When Exceeded,Block When Exceeded
+"Refuse requests when the budget is used up, until the next month or until the budget is raised.","Refuse requests when the budget is used up, until the next month or until the budget is raised."
+Monthly Limit per User (USD),Monthly Limit per User (USD)
+Requests of a user are refused once their estimated costs this month reach this amount. 0 means no limit.,Requests of a user are refused once their estimated costs this month reach this amount. 0 means no limit.
+Budget Notice,Budget Notice
+The warning threshold must be between 0 and 100 %.,The warning threshold must be between 0 and 100 %.
+The monthly AI budget is used up. Please contact your AI Writer manager.,The monthly AI budget is used up. Please contact your AI Writer manager.
+Your monthly AI budget is used up. Please contact your AI Writer manager.,Your monthly AI budget is used up. Please contact your AI Writer manager.
+The monthly AI Writer budget is used up: {0} of {1}.,The monthly AI Writer budget is used up: {0} of {1}.
+New requests are refused until next month or until the budget is raised in AI Writer Settings.,New requests are refused until next month or until the budget is raised in AI Writer Settings.
+Requests are still processed because Block When Exceeded is off in AI Writer Settings.,Requests are still processed because Block When Exceeded is off in AI Writer Settings.
+AI Writer has used {0} % of the monthly budget: {1} of {2}.,AI Writer has used {0} % of the monthly budget: {1} of {2}.
+The usage per month and user is shown in AI Writer Settings.,The usage per month and user is shown in AI Writer Settings.
+Monthly budget: {0} of {1} used ({2} %),Monthly budget: {0} of {1} used ({2} %)
+New requests are refused until next month or until the budget is raised.,New requests are refused until next month or until the budget is raised.
+Requests are still processed because Block When Exceeded is off.,Requests are still processed because Block When Exceeded is off.
