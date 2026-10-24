@@ -101,7 +101,6 @@ Cover Letter (Quotation),Супровідний лист (пропозиція)
 Cover Letter Field,Поле супровідного листа
 "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Назва текстового поля пропозиції, що містить супровідний лист у PDF, напр. власне поле на зразок custom_letter_quotation. Потребує ERPNext. Залиште порожнім, щоб приховати кнопку."
 Cover Letter Prompt,Промпт супровідного листа
-Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,"Інструкції для написання супровідних листів. Залиште порожнім, щоб відновити типові. Ціни та суми ніколи не надсилаються."
 Cover letters need ERPNext.,Супровідні листи потребують ERPNext.
 Field {0} does not exist on Quotation or is not a text field.,Поле {0} не існує в пропозиції або не є текстовим полем.
 No cover letter field is configured in AI Writer Settings.,У налаштуваннях AI Writer не вказано поле супровідного листа.
@@ -113,5 +112,11 @@ Preview,Попередній перегляд
 Apply,Застосувати
 Regenerate,Згенерувати знову
 Cover letter applied. Save the quotation to keep it.,"Супровідний лист застосовано. Збережіть пропозицію, щоб його зберегти."
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","У чернетці пропозиції Дії → Написати супровідний лист створює текст на основі клієнта, контактної особи та позицій. Ціни й суми ніколи не надсилаються. Нотатки, що вже є в полі, враховуються в листі."
 Actions,Дії
+Format,Формат
+Letter,Лист
+Structured,Структурований
+Cover Letter Format,Формат супровідного листа
+"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Типовий формат нових листів; його можна змінити в попередньому перегляді. Лист: звертання й абзаци. Структурований: заголовок як тема та короткі розділи про вихідну ситуацію, послуги й переваги."
+Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,"Спільні правила для обох форматів. Залиште порожнім, щоб відновити типові. Ціни та суми ніколи не надсилаються."
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","У чернетці пропозиції Дії → Написати супровідний лист створює текст на основі клієнта, контактної особи та позицій — як лист або із заголовками (Формат у попередньому перегляді). Ціни й суми ніколи не надсилаються. Нотатки, що вже є в полі, враховуються в листі."

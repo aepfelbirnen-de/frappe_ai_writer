@@ -24,6 +24,8 @@ def boot_session(bootinfo: frappe._dict) -> None:
             "enabled": bool(cint(frappe.db.get_single_value("AI Writer Settings", "enabled", cache=True))),
             "languages": get_translation_languages(),
             "cover_letter_field": get_cover_letter_field(),
+            "cover_letter_style": frappe.db.get_single_value("AI Writer Settings", "cover_letter_style", cache=True)
+            or "Letter",
         }
 
     # Frappe never translates change logs, so the client swaps in these versions before the update

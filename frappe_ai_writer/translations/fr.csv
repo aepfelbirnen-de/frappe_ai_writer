@@ -101,7 +101,6 @@ Cover Letter (Quotation),Lettre d'accompagnement (devis)
 Cover Letter Field,Champ de la lettre
 "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Nom du champ texte du devis qui contient la lettre affichée dans le PDF, p. ex. un champ personnalisé comme custom_letter_quotation. Nécessite ERPNext. Laisser vide pour masquer le bouton."
 Cover Letter Prompt,Prompt de la lettre
-Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,Instructions pour rédiger les lettres d'accompagnement. Laisser vide pour rétablir la valeur par défaut. Les prix et totaux ne sont jamais envoyés.
 Cover letters need ERPNext.,Les lettres d'accompagnement nécessitent ERPNext.
 Field {0} does not exist on Quotation or is not a text field.,Le champ {0} n'existe pas dans le devis ou n'est pas un champ texte.
 No cover letter field is configured in AI Writer Settings.,Aucun champ de lettre n'est configuré dans les paramètres d'AI Writer.
@@ -113,5 +112,11 @@ Preview,Aperçu
 Apply,Appliquer
 Regenerate,Régénérer
 Cover letter applied. Save the quotation to keep it.,Lettre appliquée. Enregistrez le devis pour la conserver.
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","Dans un devis brouillon, Actions → Rédiger la lettre écrit le texte à partir du client, du contact et des lignes. Les prix et totaux ne sont jamais envoyés. Les notes déjà présentes dans le champ sont intégrées à la lettre."
 Actions,Actions
+Format,Format
+Letter,Lettre
+Structured,Structuré
+Cover Letter Format,Format de la lettre
+"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Format par défaut des nouvelles lettres ; il peut être changé dans l'aperçu. Lettre : formule d'appel et paragraphes. Structuré : titre comme objet et courtes sections sur la situation, les prestations et les avantages."
+Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Règles communes aux deux formats. Laisser vide pour rétablir la valeur par défaut. Les prix et totaux ne sont jamais envoyés.
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","Dans un devis brouillon, Actions → Rédiger la lettre écrit le texte à partir du client, du contact et des lignes, sous forme de lettre ou avec des titres (Format dans l'aperçu). Les prix et totaux ne sont jamais envoyés. Les notes déjà présentes dans le champ sont intégrées à la lettre."

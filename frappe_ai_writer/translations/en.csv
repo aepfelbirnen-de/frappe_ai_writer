@@ -101,7 +101,6 @@ Cover Letter (Quotation),Cover Letter (Quotation)
 Cover Letter Field,Cover Letter Field
 "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button."
 Cover Letter Prompt,Cover Letter Prompt
-Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.
 Cover letters need ERPNext.,Cover letters need ERPNext.
 Field {0} does not exist on Quotation or is not a text field.,Field {0} does not exist on Quotation or is not a text field.
 No cover letter field is configured in AI Writer Settings.,No cover letter field is configured in AI Writer Settings.
@@ -113,5 +112,11 @@ Preview,Preview
 Apply,Apply
 Regenerate,Regenerate
 Cover letter applied. Save the quotation to keep it.,Cover letter applied. Save the quotation to keep it.
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter."
 Actions,Actions
+Format,Format
+Letter,Letter
+Structured,Structured
+Cover Letter Format,Cover Letter Format
+"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits."
+Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter."

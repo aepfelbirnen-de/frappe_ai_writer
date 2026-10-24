@@ -92,24 +92,45 @@
 	}
 
 	async function write_cover_letter(frm, fieldname) {
-		let letter;
 		try {
 			// The server reads the saved quotation, so unsaved items would be missing.
 			if (frm.is_dirty() || frm.is_new()) await frm.save();
-			frappe.dom.freeze(__("Writing cover letter…"));
-			letter = await frappe.xcall(COVER_LETTER_METHOD, { quotation: frm.doc.name, notes: frm.doc[fieldname] || "" });
 		} catch (error) {
-			// frappe.xcall and frm.save already show the server message to the user.
+			// frm.save already shows the reason to the user.
 			console.error(error);
 			return;
-		} finally {
-			frappe.dom.unfreeze();
 		}
 
+		let style = frappe.boot.ai_writer?.cover_letter_style || "Letter";
+		const letter = await generate_cover_letter(frm, fieldname, style);
+		if (letter === null) return;
+
+		const regenerate = async () => {
+			const html = await generate_cover_letter(frm, fieldname, style);
+			if (html !== null) dialog.set_value("letter", html);
+		};
 		const dialog = new frappe.ui.Dialog({
 			title: __("Cover Letter"),
 			size: "large",
-			fields: [{ fieldtype: "Text Editor", fieldname: "letter", label: __("Preview"), default: letter }],
+			fields: [
+				{
+					fieldtype: "Select",
+					fieldname: "style",
+					label: __("Format"),
+					options: [
+						{ value: "Letter", label: __("Letter") },
+						{ value: "Structured", label: __("Structured") },
+					],
+					default: style,
+					onchange() {
+						const value = dialog.get_value("style");
+						if (!value || value === style) return;
+						style = value;
+						regenerate();
+					},
+				},
+				{ fieldtype: "Text Editor", fieldname: "letter", label: __("Preview"), default: letter },
+			],
 			primary_action_label: __("Apply"),
 			primary_action(values) {
 				frm.set_value(fieldname, values.letter);
@@ -117,12 +138,26 @@
 				frappe.show_alert({ message: __("Cover letter applied. Save the quotation to keep it."), indicator: "green" });
 			},
 			secondary_action_label: __("Regenerate"),
-			secondary_action() {
-				dialog.hide();
-				write_cover_letter(frm, fieldname);
-			},
+			secondary_action: regenerate,
 		});
 		dialog.show();
+	}
+
+	// Returns the sanitized letter HTML, or null if the request failed (the server message is already shown).
+	async function generate_cover_letter(frm, fieldname, style) {
+		frappe.dom.freeze(__("Writing cover letter…"));
+		try {
+			return await frappe.xcall(COVER_LETTER_METHOD, {
+				quotation: frm.doc.name,
+				notes: frm.doc[fieldname] || "",
+				style,
+			});
+		} catch (error) {
+			console.error(error);
+			return null;
+		} finally {
+			frappe.dom.unfreeze();
+		}
 	}
 
 	// Frappe opens the update dialog only for System Managers (v16: also Workspace Managers). Other
@@ -394,7 +429,7 @@
 					"dd",
 					null,
 					__(
-						"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter."
+						"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter."
 					)
 				)
 			);

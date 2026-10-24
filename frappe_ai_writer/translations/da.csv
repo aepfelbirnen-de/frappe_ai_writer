@@ -101,7 +101,6 @@ Cover Letter (Quotation),Følgebrev (tilbud)
 Cover Letter Field,Felt til følgebrev
 "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Feltnavn på tilbuddets tekstfelt med følgebrevet, der vises i PDF'en, f.eks. et brugerdefineret felt som custom_letter_quotation. Kræver ERPNext. Lad feltet være tomt for at skjule knappen."
 Cover Letter Prompt,Prompt til følgebrev
-Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,Instruktioner til at skrive følgebreve. Lad feltet være tomt for at gendanne standarden. Priser og totaler sendes aldrig.
 Cover letters need ERPNext.,Følgebreve kræver ERPNext.
 Field {0} does not exist on Quotation or is not a text field.,Feltet {0} findes ikke i tilbuddet eller er ikke et tekstfelt.
 No cover letter field is configured in AI Writer Settings.,Der er ikke angivet noget felt til følgebrev under AI Writer-indstillinger.
@@ -113,5 +112,11 @@ Preview,Forhåndsvisning
 Apply,Anvend
 Regenerate,Generér igen
 Cover letter applied. Save the quotation to keep it.,Følgebrevet er anvendt. Gem tilbuddet for at beholde det.
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","I et tilbud i kladde skriver Handlinger → Skriv følgebrev teksten ud fra kunde, kontaktperson og linjer. Priser og totaler sendes aldrig. Noter, der allerede står i feltet, indarbejdes i brevet."
 Actions,Handlinger
+Format,Format
+Letter,Brev
+Structured,Struktureret
+Cover Letter Format,Format for følgebrev
+"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat for nye følgebreve; det kan skiftes i forhåndsvisningen. Brev: hilsen og afsnit. Struktureret: titel som emne og korte afsnit om udgangspunkt, ydelser og fordele."
+Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,Fælles regler for begge formater. Lad feltet være tomt for at gendanne standarden. Priser og totaler sendes aldrig.
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","I et tilbud i kladde skriver Handlinger → Skriv følgebrev teksten ud fra kunde, kontaktperson og linjer, som brev eller med overskrifter (Format i forhåndsvisningen). Priser og totaler sendes aldrig. Noter, der allerede står i feltet, indarbejdes i brevet."

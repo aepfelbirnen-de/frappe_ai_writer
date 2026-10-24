@@ -101,7 +101,6 @@ Cover Letter (Quotation),Anschreiben (Angebot)
 Cover Letter Field,Anschreiben-Feld
 "Fieldname of the Quotation text field that holds the cover letter shown in the PDF, e.g. a custom field such as custom_letter_quotation. Needs ERPNext. Leave empty to hide the button.","Feldname des Textfelds im Angebot, das das Anschreiben im PDF enthält, z. B. ein eigenes Feld wie custom_letter_quotation. Benötigt ERPNext. Leer lassen, um den Button auszublenden."
 Cover Letter Prompt,Anschreiben-Prompt
-Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.,"Anweisungen für das Schreiben von Anschreiben. Leer lassen, um den Standard wiederherzustellen. Preise und Summen werden nie mitgesendet."
 Cover letters need ERPNext.,Anschreiben benötigen ERPNext.
 Field {0} does not exist on Quotation or is not a text field.,"Das Feld {0} gibt es im Angebot nicht, oder es ist kein Textfeld."
 No cover letter field is configured in AI Writer Settings.,In den AI-Writer-Einstellungen ist kein Anschreiben-Feld eingetragen.
@@ -113,5 +112,11 @@ Preview,Vorschau
 Apply,Übernehmen
 Regenerate,Neu erzeugen
 Cover letter applied. Save the quotation to keep it.,"Anschreiben übernommen. Speichern Sie das Angebot, um es zu behalten."
-"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items. Prices and totals are never sent. Notes already in the field are worked into the letter.","Im Angebotsentwurf schreibt Aktionen → Anschreiben erstellen den Brieftext aus Kunde, Ansprechpartner und Positionen. Preise und Summen werden nie mitgesendet. Notizen, die schon im Feld stehen, fließen in das Anschreiben ein."
 Actions,Aktionen
+Format,Format
+Letter,Brief
+Structured,Gegliedert
+Cover Letter Format,Anschreiben-Format
+"Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.","Standardformat neuer Anschreiben; es lässt sich in der Vorschau umschalten. Brief: Anrede und Absätze. Gegliedert: Titel als Betreff und kurze Abschnitte zu Ausgangslage, Leistungen und Nutzen."
+Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.,"Gemeinsame Regeln für beide Formate. Leer lassen, um den Standard wiederherzustellen. Preise und Summen werden nie mitgesendet."
+"In a draft quotation, Actions → Write Cover Letter writes the letter text from the customer, contact and line items, as a letter or with headings (Format in the preview). Prices and totals are never sent. Notes already in the field are worked into the letter.","Im Angebotsentwurf schreibt Aktionen → Anschreiben erstellen den Brieftext aus Kunde, Ansprechpartner und Positionen, als Brief oder mit Überschriften (Format in der Vorschau). Preise und Summen werden nie mitgesendet. Notizen, die schon im Feld stehen, fließen in das Anschreiben ein."

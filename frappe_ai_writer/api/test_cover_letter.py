@@ -106,3 +106,41 @@ class TestCoverLetter(FrappeTestCase):
         self.assertNotIn("RV-2026-17", message)
         self.assertIn("Deutsch (de)", request["system"])
         self.assertIn('/"RV-2026-17"/', result)
+
+    def _system_prompt(self, **kwargs) -> str:
+        with (
+            patch("frappe_ai_writer.api.cover_letter.get_cover_letter_field", return_value="custom_letter"),
+            patch("frappe_ai_writer.api.cover_letter.frappe.get_doc", return_value=_quotation()),
+            patch("frappe_ai_writer.providers.anthropic.Anthropic") as client_cls,
+        ):
+            client_cls.return_value.messages.create.return_value = _response("<p>Text</p>")
+            write_cover_letter("QTN-TEST-0001", **kwargs)
+            return client_cls.return_value.messages.create.call_args.kwargs["system"]
+
+    def test_format_letter_is_the_default(self) -> None:
+        system = self._system_prompt()
+        self.assertIn("Format: a classic letter", system)
+        self.assertIn("Never mention prices", system)
+
+    def test_format_structured_asks_for_headings(self) -> None:
+        system = self._system_prompt(style="Structured")
+        self.assertIn("<h3> for the title", system)
+        self.assertNotIn("Format: a classic letter", system)
+
+    def test_unknown_format_falls_back_to_the_setting(self) -> None:
+        self.assertIn("Format: a classic letter", self._system_prompt(style="Poem"))
+
+    def test_patch_replaces_only_the_unedited_old_prompt(self) -> None:
+        from frappe_ai_writer.frappe_ai_writer.doctype.ai_writer_settings.ai_writer_settings import (
+            DEFAULT_COVER_LETTER_PROMPT,
+            PREVIOUS_COVER_LETTER_PROMPT,
+        )
+        from frappe_ai_writer.patches.v0_11.split_cover_letter_prompt import execute
+
+        frappe.db.set_single_value("AI Writer Settings", "cover_letter_prompt", PREVIOUS_COVER_LETTER_PROMPT)
+        execute()
+        self.assertEqual(frappe.get_single("AI Writer Settings").cover_letter_prompt, DEFAULT_COVER_LETTER_PROMPT)
+
+        frappe.db.set_single_value("AI Writer Settings", "cover_letter_prompt", "My own rules.")
+        execute()
+        self.assertEqual(frappe.get_single("AI Writer Settings").cover_letter_prompt, "My own rules.")

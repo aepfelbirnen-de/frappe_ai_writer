@@ -42,7 +42,17 @@ Example notes:
 
 Example answer:
 The existing mailboxes will be migrated to Microsoft 365, so that email, calendars and contacts are available in the cloud and no longer depend on the local mail server. In addition, multi-factor authentication (MFA) will be enabled for all users: besides their password, they confirm each sign-in with a second factor such as an authenticator app, which considerably reduces the risk of compromised accounts."""
+# The format (letter or structured) is added by api/cover_letter.py, so this prompt only holds the shared rules.
 DEFAULT_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It appears in the PDF above the line items and is addressed to the customer.
+
+- Base the content on the line items: summarize what the quotation covers and what the customer gains from it. Group related items instead of listing every item, and do not repeat quantities or item codes unless they matter.
+- Never mention prices, totals, discounts or payment amounts.
+- Use only the facts in the quotation data and the notes. Do not invent dates, deadlines, names, services or commitments.
+- If notes are given, follow them and work their points into the letter.
+- Do not add a sign-off with a name; the print format adds it.
+Answer only with the letter text."""
+# Default prompt of versions 0.10.x; the v0_11 patch replaces it if it was never edited.
+PREVIOUS_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It appears in the PDF above the line items and is addressed to the customer.
 
 - Start with a salutation to the contact person if one is given (e.g. "Dear Ms Miller," or "Sehr geehrte Frau Müller,"), otherwise a neutral salutation.
 - Thank the customer briefly, then summarize in two to four sentences what the quotation covers and what the customer gains from it, based on the line items. Group related items instead of listing every item, and do not repeat quantities or item codes unless they matter.
@@ -52,6 +62,7 @@ DEFAULT_COVER_LETTER_PROMPT = """You write the cover letter of a quotation. It a
 - If notes are given, follow them and work their points into the letter.
 - Keep it to roughly 80 to 180 words.
 Answer only with the letter text."""
+COVER_LETTER_STYLES = ("Letter", "Structured")
 DEFAULT_EXPANSION_FACTORS = (4, 10)
 COVER_LETTER_FIELD_TYPES = ("Text Editor", "Small Text", "Text", "Long Text", "HTML Editor")
 MAX_EXPANSION_FACTOR = 50
@@ -79,6 +90,7 @@ class AIWriterSettings(Document):
         api_key: DF.Password | None
         cover_letter_field: DF.Data | None
         cover_letter_prompt: DF.SmallText | None
+        cover_letter_style: DF.Literal["Letter", "Structured"]
         base_url: DF.Data | None
         effort: DF.Literal["", "low", "medium", "high"]
         enabled: DF.Check
@@ -117,6 +129,8 @@ class AIWriterSettings(Document):
             self.expand_prompt = DEFAULT_EXPAND_PROMPT
         if not (self.cover_letter_prompt or "").strip():
             self.cover_letter_prompt = DEFAULT_COVER_LETTER_PROMPT
+        if self.cover_letter_style not in COVER_LETTER_STYLES:
+            self.cover_letter_style = COVER_LETTER_STYLES[0]
         self.validate_cover_letter_field()
 
         self.expansion_factor_min = cint(self.expansion_factor_min) or DEFAULT_EXPANSION_FACTORS[0]

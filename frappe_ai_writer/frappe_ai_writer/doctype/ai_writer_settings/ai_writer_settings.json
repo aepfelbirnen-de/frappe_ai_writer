@@ -22,6 +22,7 @@
   "expansion_factor_max",
   "cover_letter_section",
   "cover_letter_field",
+  "cover_letter_style",
   "cover_letter_prompt",
   "translation_section",
   "translation_languages",
@@ -136,7 +137,15 @@
    "label": "Cover Letter Field"
   },
   {
-   "description": "Instructions for writing cover letters. Leave empty to restore the default. Prices and totals are never sent.",
+   "default": "Letter",
+   "description": "Default format of new cover letters; it can be switched in the preview. Letter: salutation and paragraphs. Structured: title as subject and short sections for starting point, services and benefits.",
+   "fieldname": "cover_letter_style",
+   "fieldtype": "Select",
+   "label": "Cover Letter Format",
+   "options": "Letter\nStructured"
+  },
+  {
+   "description": "Shared rules for both formats. Leave empty to restore the default. Prices and totals are never sent.",
    "fieldname": "cover_letter_prompt",
    "fieldtype": "Small Text",
    "label": "Cover Letter Prompt"
@@ -194,7 +203,7 @@
  "index_web_pages_for_search": 0,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-24 09:00:00.000000",
+ "modified": "2026-10-24 11:00:00.000000",
  "modified_by": "Administrator",
  "module": "Frappe AI Writer",
  "name": "AI Writer Settings",
